@@ -1,0 +1,900 @@
+{
+    "postalCode": {
+        "label": "Postal Code",
+        "placeholder": {
+            "default": "Enter postal code",
+            "br": "00000-000",
+            "us": "00000-0000",
+            "uk": "AA0 0AA"
+        },
+        "description": {
+            "br": "Brazilian postal code (CEP)",
+            "us": "US ZIP code",
+            "uk": "UK postcode",
+            "default": "Postal code"
+        },
+        "errors": {
+            "required": "Postal code is required",
+            "invalid": {
+                "br": "CEP must be in the format 00000-000",
+                "us": "ZIP code must be in the format 00000 or 00000-0000",
+                "uk": "Invalid UK postcode format",
+                "default": "Invalid postal code format"
+            }
+        },
+        "lookupFailed": "Could not find address for this postal code",
+        "lookupSuccess": "Address found"
+    },
+    "address": {
+        "street": "Street",
+        "neighborhood": "Neighborhood",
+        "city": "City",
+        "state": "State",
+        "country": "Country"
+    },
+    "salon": {
+        "config": {
+            "title": "Salon Configuration",
+            "description": "Update your salon's basic information and operating hours",
+            "sections": {
+                "basicInfo": "Basic Information",
+                "hoursConfig": "Hours Configuration"
+            },
+            "fields": {
+                "name": {
+                    "label": "Salon Name",
+                    "placeholder": "Enter salon name",
+                    "description": "The name of your salon as it will appear to customers"
+                },
+                "address": {
+                    "label": "Address",
+                    "placeholder": "Enter salon address",
+                    "description": "The physical address of your salon"
+                }
+            },
+            "buttons": {
+                "save": "Save Configuration",
+                "saving": "Saving...",
+                "apply": "Apply"
+            },
+            "toast": {
+                "success": "Salon configuration updated successfully",
+                "error": "Failed to update salon configuration"
+            }
+        }
+    },
+    "cookies": {
+        "message": "We use cookies to enhance your experience on our website.",
+        "readMore": "Read more",
+        "reject": "Reject",
+        "accept": "Accept"
+    },
+    "finance": {
+        "nav": {
+            "dashboard": "Dashboard",
+            "dailyEntries": "Daily Entries",
+            "profitability": "Profitability",
+            "project": "Project",
+            "header": {
+                "salon": "Salon",
+                "schedule": "Schedule"
+            }
+        }
+    },
+    "customer": {
+        "import": {
+            "DocumentUploader": {
+                "title": "Document Upload",
+                "upload": {
+                    "line1": "Click to upload or drag and drop",
+                    "line2": "CSV AND JSON up to {maxSize}MB"
+                },
+                "button": "Remove",
+                "errorPrefix": "Error: ",
+                "send": "Send"
+            },
+            "alert": {
+                "button": "Import Customers",
+                "title": "Warning",
+                "description": {
+                    "list1": "Inconsistent data will be automatically rejected by the system",
+                    "list2": "Check formatting before importing",
+                    "list3": "Required fields: ",
+                    "fields": "Full name and Phone",
+                    "list4": "Maintain specified formatting standards"
+                }
+            },
+            "technicalRequirements": "Essential Technical Requirements",
+            "structure": {
+                "title": "Basic Structure",
+                "fileName": "customers.json"
+            },
+            "csv": {
+                "title": "CSV Format",
+                "headers": [
+                    "name",
+                    "phone",
+                    "email",
+                    "birthDay"
+                ],
+                "note": "Headers must follow this exact order"
+            },
+            "validation": {
+                "title": "Field Validation",
+                "formatRules": "Formatting Rules",
+                "phone": "Phone:",
+                "phoneNote": "Numbers with area code only (ex: 11999990000)",
+                "birthday": "Birth Date:",
+                "birthdayNote": "ISO 8601 format (YYYY-MM-DD)",
+                "gender": "Gender:",
+                "genderNote": "Accepted values:",
+                "genderValues": [
+                    "M (Male)",
+                    "F (Female)",
+                    "O (Other)"
+                ],
+                "email": "Email:",
+                "emailNote": "Must follow RFC 5322 standard"
+            }
+        },
+        "page": {
+            "title": "Customers",
+            "description": "Manage your customers' data.",
+            "export": "customers"
+        },
+        "dialog": {
+            "title": "Customer Details",
+            "description": "Manage customer information",
+            "tabs": {
+                "services": "Service",
+                "appointments": "Appointments",
+                "edit": "Edit",
+                "services_table": {
+                    "name": "Name",
+                    "price": "Price",
+                    "duration": "Duration",
+                    "created_at": "Created At",
+                    "empty": "No services found"
+                },
+                "appointments_table": {
+                    "date": "Date",
+                    "service": "Service",
+                    "professional": "Professional",
+                    "status": "Status",
+                    "notes": "Notes",
+                    "empty": "No appointments found"
+                }
+            },
+            "appointment_status": {
+                "completed": "Completed",
+                "scheduled": "Scheduled",
+                "canceled": "Canceled"
+            },
+            "serviceDate": "Service Date",
+            "serviceType": "Service",
+            "appointmentDate": "Date",
+            "professional": "Professional",
+            "status": "Status",
+            "price": "Price",
+            "duration": "Duration",
+            "salon": "Salon",
+            "notes": "Notes",
+            "currency": {
+                "code": "USD",
+                "symbol": "$"
+            },
+            "common": {
+                "none": "None",
+                "cancel": "Cancel",
+                "save": "Save",
+                "minutes": "minutes"
+            }
+        },
+        "name": "Name",
+        "city": "City",
+        "email": "Email",
+        "phone": "Phone",
+        "inputConfig": {
+            "name": {
+                "label": "Name",
+                "placeholder": "Enter the customer's name",
+                "description": "Please provide the full name of the customer"
+            },
+            "city": {
+                "label": "City",
+                "placeholder": "Enter the city",
+                "description": "City where the customer resides"
+            },
+            "address": {
+                "label": "Address",
+                "placeholder": "Enter the address",
+                "description": "Customer's address"
+            },
+            "genre": {
+                "label": "Gender",
+                "placeholder": "Select the gender",
+                "description": "Please select the customer's gender",
+                "options": {
+                    "male": "Male",
+                    "female": "Female",
+                    "other": "Other"
+                }
+            },
+            "phone": {
+                "label": "Phone",
+                "placeholder": "Enter the phone number",
+                "description": "Customer's phone number"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter the email address",
+                "description": "Customer's email address"
+            },
+            "birthDay": {
+                "label": "Birth Date",
+                "placeholder": "Select the birth date",
+                "description": "Customer's birth date"
+            },
+            "salonId": {
+                "label": "Salon ID",
+                "placeholder": "Enter the salon ID",
+                "description": "Identifier of the salon"
+            }
+        }
+    },
+    "table": {
+        "view": "View",
+        "search": "Search",
+        "edit": "Edit",
+        "export": "Export",
+        "sheetForm": {
+            "create": "Create",
+            "description": "Fill in the form below"
+        },
+        "viewOptions": {
+            "view": "View",
+            "toggleColumns": "Toggle columns"
+        },
+        "dataTable": {
+            "error": {
+                "exportNoSelection": "Error exporting",
+                "exportNoSelectionDesc": "You need to select the items you want to export.",
+                "exportGeneric": "Error exporting",
+                "exportGenericDesc": "There was a problem exporting"
+            },
+            "search": {
+                "placeholder": "Search..."
+            },
+            "addButton": "Add {name}",
+            "form": {
+                "title": "Form to create a {name}",
+                "defaultTitle": "Form"
+            },
+            "noResults": "No results.",
+            "print": {
+                "noSelection": "No items selected"
+            }
+        }
+    },
+    "professional": {
+        "name": "Name",
+        "phone": "Phone",
+        "email": "Email",
+        "category": "Category",
+        "commission": "Commission",
+        "inputConfig": {
+            "name": {
+                "label": "Name",
+                "placeholder": "Enter name",
+                "description": "Full name of the professional"
+            },
+            "category": {
+                "label": "Category",
+                "placeholder": "Select category",
+                "description": "Professional's work area",
+                "options": {
+                    "hair": "Hair",
+                    "nail": "Nail"
+                }
+            },
+            "cpf": {
+                "label": "CPF",
+                "placeholder": "Enter CPF",
+                "description": "Cadastro de Pessoa Física (optional)"
+            },
+            "phone": {
+                "label": "Phone",
+                "placeholder": "Enter phone number",
+                "description": "Contact phone number (optional)"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Enter email",
+                "description": "Email address (optional)"
+            },
+            "commissionRules": {
+                "label": "Commission Rules",
+                "placeholder": "Add commission rules",
+                "description": "Define the commission rules for this professional"
+            }
+        }
+    },
+    "header": {
+        "finance": "Finance",
+        "professionals": "Professionals",
+        "customers": "Customers",
+        "schedule": "Schedule",
+        "signin": "Sign in"
+    },
+    "form": {
+        "errors": {
+            "invalidType": "Expected {expected}, received {received}",
+            "invalidLiteral": "Expected value: {expected}",
+            "unrecognizedKeys": "Unrecognized keys in the object",
+            "invalidEnumValue": "Invalid value. Valid options: {options}",
+            "invalidUnion": "Value does not match any allowed format",
+            "invalidDate": "Invalid date",
+            "invalidString": {
+                "email": "Invalid email",
+                "url": "Invalid URL",
+                "uuid": "Invalid UUID",
+                "regex": "Invalid format",
+                "default": "Invalid text"
+            },
+            "tooSmall": {
+                "string": "Minimum {count} characters",
+                "number": "Minimum value: {minimum}",
+                "array": "At least {count} items"
+            },
+            "tooBig": {
+                "string": "Maximum {count} characters",
+                "number": "Maximum value: {maximum}",
+                "array": "At most {count} items"
+            },
+            "default": "Invalid field"
+        },
+        "types": {
+            "string": "string",
+            "number": "number",
+            "boolean": "boolean",
+            "date": "date",
+            "undefined": "empty",
+            "null": "null"
+        }
+    },
+    "notfound": {
+        "title": "Page not found",
+        "description": "Sorry, the page you are looking for does not exist.",
+        "back": "Go Back",
+        "home": "Take mehome"
+    },
+    "auth": {
+        "signin": {
+            "welcome": "Welcome back!",
+            "description": "Fill in your details to log in to our page.",
+            "social": "Sign in with {provider}",
+            "form": {
+                "email": {
+                    "label": "Email",
+                    "placeholder": "youremail@gmail.com",
+                    "description": "Enter your email"
+                },
+                "password": {
+                    "label": "Password",
+                    "placeholder": "your password",
+                    "description": "Enter your password"
+                }
+            },
+            "submit": "Sign In",
+            "noAccount": "Don't have an account yet?",
+            "createAccount": "Create",
+            "error": {
+                "title": "Unable to log in",
+                "description": "Invalid username or password"
+            }
+        },
+        "signup": {
+            "title": "Create your account",
+            "description": "Fill in your details to register on our page.",
+            "form": {
+                "name": {
+                    "label": "Full Name",
+                    "placeholder": "e.g. John Doe",
+                    "description": "Enter your name"
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "john.doe@gmail.com",
+                    "description": "Enter your email"
+                },
+                "password": {
+                    "label": "Password",
+                    "placeholder": "Enter your password here",
+                    "description": "Enter your password"
+                },
+                "confirmPassword": {
+                    "label": "Confirm Password",
+                    "placeholder": "Confirm your password"
+                }
+            },
+            "password": {
+                "strength": {
+                    "enter": "Enter a password",
+                    "weak": "Weak password",
+                    "medium": "Medium password",
+                    "strong": "Strong password"
+                },
+                "requirements": {
+                    "length": "At least 8 characters",
+                    "number": "At least 1 number",
+                    "lowercase": "At least 1 lowercase letter",
+                    "uppercase": "At least 1 uppercase letter"
+                },
+                "errors": {
+                    "min": "Minimum 8 characters",
+                    "number": "Must contain a number",
+                    "lowercase": "Must contain a lowercase letter",
+                    "uppercase": "Must contain an uppercase letter"
+                }
+            },
+            "social": "Sign up with {provider}",
+            "submit": "Sign Up",
+            "hasAccount": "Already have an account?",
+            "login": "Login",
+            "terms": "By registering, you agree to our Terms of Use",
+            "error": {
+                "title": "Registration failed",
+                "description": "Please check if email is already registered or password is valid"
+            }
+        },
+        "footer": {
+            "terms": "Terms & Conditions",
+            "privacy": "Privacy Policy",
+            "license": "License",
+            "refund": "Refund Policy"
+        }
+    },
+    "hero": {
+        "brand": "PROJECT",
+        "heading": {
+            "part1": "Your salon management just got"
+        },
+        "titles": {
+            "title1": "efficient",
+            "title2": "modern",
+            "title3": "smart",
+            "title4": "practical",
+            "title5": "complete"
+        },
+        "heroDescription": "Forget paperwork and manual control...",
+        "buttons": {
+            "contact": "Contact us",
+            "trial": "Try now"
+        },
+        "heroFeatures": {
+            "cashSystem": {
+                "title": "Cash System",
+                "description": "Manage cash flow, control daily sales, and securely close the cash register."
+            },
+            "scheduling": {
+                "title": "Simplified Scheduling",
+                "description": "Effortlessly manage your salon's schedule with online bookings and full control at your fingertips."
+            },
+            "payments": {
+                "title": "Easy Payments",
+                "description": "Accept payments via Pix, credit card, and cash. Manage your finances with ease."
+            },
+            "reports": {
+                "title": "Reports & Statistics",
+                "description": "Track your salon's revenue, expenses, and growth with detailed charts."
+            },
+            "clients": {
+                "title": "Client Management",
+                "description": "Client history, preferences, and automatic notifications for personalized service."
+            },
+            "services": {
+                "title": "Service Catalog",
+                "description": "Organize your services, prices, and durations for a professional experience."
+            },
+            "support": {
+                "title": "24/7 Support",
+                "description": "Our team is available to help you whenever you need."
+            },
+            "experience": {
+                "title": "Premium Experience",
+                "description": "Stand out from the competition with a complete and easy-to-use system."
+            }
+        },
+        "heroParallax": {
+            "title": "You",
+            "subtitle": "In Control",
+            "description": "Dozens of tools for you to control everything that happens in your salon."
+        },
+        "products": {
+            "dailyEntry": "Daily Entry",
+            "dashboard": "Dashboard",
+            "configure": "Configure",
+            "scheduling": "Scheduling"
+        },
+        "pricing": {
+            "plans": {
+                "free": {
+                    "name": "Free"
+                },
+                "pro": {
+                    "name": "Pro"
+                },
+                "enterprise": {
+                    "name": "Enterprise"
+                }
+            },
+            "featureItem": {
+                "clientRegistration": "Customer registration",
+                "serviceHistory": "Service history",
+                "basicReports": "Basic reports",
+                "faqSupport": "FAQ and tutorial support",
+                "scheduling": "Customer scheduling",
+                "profileCustomization": "Salon profile customization",
+                "emailSupport": "Email support",
+                "cashManagement": "Cash management",
+                "expenseTracking": "Daily expense tracking",
+                "detailedReports": "Detailed financial reports",
+                "commissionManagement": "Professional commissions management",
+                "autoFees": "Automatic card and Pix fees",
+                "prioritySupport": "Priority WhatsApp support",
+                "paymentIntegration": "Payment system integration",
+                "advancedFinancial": "Advanced financial control",
+                "multiUserAccess": "Multi-user access with permissions",
+                "247Support": "24/7 phone support"
+            },
+            "interval": {
+                "monthly": "Monthly",
+                "yearly": "Yearly"
+            },
+            "badges": {
+                "popular": "Popular"
+            },
+            "features": "Features",
+            "cta": "Get started with {plan}",
+            "currency": {
+                "code": "USD"
+            }
+        },
+        "title": "Get to Know Us Better",
+        "description": "A complete system for beauty salon owners: cash control, commission management, payment fees, expenses and profitability analysis, all in one place.",
+        "features": {
+            "title": "What Our System Does",
+            "description": "Control all your salon's finances in real time: record income and expenses, view detailed reports, and increase your business profitability with accurate data.",
+            "button": "See how it works"
+        },
+        "results": {
+            "title": "Proven Results",
+            "description": "Our system simplifies salon management and improves financial organization, helping owners make strategic decisions to increase profits."
+        },
+        "stats": {
+            "salons": {
+                "label": "Salons Using"
+            },
+            "transactions": {
+                "label": "Transactions Processed"
+            },
+            "satisfaction": {
+                "label": "Satisfaction Rate"
+            },
+            "years": {
+                "label": "Years in the Market"
+            }
+        },
+        "images": {
+            "monthly": "Monthly scheduling",
+            "financialControl": "Financial control",
+            "logo": "System logo"
+        }
+    },
+    "financial": {
+        "table": {
+            "selectAll": "Select all",
+            "selectRow": "Select row",
+            "headers": {
+                "description": "Description",
+                "date": "Date",
+                "amount": "Amount",
+                "category": "Category/Method",
+                "category_name": "Category/Method",
+                "type": "Type",
+                "actions": "Actions"
+            },
+            "filter": {
+                "placeholder": "Filter...",
+                "type": "Type",
+                "typeLabel": "Filter by type"
+            },
+            "types": {
+                "inflow": "Inflow",
+                "outflow": "Outflow"
+            },
+            "columns": {
+                "title": "Columns",
+                "label": "Toggle columns"
+            },
+            "actions": {
+                "delete": "Delete",
+                "new": "New Record",
+                "edit": "Edit",
+                "duplicate": "Duplicate",
+                "export": "Export",
+                "archive": "Archive"
+            },
+            "messages": {
+                "noResults": "No records found"
+            },
+            "pagination": {
+                "itemsPerPage": "Items per page",
+                "range": "{from}-{to} of {total}"
+            }
+        }
+    },
+    "footer": {
+        "stayConnected": {
+            "title": "Stay Connected",
+            "description": "Join our newsletter for the latest updates and exclusive offers.",
+            "form": {
+                "emailLabel": "Email",
+                "emailDescription": "Your email to contact you",
+                "subscribe": "Subscribe",
+                "placeholder": "example@email.com"
+            }
+        },
+        "quickLinks": {
+            "title": "Quick Links",
+            "links": {
+                "home": "Home",
+                "products": "Products",
+                "account": "Account",
+                "faq": "FAQ"
+            }
+        },
+        "logoSection": {
+            "title": "project",
+            "addressLines": [
+                "project",
+                "project",
+                "project",
+                "project",
+                "project",
+                "project",
+                "project"
+            ]
+        },
+        "followUs": {
+            "title": "Follow Us",
+            "socials": {
+                "facebook": "Follow us on Facebook",
+                "twitter": "Follow us on Twitter",
+                "instagram": "Follow us on Instagram",
+                "whatsapp": "Connect with us on WhatsApp"
+            }
+        },
+        "copyright": "© {year} Project. All rights reserved.",
+        "footerLinks": {
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Service",
+            "cookies": "Cookie Settings"
+        }
+    },
+    "account": {
+        "appearance": {
+            "title": "Appearance",
+            "description": "Customize the appearance of the app. Automatically switch between day and night themes.",
+            "appearanceForm": {
+                "labels": {
+                    "font": "Font",
+                    "theme": "Theme"
+                },
+                "descriptions": {
+                    "font": "Set the font you want to use in the dashboard.",
+                    "theme": "Select the theme for the dashboard."
+                },
+                "options": {
+                    "font": {
+                        "geist": "Geist",
+                        "inter": "Inter",
+                        "manrope": "Manrope"
+                    },
+                    "theme": {
+                        "light": "Light",
+                        "dark": "Dark"
+                    }
+                },
+                "buttons": {
+                    "update": "Update preferences"
+                },
+                "errors": {
+                    "theme": "Please select a theme.",
+                    "font": "Please select a font."
+                }
+            }
+        },
+        "settings": {
+            "title": "Profile",
+            "description": "Configure your account"
+        },
+        "sidenav": {
+            "profile": "Profile",
+            "salon": "Salon",
+            "apparence": "Apparence",
+            "billing": "Billing",
+            "layout": {
+                "heading": "Settings",
+                "description": "Configure your account in your way"
+            }
+        },
+        "profileForm": {
+            "labels": {
+                "name": "Name",
+                "dob": "Date of birth",
+                "email": "Email",
+                "theme": "Theme",
+                "font": "Font"
+            },
+            "placeholders": {
+                "name": "your-name",
+                "date": "Pick a date"
+            },
+            "descriptions": {
+                "name": "This is your public display name. It can be your real name or a pseudonym. You can only change this once every 30 days.",
+                "dob": "Your date of birth is used to calculate your age.",
+                "theme": "Select a theme for your interface.",
+                "font": "Select a font for your interface."
+            },
+            "buttons": {
+                "update": "Update profile"
+            },
+            "toast": {
+                "title": "You submitted the following values:"
+            },
+            "errors": {
+                "name": {
+                    "min": "Username must be at least 2 characters.",
+                    "max": "Username must not be longer than 30 characters."
+                },
+                "dob": "A date of birth is required.",
+                "email": "Please select an email to display.",
+                "theme": "Please select a theme.",
+                "font": "Please select a font."
+            }
+        }
+    },
+    "calendar": {
+        "common": {
+            "all": "All",
+            "pick": "Pick a date"
+        },
+        "dayView": {
+            "currentSchedules": {
+                "ongoing": "Ongoing",
+                "empty": "No ongoing schedules at the moment"
+            }
+        },
+        "weekDays": {
+            "sun": "Sun",
+            "mon": "Mon",
+            "tue": "Tue",
+            "wed": "Wed",
+            "thu": "Thu",
+            "fri": "Fri",
+            "sat": "Sat"
+        },
+        "dialog": {
+            "add": {
+                "title": "New Schedule",
+                "description": "Fill in the details of the new schedule",
+                "fields": {
+                    "startDate": {
+                        "label": "Start Date",
+                        "placeholder": "Select a date"
+                    },
+                    "endDate": {
+                        "label": "End Date",
+                        "placeholder": "Select a date"
+                    },
+                    "startTime": {
+                        "label": "Start Time"
+                    },
+                    "endTime": {
+                        "label": "End Time"
+                    },
+                    "professional": {
+                        "label": "Professional",
+                        "placeholder": "Select a professional",
+                        "description": "Choose a professional for this schedule"
+                    },
+                    "service": {
+                        "label": "Service",
+                        "placeholder": "Select a service",
+                        "description": "Choose a service type"
+                    },
+                    "customer": {
+                        "label": "Customer",
+                        "placeholder": "Select a customer",
+                        "description": "Choose the customer"
+                    },
+                    "description": {
+                        "label": "Description",
+                        "placeholder": "Schedule details"
+                    }
+                },
+                "buttons": {
+                    "cancel": "Cancel",
+                    "submit": "Save Schedule"
+                },
+                "validation": {
+                    "required": "Required field",
+                    "invalid_time": "Invalid time",
+                    "time_order": "End time must be after start time"
+                }
+            },
+            "edit": {
+                "title": "Edit Schedule",
+                "description": "Update the appointment details below.",
+                "success": "Schedule updated successfully!",
+                "error": "There was an error updating the schedule.",
+                "fields": {
+                    "professional": {
+                        "label": "Professional",
+                        "placeholder": "Select a professional",
+                        "description": "Choose the professional responsible for the service"
+                    },
+                    "service": {
+                        "label": "Service",
+                        "placeholder": "Select a service",
+                        "description": "Choose the service to be performed"
+                    },
+                    "startDate": {
+                        "label": "Start Date",
+                        "placeholder": "Pick a start date"
+                    },
+                    "endDate": {
+                        "label": "End Date",
+                        "placeholder": "Pick an end date"
+                    },
+                    "startTime": {
+                        "label": "Start Time"
+                    },
+                    "endTime": {
+                        "label": "End Time"
+                    },
+                    "description": {
+                        "label": "Description",
+                        "placeholder": "Add some notes..."
+                    }
+                },
+                "buttons": {
+                    "cancel": "Cancel",
+                    "submit": "Save Changes"
+                }
+            },
+            "detail": {
+                "title": "Schedule Details",
+                "description": "Appointment details",
+                "sections": {
+                    "professional": {
+                        "label": "Professional"
+                    },
+                    "start": {
+                        "label": "Start"
+                    },
+                    "end": {
+                        "label": "End"
+                    },
+                    "description": {
+                        "label": "Description"
+                    }
+                },
+                "buttons": {
+                    "edit": "Edit"
+                }
+            }
+        }
+    }
+}

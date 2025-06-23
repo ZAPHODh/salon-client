@@ -1,0 +1,681 @@
+{
+    "customer": {
+        "dialogTitle": "客户详情",
+        "dialogDescription": "管理客户信息",
+        "tabs": {
+            "services": "服务历史",
+            "appointments": "即将到来的预约",
+            "edit": "编辑客户"
+        },
+        "serviceDate": "服务日期",
+        "serviceType": "服务",
+        "appointmentDate": "日期",
+        "professional": "专业人员",
+        "status": "状态",
+        "price": "价格",
+        "duration": "持续时间",
+        "salon": "沙龙",
+        "notes": "备注",
+        "currency": {
+            "code": "CNY",
+            "symbol": "¥"
+        },
+        "common": {
+            "none": "无",
+            "cancel": "取消",
+            "save": "保存"
+        },
+        "name": "姓名",
+        "city": "城市",
+        "email": "电子邮箱",
+        "phone": "电话",
+        "inputConfig": {
+            "name": {
+                "label": "姓名",
+                "placeholder": "输入客户姓名",
+                "description": "请输入客户全名"
+            },
+            "city": {
+                "label": "城市",
+                "placeholder": "输入城市",
+                "description": "客户居住城市"
+            },
+            "address": {
+                "label": "地址",
+                "placeholder": "输入地址",
+                "description": "客户详细地址"
+            },
+            "genre": {
+                "label": "性别",
+                "placeholder": "选择性别",
+                "description": "请选择客户性别",
+                "options": {
+                    "male": "男",
+                    "female": "女",
+                    "other": "其他"
+                }
+            },
+            "phone": {
+                "label": "电话",
+                "placeholder": "输入电话号码",
+                "description": "客户联系电话"
+            },
+            "email": {
+                "label": "电子邮箱",
+                "placeholder": "输入电子邮箱",
+                "description": "客户电子邮箱"
+            },
+            "birthDay": {
+                "label": "出生日期",
+                "placeholder": "选择出生日期",
+                "description": "客户出生日期"
+            },
+            "salonId": {
+                "label": "沙龙ID",
+                "placeholder": "输入沙龙ID",
+                "description": "沙龙唯一标识符"
+            }
+        }
+    },
+    "table": {
+        "view": "查看",
+        "search": "搜索",
+        "edit": "编辑",
+        "export": "导出",
+        "sheetForm": {
+            "create": "创建",
+            "description": "填写下方表格"
+        },
+        "viewOptions": {
+            "view": "查看",
+            "toggleColumns": "切换列"
+        },
+        "dataTable": {
+            "error": {
+                "exportNoSelection": "导出错误",
+                "exportNoSelectionDesc": "您需要选择要导出的项目",
+                "exportGeneric": "导出错误",
+                "exportGenericDesc": "导出时出现问题"
+            },
+            "search": {
+                "placeholder": "搜索..."
+            },
+            "addButton": "添加{name}",
+            "form": {
+                "title": "创建{name}表格",
+                "defaultTitle": "表格"
+            },
+            "noResults": "无结果",
+            "print": {
+                "noSelection": "未选择项目"
+            }
+        }
+    },
+    "professional": {
+        "name": "姓名",
+        "phone": "电话",
+        "email": "电子邮箱",
+        "category": "类别",
+        "commission": "佣金",
+        "inputConfig": {
+            "name": {
+                "label": "姓名",
+                "placeholder": "输入姓名",
+                "description": "专业人员全名"
+            },
+            "category": {
+                "label": "类别",
+                "placeholder": "选择类别",
+                "description": "专业人员工作领域",
+                "options": {
+                    "hair": "美发",
+                    "nail": "美甲"
+                }
+            },
+            "cpf": {
+                "label": "CPF(巴西税号)",
+                "placeholder": "输入CPF",
+                "description": "巴西个人税务编号(可选)"
+            },
+            "phone": {
+                "label": "电话",
+                "placeholder": "输入电话号码",
+                "description": "联系电话(可选)"
+            },
+            "email": {
+                "label": "电子邮箱",
+                "placeholder": "输入电子邮箱",
+                "description": "电子邮箱地址(可选)"
+            },
+            "commissionRules": {
+                "label": "佣金规则",
+                "placeholder": "添加佣金规则",
+                "description": "为此专业人员设置佣金规则"
+            }
+        }
+    },
+    "header": {
+        "finance": "财务",
+        "professionals": "专业人员",
+        "customers": "客户",
+        "schedule": "预约",
+        "signin": "登录"
+    },
+    "form": {
+        "errors": {
+            "invalidType": "应为{expected}，实际为{received}",
+            "invalidLiteral": "应为值: {expected}",
+            "unrecognizedKeys": "对象中存在无法识别的键",
+            "invalidEnumValue": "无效值。有效选项: {options}",
+            "invalidUnion": "值不符合任何允许的格式",
+            "invalidDate": "无效日期",
+            "invalidString": {
+                "email": "无效电子邮箱",
+                "url": "无效URL",
+                "uuid": "无效UUID",
+                "regex": "无效格式",
+                "default": "无效文本"
+            },
+            "tooSmall": {
+                "string": "至少{count}个字符",
+                "number": "最小值: {minimum}",
+                "array": "至少{count}个项目"
+            },
+            "tooBig": {
+                "string": "最多{count}个字符",
+                "number": "最大值: {maximum}",
+                "array": "最多{count}个项目"
+            },
+            "default": "无效字段"
+        },
+        "types": {
+            "string": "字符串",
+            "number": "数字",
+            "boolean": "布尔值",
+            "date": "日期",
+            "undefined": "空",
+            "null": "空值"
+        }
+    },
+    "notfound": {
+        "title": "页面未找到",
+        "description": "抱歉，您访问的页面不存在",
+        "back": "返回",
+        "home": "返回首页"
+    },
+    "auth": {
+        "signin": {
+            "welcome": "欢迎回来!",
+            "description": "填写您的详细信息以登录",
+            "social": "通过{provider}登录",
+            "form": {
+                "email": {
+                    "label": "电子邮箱",
+                    "placeholder": "您的邮箱@gmail.com",
+                    "description": "输入您的电子邮箱"
+                },
+                "password": {
+                    "label": "密码",
+                    "placeholder": "您的密码",
+                    "description": "输入您的密码"
+                }
+            },
+            "submit": "登录",
+            "noAccount": "还没有账号?",
+            "createAccount": "创建",
+            "error": {
+                "title": "无法登录",
+                "description": "用户名或密码错误"
+            }
+        },
+        "signup": {
+            "title": "创建账号",
+            "description": "填写您的详细信息以注册",
+            "form": {
+                "name": {
+                    "label": "全名",
+                    "placeholder": "例如: 张三",
+                    "description": "输入您的姓名"
+                },
+                "email": {
+                    "label": "电子邮箱",
+                    "placeholder": "zhangsan@gmail.com",
+                    "description": "输入您的电子邮箱"
+                },
+                "password": {
+                    "label": "密码",
+                    "placeholder": "在此输入密码",
+                    "description": "输入您的密码"
+                }
+            },
+            "social": "通过{provider}注册",
+            "submit": "注册",
+            "hasAccount": "已有账号?",
+            "login": "登录",
+            "terms": "注册即表示您同意我们的使用条款",
+            "error": {
+                "title": "注册失败",
+                "description": "请检查电子邮箱是否已注册或密码是否有效"
+            }
+        },
+        "footer": {
+            "terms": "条款与条件",
+            "privacy": "隐私政策",
+            "license": "许可证",
+            "refund": "退款政策"
+        }
+    },
+    "hero": {
+        "brand": "项目",
+        "heading": {
+            "part1": "您的沙龙管理变得"
+        },
+        "titles": {
+            "title1": "高效",
+            "title2": "现代",
+            "title3": "智能",
+            "title4": "实用",
+            "title5": "全面"
+        },
+        "heroDescription": "告别纸质文件和手工管理...",
+        "buttons": {
+            "contact": "联系我们",
+            "trial": "立即试用"
+        },
+        "heroFeatures": {
+            "cashSystem": {
+                "title": "收银系统",
+                "description": "管理现金流，控制日常销售，安全关闭收银机"
+            },
+            "scheduling": {
+                "title": "简化预约",
+                "description": "轻松管理沙龙预约，在线预订，一切尽在掌握"
+            },
+            "payments": {
+                "title": "便捷支付",
+                "description": "支持微信支付、支付宝、信用卡和现金支付，轻松管理财务"
+            },
+            "reports": {
+                "title": "报表与统计",
+                "description": "通过详细图表跟踪沙龙收入、支出和增长情况"
+            },
+            "clients": {
+                "title": "客户管理",
+                "description": "客户历史记录、偏好设置和自动通知，提供个性化服务"
+            },
+            "services": {
+                "title": "服务目录",
+                "description": "组织您的服务、价格和时长，提供专业体验"
+            },
+            "support": {
+                "title": "24/7支持",
+                "description": "我们的团队随时为您提供帮助"
+            },
+            "experience": {
+                "title": "优质体验",
+                "description": "使用完整且易于使用的系统，从竞争中脱颖而出"
+            }
+        },
+        "heroParallax": {
+            "title": "您",
+            "subtitle": "掌控一切",
+            "description": "数十种工具助您全面掌控沙龙运营"
+        },
+        "products": {
+            "dailyEntry": "日常记录",
+            "dashboard": "仪表板",
+            "configure": "配置",
+            "scheduling": "预约管理"
+        },
+        "pricing": {
+            "plans": {
+                "free": {
+                    "name": "免费版"
+                },
+                "pro": {
+                    "name": "专业版"
+                },
+                "enterprise": {
+                    "name": "企业版"
+                }
+            },
+            "featureItem": {
+                "clientRegistration": "客户注册",
+                "serviceHistory": "服务历史",
+                "basicReports": "基础报表",
+                "faqSupport": "常见问题解答支持",
+                "scheduling": "客户预约",
+                "profileCustomization": "沙龙资料定制",
+                "emailSupport": "邮件支持",
+                "cashManagement": "现金管理",
+                "expenseTracking": "日常支出跟踪",
+                "detailedReports": "详细财务报告",
+                "commissionManagement": "专业人员佣金管理",
+                "autoFees": "自动计算卡和微信手续费",
+                "prioritySupport": "优先微信支持",
+                "paymentIntegration": "支付系统集成",
+                "advancedFinancial": "高级财务控制",
+                "multiUserAccess": "多用户权限访问",
+                "247Support": "24/7电话支持"
+            },
+            "interval": {
+                "monthly": "月付",
+                "yearly": "年付"
+            },
+            "badges": {
+                "popular": "热门"
+            },
+            "features": "功能",
+            "cta": "开始使用{plan}",
+            "currency": {
+                "code": "美元"
+            }
+        },
+        "title": "更好地了解我们",
+        "description": "为美容沙龙业主提供的完整系统：现金控制、佣金管理、支付手续费、支出和盈利分析，一切尽在一处",
+        "features": {
+            "title": "我们的系统功能",
+            "description": "实时控制沙龙所有财务：记录收入和支出，查看详细报告，通过准确数据提高业务盈利能力",
+            "button": "查看工作原理"
+        },
+        "results": {
+            "title": "验证效果",
+            "description": "我们的系统简化沙龙管理并改善财务组织，帮助业主做出战略决策以提高利润"
+        },
+        "stats": {
+            "salons": {
+                "label": "使用沙龙数"
+            },
+            "transactions": {
+                "label": "处理交易数"
+            },
+            "satisfaction": {
+                "label": "满意率"
+            },
+            "years": {
+                "label": "市场年限"
+            }
+        },
+        "images": {
+            "monthly": "月度预约",
+            "financialControl": "财务控制",
+            "logo": "系统标志"
+        }
+    },
+    "financial": {
+        "table": {
+            "selectAll": "全选",
+            "selectRow": "选择行",
+            "headers": {
+                "description": "描述",
+                "date": "日期",
+                "amount": "金额",
+                "category": "类别/方式",
+                "category_name": "类别/方式",
+                "type": "类型",
+                "actions": "操作"
+            },
+            "filter": {
+                "placeholder": "筛选...",
+                "type": "类型",
+                "typeLabel": "按类型筛选"
+            },
+            "types": {
+                "inflow": "收入",
+                "outflow": "支出"
+            },
+            "columns": {
+                "title": "列",
+                "label": "切换列"
+            },
+            "actions": {
+                "delete": "删除",
+                "new": "新记录",
+                "edit": "编辑",
+                "duplicate": "复制",
+                "export": "导出",
+                "archive": "归档"
+            },
+            "messages": {
+                "noResults": "未找到记录"
+            },
+            "pagination": {
+                "itemsPerPage": "每页项目数",
+                "range": "{from}-{to} 共 {total}"
+            }
+        }
+    },
+    "footer": {
+        "stayConnected": {
+            "title": "保持联系",
+            "description": "加入我们的通讯，获取最新更新和独家优惠",
+            "form": {
+                "emailLabel": "电子邮箱",
+                "emailDescription": "您的联系邮箱",
+                "subscribe": "订阅",
+                "placeholder": "example@email.com"
+            }
+        },
+        "quickLinks": {
+            "title": "快速链接",
+            "links": {
+                "home": "首页",
+                "products": "产品",
+                "account": "账户",
+                "faq": "常见问题"
+            }
+        },
+        "logoSection": {
+            "title": "项目",
+            "addressLines": [
+                "项目",
+                "项目",
+                "项目",
+                "项目",
+                "项目",
+                "项目",
+                "项目"
+            ]
+        },
+        "followUs": {
+            "title": "关注我们",
+            "socials": {
+                "facebook": "Facebook关注我们",
+                "twitter": "Twitter关注我们",
+                "instagram": "Instagram关注我们",
+                "whatsapp": "WhatsApp联系我们"
+            }
+        },
+        "copyright": "© {year} 项目。保留所有权利",
+        "footerLinks": {
+            "privacy": "隐私政策",
+            "terms": "服务条款",
+            "cookies": "Cookie设置"
+        }
+    },
+    "account": {
+        "appearance": {
+            "title": "外观",
+            "description": "自定义应用外观。自动切换白天和夜间主题",
+            "appearanceForm": {
+                "labels": {
+                    "font": "字体",
+                    "theme": "主题"
+                },
+                "descriptions": {
+                    "font": "设置仪表板使用的字体",
+                    "theme": "选择仪表板主题"
+                },
+                "options": {
+                    "font": {
+                        "geist": "Geist",
+                        "inter": "Inter",
+                        "manrope": "Manrope"
+                    },
+                    "theme": {
+                        "light": "浅色",
+                        "dark": "深色"
+                    }
+                },
+                "buttons": {
+                    "update": "更新偏好设置"
+                },
+                "errors": {
+                    "theme": "请选择主题",
+                    "font": "请选择字体"
+                }
+            }
+        },
+        "settings": {
+            "title": "个人资料",
+            "description": "配置您的账户"
+        },
+        "sidenav": {
+            "profile": "个人资料",
+            "salon": "沙龙",
+            "apparence": "外观",
+            "professionals": "专业人员",
+            "layout": {
+                "heading": "设置",
+                "description": "按您的方式配置账户"
+            }
+        },
+        "profileForm": {
+            "labels": {
+                "name": "姓名",
+                "dob": "出生日期",
+                "email": "电子邮箱",
+                "theme": "主题",
+                "font": "字体"
+            },
+            "placeholders": {
+                "name": "您的姓名",
+                "date": "选择日期"
+            },
+            "descriptions": {
+                "name": "这是您的公开显示名称。可以是真实姓名或昵称。每30天只能更改一次",
+                "dob": "您的出生日期用于计算年龄",
+                "theme": "为界面选择主题",
+                "font": "为界面选择字体"
+            },
+            "buttons": {
+                "update": "更新资料"
+            },
+            "toast": {
+                "title": "您提交了以下值:"
+            },
+            "errors": {
+                "name": {
+                    "min": "用户名至少2个字符",
+                    "max": "用户名不能超过30个字符"
+                },
+                "dob": "需要出生日期",
+                "email": "请选择显示的电子邮箱",
+                "theme": "请选择主题",
+                "font": "请选择字体"
+            }
+        }
+    },
+    "calendar": {
+        "common": {
+            "all": "全部"
+        },
+        "dayView": {
+            "currentSchedules": {
+                "ongoing": "进行中",
+                "empty": "当前没有进行中的预约"
+            }
+        },
+        "weekDays": {
+            "sun": "周日",
+            "mon": "周一",
+            "tue": "周二",
+            "wed": "周三",
+            "thu": "周四",
+            "fri": "周五",
+            "sat": "周六"
+        },
+        "dialog": {
+            "add": {
+                "title": "新建预约",
+                "description": "填写新预约的详细信息",
+                "fields": {
+                    "title": {
+                        "label": "标题",
+                        "placeholder": "预约标题"
+                    },
+                    "startDate": {
+                        "label": "开始日期",
+                        "placeholder": "选择日期"
+                    },
+                    "endDate": {
+                        "label": "结束日期",
+                        "placeholder": "选择日期"
+                    },
+                    "startTime": {
+                        "label": "开始时间"
+                    },
+                    "endTime": {
+                        "label": "结束时间"
+                    },
+                    "variant": {
+                        "label": "标识颜色",
+                        "placeholder": "选择颜色",
+                        "options": {
+                            "blue": {
+                                "label": "蓝色",
+                                "color": "蓝色"
+                            },
+                            "green": {
+                                "label": "绿色",
+                                "color": "绿色"
+                            },
+                            "red": {
+                                "label": "红色",
+                                "color": "红色"
+                            },
+                            "purple": {
+                                "label": "紫色",
+                                "color": "紫色"
+                            }
+                        }
+                    },
+                    "description": {
+                        "label": "描述",
+                        "placeholder": "预约详情"
+                    }
+                },
+                "buttons": {
+                    "cancel": "取消",
+                    "submit": "保存预约"
+                },
+                "validation": {
+                    "required": "必填字段",
+                    "invalid_time": "无效时间",
+                    "time_order": "结束时间必须在开始时间之后"
+                }
+            },
+            "detail": {
+                "title": "预约详情",
+                "description": "预约详细信息",
+                "sections": {
+                    "professional": {
+                        "label": "专业人员"
+                    },
+                    "start": {
+                        "label": "开始"
+                    },
+                    "end": {
+                        "label": "结束"
+                    },
+                    "description": {
+                        "label": "描述"
+                    }
+                },
+                "buttons": {
+                    "close": "关闭"
+                }
+            }
+        }
+    }
+}

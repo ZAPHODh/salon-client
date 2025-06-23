@@ -1,0 +1,902 @@
+{
+    "postalCode": {
+        "label": "Código Postal",
+        "placeholder": {
+            "default": "Digite o código postal",
+            "br": "00000-000",
+            "us": "00000-0000",
+            "uk": "AA0 0AA"
+        },
+        "description": {
+            "br": "Código de Endereçamento Postal (CEP)",
+            "us": "Código postal americano (ZIP)",
+            "uk": "Código postal britânico",
+            "default": "Código postal"
+        },
+        "errors": {
+            "required": "O código postal é obrigatório",
+            "invalid": {
+                "br": "O CEP deve estar no formato 00000-000",
+                "us": "O ZIP deve estar no formato 00000 ou 00000-0000",
+                "uk": "Formato de código postal britânico inválido",
+                "default": "Formato de código postal inválido"
+            }
+        },
+        "lookupFailed": "Não foi possível encontrar o endereço para este código postal",
+        "lookupSuccess": "Endereço encontrado"
+    },
+    "address": {
+        "street": "Rua",
+        "neighborhood": "Bairro",
+        "city": "Cidade",
+        "state": "Estado",
+        "country": "País"
+    },
+    "salon": {
+        "config": {
+            "title": "Configuração do Salão",
+            "description": "Atualize as informações básicas e horários de funcionamento do seu salão",
+            "sections": {
+                "basicInfo": "Informações Básicas",
+                "hoursConfig": "Configuração de Horários"
+            },
+            "fields": {
+                "name": {
+                    "label": "Nome do Salão",
+                    "placeholder": "Digite o nome do salão",
+                    "description": "O nome do seu salão como aparecerá para os clientes"
+                },
+                "address": {
+                    "label": "Endereço",
+                    "placeholder": "Digite o endereço do salão",
+                    "description": "O endereço físico do seu salão"
+                }
+            },
+            "buttons": {
+                "save": "Salvar Configuração",
+                "saving": "Salvando...",
+                "apply": "Aplicar"
+            },
+            "toast": {
+                "success": "Configuração do salão atualizada com sucesso",
+                "error": "Falha ao atualizar a configuração do salão"
+            }
+        }
+    },
+    "cookies": {
+        "message": "Usamos cookies para melhorar sua experiência em nosso site.",
+        "readMore": "Saiba mais",
+        "reject": "Rejeitar",
+        "accept": "Aceitar"
+    },
+    "finance": {
+        "nav": {
+            "dashboard": "Dashboard",
+            "dailyEntries": "Lançamentos diários",
+            "profitability": "Lucratividade",
+            "project": "Projeto",
+            "header": {
+                "salon": "Salão",
+                "schedule": "Agenda"
+            }
+        }
+    },
+    "customer": {
+        "import": {
+            "DocumentUploader": {
+                "title": "Upload de Documentos",
+                "upload": {
+                    "line1": "Clique para enviar ou arraste e solte",
+                    "line2": "CSV E JSON até {maxSize}MB"
+                },
+                "button": "Remover",
+                "errorPrefix": "Erro: ",
+                "send": "Enviar"
+            },
+            "alert": {
+                "button": "Importar Clientes",
+                "title": "Aviso",
+                "description": {
+                    "list1": "Dados que não seguirem o padrão descrito em VALIDAÇÃO DE CAMPOS, serão rejeitados automaticamente pelo sistema",
+                    "list2": "Verifique a formatação antes de importar",
+                    "list3": "Campos obrigatórios: ",
+                    "fields": "Nome completo e Telefone",
+                    "list4": "Mantenha os padrões de formatação especificados"
+                }
+            },
+            "technicalRequirements": "Requisitos Técnicos Essenciais",
+            "structure": {
+                "title": "Estrutura Básica",
+                "fileName": "clientes.json"
+            },
+            "csv": {
+                "title": "Formato CSV",
+                "headers": [
+                    "name",
+                    "phone",
+                    "email",
+                    "birthDay"
+                ],
+                "note": "Cabeçalhos devem seguir esta ordem exata"
+            },
+            "validation": {
+                "title": "Validação de Campos",
+                "formatRules": "Regras de Formatação",
+                "phone": "Telefone:",
+                "phoneNote": "Apenas números com DDD (ex: 11999990000)",
+                "birthday": "Data de Nascimento:",
+                "birthdayNote": "Formato ISO 8601 (AAAA-MM-DD)",
+                "gender": "Gênero:",
+                "genderNote": "Valores aceitos:",
+                "genderValues": [
+                    "M (Masculino)",
+                    "F (Feminino)",
+                    "O (Outros)"
+                ],
+                "email": "E-mail:",
+                "emailNote": "Deve seguir padrão RFC 5322"
+            }
+        },
+        "page": {
+            "title": "Clientes",
+            "description": "Gerencie os dados dos seus clientes.",
+            "export": "clientes"
+        },
+        "dialog": {
+            "title": "Detalhes do Cliente",
+            "description": "Gerencie as informações do cliente",
+            "tabs": {
+                "services": "Serviços",
+                "appointments": "Agendamentos",
+                "edit": "Editar",
+                "services_table": {
+                    "name": "Nome",
+                    "price": "Preço",
+                    "duration": "Duração",
+                    "created_at": "Criado em",
+                    "empty": "Nenhum serviço encontrado"
+                },
+                "appointments_table": {
+                    "date": "Data",
+                    "service": "Serviço",
+                    "professional": "Profissional",
+                    "status": "Status",
+                    "notes": "Observações",
+                    "empty": "Nenhum agendamento encontrado"
+                }
+            },
+            "appointment_status": {
+                "completed": "Concluído",
+                "scheduled": "Agendado",
+                "canceled": "Cancelado"
+            },
+            "serviceDate": "Data do Serviço",
+            "serviceType": "Serviço",
+            "appointmentDate": "Data",
+            "professional": "Profissional",
+            "status": "Status",
+            "price": "Preço",
+            "duration": "Duração",
+            "salon": "Salão",
+            "notes": "Observações",
+            "currency": {
+                "code": "BRL",
+                "symbol": "R$"
+            },
+            "common": {
+                "none": "Nenhum",
+                "cancel": "Cancelar",
+                "save": "Salvar",
+                "minutes": "minutos"
+            }
+        },
+        "name": "Nome",
+        "city": "Cidade",
+        "email": "E-mail",
+        "phone": "Telefone",
+        "inputConfig": {
+            "name": {
+                "label": "Nome",
+                "placeholder": "Digite o nome do cliente",
+                "description": "Informe o nome completo do cliente"
+            },
+            "city": {
+                "label": "Cidade",
+                "placeholder": "Digite a cidade",
+                "description": "Cidade onde o cliente reside"
+            },
+            "address": {
+                "label": "Endereço",
+                "placeholder": "Digite o endereço",
+                "description": "Endereço do cliente"
+            },
+            "genre": {
+                "label": "Gênero",
+                "placeholder": "Selecione o gênero",
+                "description": "Por favor, selecione o gênero do cliente",
+                "options": {
+                    "male": "Masculino",
+                    "female": "Feminino",
+                    "other": "Outro"
+                }
+            },
+            "phone": {
+                "label": "Telefone",
+                "placeholder": "Digite o número de telefone",
+                "description": "Número de telefone do cliente"
+            },
+            "email": {
+                "label": "E-mail",
+                "placeholder": "Digite o endereço de e-mail",
+                "description": "Endereço de e-mail do cliente"
+            },
+            "birthDay": {
+                "label": "Data de Nascimento",
+                "placeholder": "Selecione a data de nascimento",
+                "description": "Data de nascimento do cliente"
+            },
+            "salonId": {
+                "label": "ID do Salão",
+                "placeholder": "Digite o ID do salão",
+                "description": "Identificador do salão"
+            }
+        }
+    },
+    "table": {
+        "create": "Criar",
+        "view": "Visualizar",
+        "search": "Pesquisar",
+        "edit": "Editar",
+        "export": "Exportar",
+        "sheetForm": {
+            "create": "Criar",
+            "description": "Preencha o formulário abaixo"
+        },
+        "viewOptions": {
+            "view": "Visualizar",
+            "toggleColumns": "Alternar colunas"
+        },
+        "dataTable": {
+            "error": {
+                "exportNoSelection": "Erro ao exportar",
+                "exportNoSelectionDesc": "Você precisa selecionar os itens que você quer exportar.",
+                "exportGeneric": "Erro ao exportar",
+                "exportGenericDesc": "Houve um problema ao exportar"
+            },
+            "search": {
+                "placeholder": "Pesquisar..."
+            },
+            "addButton": "Adicionar {name}",
+            "form": {
+                "title": "Formulário para criar um(a) {name}",
+                "defaultTitle": "Formulário"
+            },
+            "noResults": "Sem resultados",
+            "print": {
+                "noSelection": "Nenhum item selecionado"
+            }
+        }
+    },
+    "professional": {
+        "name": "Nome",
+        "phone": "Telefone",
+        "email": "Email",
+        "category": "Categoria",
+        "commission": "Comissão",
+        "inputConfig": {
+            "name": {
+                "label": "Nome",
+                "placeholder": "Digite o nome",
+                "description": "Nome completo do profissional"
+            },
+            "category": {
+                "label": "Categoria",
+                "placeholder": "Selecione a categoria",
+                "description": "Área de atuação do profissional",
+                "options": {
+                    "hair": "Cabelo",
+                    "nail": "Unha"
+                }
+            },
+            "cpf": {
+                "label": "CPF",
+                "placeholder": "Digite o CPF",
+                "description": "Cadastro de Pessoa Física (opcional)"
+            },
+            "phone": {
+                "label": "Telefone",
+                "placeholder": "Digite o telefone",
+                "description": "Telefone de contato (opcional)"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Digite o email",
+                "description": "Endereço de email (opcional)"
+            },
+            "commissionRules": {
+                "label": "Regras de Comissão",
+                "placeholder": "Adicione regras de comissão",
+                "description": "Defina as regras de comissão para este profissional"
+            }
+        }
+    },
+    "header": {
+        "finance": "Financeiro",
+        "professionals": "Profissionais",
+        "customers": "Clientes",
+        "schedule": "Agenda",
+        "signin": "Entrar"
+    },
+    "form": {
+        "errors": {
+            "invalidType": "Esperado {expected}, recebido {received}",
+            "invalidLiteral": "Valor esperado: {expected}",
+            "unrecognizedKeys": "Chaves não reconhecidas no objeto",
+            "invalidEnumValue": "Valor inválido. Opções válidas: {options}",
+            "invalidUnion": "Valor não corresponde a nenhum formato permitido",
+            "invalidDate": "Data inválida",
+            "invalidString": {
+                "email": "Email inválido",
+                "url": "URL inválida",
+                "uuid": "UUID inválido",
+                "regex": "Formato inválido",
+                "default": "Texto inválido"
+            },
+            "tooSmall": {
+                "string": "Mínimo de {count} caracteres",
+                "number": "Valor mínimo: {minimum}",
+                "array": "Pelo menos {count} itens"
+            },
+            "tooBig": {
+                "string": "Máximo de {count} caracteres",
+                "number": "Valor máximo: {maximum}",
+                "array": "No máximo {count} itens"
+            },
+            "default": "Campo inválido"
+        },
+        "types": {
+            "string": "texto",
+            "number": "número",
+            "boolean": "booleano",
+            "date": "data",
+            "undefined": "vazio",
+            "null": "nulo"
+        }
+    },
+    "notfound": {
+        "title": "Página não encontrada",
+        "description": "Desculpe, a página que você está procurando não existe.",
+        "back": "Voltar",
+        "home": "Me leve para a página inicial"
+    },
+    "auth": {
+        "signin": {
+            "welcome": "Bem vindo novamente!",
+            "description": "Preencha seus dados para fazer login em nossa página.",
+            "social": "Entrar com o {provider}",
+            "form": {
+                "email": {
+                    "label": "Email",
+                    "placeholder": "youremail@gmail.com",
+                    "description": "Digite seu Email"
+                },
+                "password": {
+                    "label": "Senha",
+                    "placeholder": "sua senha",
+                    "description": "Digite sua senha"
+                }
+            },
+            "submit": "Entrar",
+            "noAccount": "Ainda não tem uma conta?",
+            "createAccount": "Criar",
+            "error": {
+                "title": "Infelizmente não foi possível logar",
+                "description": "Usuário ou senha inválido"
+            }
+        },
+        "signup": {
+            "title": "Crie sua conta",
+            "description": "Preenche os dados para registrar-se...",
+            "form": {
+                "name": {
+                    "label": "Nome Completo",
+                    "placeholder": "e.g. Luis Paulo",
+                    "description": "Digite seu nome"
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "luispaulo@gmail.com",
+                    "description": "Digite seu Email"
+                },
+                "password": {
+                    "label": "Senha",
+                    "placeholder": "Digite sua senha aqui.",
+                    "description": "Digite sua senha"
+                },
+                "confirmPassword": {
+                    "label": "Confirmar Senha",
+                    "placeholder": "Digite a confirmação da sua senha aqui",
+                    "description": "Conirme sua senha"
+                }
+            },
+            "social": "Registrar-se com o {provider}",
+            "submit": "Registrar",
+            "hasAccount": "Já tem uma conta?",
+            "login": "Faça login",
+            "terms": "Ao registrar, você concorda com os nossos Termos de uso",
+            "error": {
+                "title": "Infelizmente não foi possível fazer o registro",
+                "description": "Verifique se o email já está cadastrado ou se a senha é válida."
+            },
+            "password": {
+                "strength": {
+                    "enter": "A senha deve conter",
+                    "weak": "Senha fraca",
+                    "medium": "Senha média",
+                    "strong": "Senha forte"
+                },
+                "requirements": {
+                    "length": "Pelo menos 8 caracteres",
+                    "number": "Pelo menos 1 número",
+                    "lowercase": "Pelo menos 1 letra minúscula",
+                    "uppercase": "Pelo menos 1 letra maiúscula"
+                },
+                "errors": {
+                    "min": "Mínimo de 8 caracteres",
+                    "number": "Deve conter um número",
+                    "lowercase": "Deve conter uma letra minúscula",
+                    "uppercase": "Deve conter uma letra maiúscula"
+                }
+            }
+        },
+        "footer": {
+            "terms": "Termos & Condições",
+            "privacy": "Política de Privacidade",
+            "license": "Licença",
+            "refund": "Política de Reembolso"
+        }
+    },
+    "hero": {
+        "brand": "PROJECT",
+        "heading": {
+            "part1": "A gestão do seu salão ficou"
+        },
+        "titles": {
+            "title1": "eficiente",
+            "title2": "moderno",
+            "title3": "inteligente",
+            "title4": "prático",
+            "title5": "completo"
+        },
+        "heroDescription": "Esqueça a papelada e o controle manual...",
+        "buttons": {
+            "contact": "Fale conosco",
+            "trial": "Teste agora"
+        },
+        "heroFeatures": {
+            "cashSystem": {
+                "title": "Sistema de Caixa",
+                "description": "Gerencie o fluxo de caixa, controle vendas diárias e faça o fechamento do caixa com segurança."
+            },
+            "scheduling": {
+                "title": "Agendamentos Simplificados",
+                "description": "Gerencie os horários do seu salão sem complicação. Agendamentos online e controle total na palma da sua mão."
+            },
+            "payments": {
+                "title": "Pagamentos Facilitados",
+                "description": "Aceite pagamentos por Pix, cartão e dinheiro. Controle suas finanças com facilidade."
+            },
+            "reports": {
+                "title": "Relatórios e Estatísticas",
+                "description": "Acompanhe o faturamento, despesas e crescimento do seu salão com gráficos detalhados."
+            },
+            "clients": {
+                "title": "Gestão de Clientes",
+                "description": "Histórico de clientes, preferências e notificações automáticas para um atendimento personalizado."
+            },
+            "services": {
+                "title": "Catálogo de Serviços",
+                "description": "Organize seus serviços, valores e durações para uma experiência profissional."
+            },
+            "support": {
+                "title": "Suporte 24/7",
+                "description": "Nossa equipe está disponível para te ajudar sempre que precisar."
+            },
+            "experience": {
+                "title": "Experiência Premium",
+                "description": "Destaque-se da concorrência com um sistema completo e fácil de usar."
+            }
+        },
+        "heroParallax": {
+            "title": "Você",
+            "subtitle": "No controle",
+            "description": "Dezenas de ferramentas para você ter o controle de tudo que acontece no seu salão."
+        },
+        "products": {
+            "dailyEntry": "Lançamento diário",
+            "dashboard": "Dashboard",
+            "configure": "Configure",
+            "scheduling": "Agendamento"
+        },
+        "title": "Nos conheça melhor",
+        "description": "Um sistema completo para donos de salões de beleza: controle de caixa, gestão de comissões, taxas de pagamento, despesas e análise de lucratividade, tudo em um só lugar.",
+        "features": {
+            "title": "O Que Nosso Sistema Faz?",
+            "description": "Controle todas as finanças do seu salão em tempo real: registre entradas e saídas, visualize relatórios detalhados e aumente a rentabilidade do seu negócio com dados precisos.",
+            "button": "Veja como funciona"
+        },
+        "results": {
+            "title": "Resultados Comprovados",
+            "description": "Nosso sistema simplifica a gestão do salão e melhora a organização financeira, ajudando proprietários a tomarem decisões estratégicas para aumentar os lucros."
+        },
+        "stats": {
+            "salons": {
+                "label": "Salões Utilizando"
+            },
+            "transactions": {
+                "label": "Transações Processadas"
+            },
+            "satisfaction": {
+                "label": "Taxa de Satisfação"
+            },
+            "years": {
+                "label": "Anos no Mercado"
+            }
+        },
+        "images": {
+            "monthly": "Agendamento mensal",
+            "financialControl": "Controle financeiro",
+            "logo": "Logo do sistema"
+        },
+        "pricing": {
+            "plans": {
+                "free": {
+                    "name": "Free"
+                },
+                "pro": {
+                    "name": "Pro"
+                },
+                "enterprise": {
+                    "name": "Enterprise"
+                }
+            },
+            "featureItem": {
+                "clientRegistration": "Cadastro de clientes",
+                "serviceHistory": "Histórico de atendimentos",
+                "basicReports": "Relatórios básicos",
+                "faqSupport": "Suporte via FAQ e tutoriais",
+                "scheduling": "Agendamento de clientes",
+                "profileCustomization": "Personalização do perfil do salão",
+                "emailSupport": "Suporte via e-mail",
+                "cashManagement": "Gestão de caixa",
+                "expenseTracking": "Lançamentos diários de despesas",
+                "detailedReports": "Relatórios financeiros detalhados",
+                "commissionManagement": "Gestão de comissões de profissionais",
+                "autoFees": "Taxas de cartão e Pix automáticas",
+                "prioritySupport": "Suporte prioritário via WhatsApp",
+                "paymentIntegration": "Integração com sistemas de pagamento",
+                "advancedFinancial": "Controle financeiro avançado",
+                "multiUserAccess": "Acesso multiusuário com permissões",
+                "247Support": "Suporte 24/7 via telefone"
+            },
+            "interval": {
+                "monthly": "Mensal",
+                "yearly": "Anual"
+            },
+            "badges": {
+                "popular": "Popular"
+            },
+            "features": "Recursos",
+            "cta": "Começar com {plan}",
+            "currency": {
+                "code": "BRL"
+            }
+        }
+    },
+    "financial": {
+        "table": {
+            "selectAll": "Selecionar todos",
+            "selectRow": "Selecionar linha",
+            "headers": {
+                "description": "Descrição",
+                "date": "Data",
+                "amount": "Valor",
+                "category": "Categoria/Método",
+                "category_name": "Categoria/Método",
+                "type": "Tipo",
+                "actions": "Ações"
+            },
+            "filter": {
+                "placeholder": "Filtrar...",
+                "type": "Tipo",
+                "typeLabel": "Filtrar por tipo"
+            },
+            "types": {
+                "inflow": "Entrada",
+                "outflow": "Saída"
+            },
+            "columns": {
+                "title": "Colunas",
+                "label": "Alternar colunas"
+            },
+            "actions": {
+                "delete": "Excluir",
+                "new": "Novo Registro",
+                "edit": "Editar",
+                "duplicate": "Duplicar",
+                "export": "Exportar",
+                "archive": "Arquivar"
+            },
+            "messages": {
+                "noResults": "Nenhum registro encontrado"
+            },
+            "pagination": {
+                "itemsPerPage": "Itens por página",
+                "range": "{from}-{to} de {total}"
+            }
+        }
+    },
+    "footer": {
+        "stayConnected": {
+            "title": "Fique Conectado",
+            "description": "Junte-se à nossa newsletter para as últimas atualizações e ofertas exclusivas.",
+            "form": {
+                "emailLabel": "E-mail",
+                "emailDescription": "Seu email para entrarmos em contato",
+                "subscribe": "Inscrever-se",
+                "placeholder": "exemplo@email.com"
+            }
+        },
+        "quickLinks": {
+            "title": "Links Rápidos",
+            "links": {
+                "home": "Início",
+                "products": "Produtos",
+                "account": "Conta",
+                "faq": "FAQ"
+            }
+        },
+        "logoSection": {
+            "title": "Project",
+            "addressLines": [
+                "project",
+                "project",
+                "project",
+                "project",
+                "project",
+                "project",
+                "project"
+            ]
+        },
+        "followUs": {
+            "title": "Siga-nos",
+            "socials": {
+                "facebook": "Siga-nos no Facebook",
+                "twitter": "Siga-nos no Twitter",
+                "instagram": "Siga-nos no Instagram",
+                "whatsapp": "Conecte-se conosco no WhatsApp"
+            }
+        },
+        "copyright": "© {year} Project. Todos os direitos reservados.",
+        "footerLinks": {
+            "privacy": "Política de Privacidade",
+            "terms": "Termos de Serviço",
+            "cookies": "Configurações de Cookies"
+        }
+    },
+    "account": {
+        "appearance": {
+            "title": "Aparência",
+            "description": "Personalize a aparência do aplicativo. Alterne automaticamente entre temas diurno e noturno.",
+            "appearanceForm": {
+                "labels": {
+                    "font": "Fonte",
+                    "theme": "Tema"
+                },
+                "descriptions": {
+                    "font": "Defina a fonte que deseja usar no painel.",
+                    "theme": "Selecione o tema para o painel."
+                },
+                "options": {
+                    "font": {
+                        "geist": "Geist",
+                        "inter": "Inter",
+                        "manrope": "Manrope"
+                    },
+                    "theme": {
+                        "light": "Claro",
+                        "dark": "Escuro"
+                    }
+                },
+                "buttons": {
+                    "update": "Atualizar preferências"
+                },
+                "errors": {
+                    "theme": "Por favor selecione um tema.",
+                    "font": "Por favor selecione uma fonte."
+                }
+            }
+        },
+        "settings": {
+            "title": "Perfil",
+            "description": "Configure sua conta"
+        },
+        "sidenav": {
+            "profile": "Perfil",
+            "salon": "Salão",
+            "apparence": "Aparência",
+            "billing": "Planos",
+            "layout": {
+                "heading": "Configuração",
+                "description": "Configure sua conta da forma que achar melhor"
+            }
+        },
+        "profileForm": {
+            "labels": {
+                "name": "Nome",
+                "dob": "Data de nascimento",
+                "email": "E-mail",
+                "theme": "Tema",
+                "font": "Fonte"
+            },
+            "placeholders": {
+                "name": "seu-nome",
+                "date": "Selecione uma data"
+            },
+            "descriptions": {
+                "name": "Este é seu nome público. Pode ser seu nome real ou um pseudônimo. Você só pode alterar isso a cada 30 dias.",
+                "dob": "Sua data de nascimento é usada para calcular sua idade.",
+                "theme": "Selecione um tema para sua interface.",
+                "font": "Selecione uma fonte para sua interface."
+            },
+            "buttons": {
+                "update": "Atualizar perfil"
+            },
+            "toast": {
+                "title": "Você enviou os seguintes valores:"
+            },
+            "errors": {
+                "name": {
+                    "min": "O nome deve ter pelo menos 2 caracteres.",
+                    "max": "O nome não pode ter mais de 30 caracteres."
+                },
+                "dob": "Uma data de nascimento é obrigatória.",
+                "email": "Por favor selecione um e-mail para exibir.",
+                "theme": "Por favor selecione um tema.",
+                "font": "Por favor selecione uma fonte."
+            }
+        }
+    },
+    "calendar": {
+        "common": {
+            "all": "Todos",
+            "pick": "Escolha uma data"
+        },
+        "dayView": {
+            "currentSchedules": {
+                "ongoing": "Em andamento",
+                "empty": "Nenhum agendamento acontecendo neste momento"
+            }
+        },
+        "weekDays": {
+            "sun": "Dom",
+            "mon": "Seg",
+            "tue": "Ter",
+            "wed": "Qua",
+            "thu": "Qui",
+            "fri": "Sex",
+            "sat": "Sáb"
+        },
+        "dialog": {
+            "add": {
+                "title": "Novo Agendamento",
+                "description": "Preencha os detalhes do novo agendamento",
+                "fields": {
+                    "startDate": {
+                        "label": "Data de Início",
+                        "placeholder": "Selecione uma data"
+                    },
+                    "endDate": {
+                        "label": "Data de Término",
+                        "placeholder": "Selecione uma data"
+                    },
+                    "startTime": {
+                        "label": "Hora de Início"
+                    },
+                    "endTime": {
+                        "label": "Hora de Término"
+                    },
+                    "professional": {
+                        "label": "Profissional",
+                        "placeholder": "Selecione um profissional",
+                        "description": "Escolha o profissional para este agendamento"
+                    },
+                    "service": {
+                        "label": "Serviço",
+                        "placeholder": "Selecione um serviço",
+                        "description": "Escolha o tipo de serviço"
+                    },
+                    "customer": {
+                        "label": "Cliente",
+                        "placeholder": "Selecione um cliente",
+                        "description": "Escolha um cliente"
+                    },
+                    "description": {
+                        "label": "Descrição",
+                        "placeholder": "Detalhes do agendamento"
+                    }
+                },
+                "buttons": {
+                    "cancel": "Cancelar",
+                    "submit": "Salvar Agendamento"
+                },
+                "validation": {
+                    "required": "Campo obrigatório",
+                    "invalid_time": "Hora inválida",
+                    "time_order": "Hora de término deve ser após a hora de início"
+                }
+            },
+            "edit": {
+                "title": "Editar Agendamento",
+                "description": "Atualize os detalhes do agendamento abaixo.",
+                "success": "Agendamento atualizado com sucesso!",
+                "error": "Ocorreu um erro ao atualizar o agendamento.",
+                "fields": {
+                    "professional": {
+                        "label": "Profissional",
+                        "placeholder": "Selecione um profissional",
+                        "description": "Escolha o profissional responsável pelo serviço"
+                    },
+                    "service": {
+                        "label": "Serviço",
+                        "placeholder": "Selecione um serviço",
+                        "description": "Escolha o serviço a ser realizado"
+                    },
+                    "startDate": {
+                        "label": "Data de Início",
+                        "placeholder": "Escolha a data de início"
+                    },
+                    "endDate": {
+                        "label": "Data de Término",
+                        "placeholder": "Escolha a data de término"
+                    },
+                    "startTime": {
+                        "label": "Hora de Início"
+                    },
+                    "endTime": {
+                        "label": "Hora de Término"
+                    },
+                    "description": {
+                        "label": "Descrição",
+                        "placeholder": "Adicione alguma observação..."
+                    }
+                },
+                "buttons": {
+                    "cancel": "Cancelar",
+                    "submit": "Salvar Alterações"
+                }
+            },
+            "detail": {
+                "title": "Detalhes do Agendamento",
+                "description": "Detalhes do agendamento",
+                "sections": {
+                    "professional": {
+                        "label": "Profissional"
+                    },
+                    "start": {
+                        "label": "Início"
+                    },
+                    "end": {
+                        "label": "Término"
+                    },
+                    "description": {
+                        "label": "Descrição"
+                    }
+                },
+                "buttons": {
+                    "edit": "Editar"
+                }
+            }
+        }
+    }
+}
