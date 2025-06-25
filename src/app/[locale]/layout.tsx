@@ -11,11 +11,13 @@ import { FooterSection } from '@/components/ui/footer-section';
 import NavHeader from '@/components/widgets/nav-header';
 import SessionProvider from '@/components/providers/session';
 import { ZodProvider } from '@/components/providers/zodI18n';
-import Analytics from "@/components/analytics";
 import Adsense from "@/components/adsense";
 import { GoogleTagManager } from "@next/third-parties/google";
-import CookieBanner from '@/components/widgets/cookie-consent';
+
 import { verifySession } from '@/lib/auth/dal';
+import { CookieConsentProvider } from '@/components/providers/cookie-consent';
+import { CookieConsentButton } from '@/components/cookie/cookie-consent-button';
+import { CookieDebugPanel } from '@/components/cookie/cookies-debug-pannel';
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
@@ -52,27 +54,33 @@ export default async function LocaleLayout({
             </head>
             <body>
                 <SessionProvider initialSession={session}>
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="system"
-                        enableSystem
-                        disableTransitionOnChange
-                        nonce={nonce as string | undefined}
+                    <CookieConsentProvider
+                        googleAnalyticsId={process.env.NEXT_PUBLIC_GA_ID}
+                        googleAdsId={process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}
                     >
-                        <FontProvider defaultFont={font || inter.variable}>
-                            <NextIntlClientProvider>
-                                <ZodProvider>
-                                    <NavHeader />
-                                    {children}
-                                    <CookieBanner />
-                                    <GoogleTagManager nonce={nonce as string | undefined} gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
-                                    <Analytics nonce={nonce as string | undefined} />
-                                    <FooterSection />
-                                </ZodProvider>
-                            </NextIntlClientProvider>
-                            <Toaster />
-                        </FontProvider>
-                    </ThemeProvider>
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                            disableTransitionOnChange
+                            nonce={nonce as string | undefined}
+                        >
+                            <FontProvider defaultFont={font || inter.variable}>
+                                <NextIntlClientProvider>
+                                    <ZodProvider>
+                                        <NavHeader />
+                                        {children}
+                                        <div className="mt-6">
+                                            <CookieConsentButton />
+                                        </div>
+                                        <CookieDebugPanel />
+                                        <FooterSection />
+                                    </ZodProvider>
+                                </NextIntlClientProvider>
+                                <Toaster />
+                            </FontProvider>
+                        </ThemeProvider>
+                    </CookieConsentProvider>
                 </SessionProvider>
             </body>
         </html >
