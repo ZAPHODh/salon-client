@@ -27,7 +27,7 @@ export function ProfessionalSelect() {
                         <AvatarGroup max={3}>
                             {professionals.map((professional) => (
                                 <Avatar key={professional.id} className="h-6 w-6 text-xs">
-                                    <AvatarImage src={professional.picturePath ?? undefined} />
+                                    <AvatarImage src={professional.name ?? undefined} />
                                     <AvatarFallback>{professional.name[0]}</AvatarFallback>
                                 </Avatar>
                             ))}

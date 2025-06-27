@@ -72,7 +72,6 @@ export function AdBanner({
 
     useEffect(() => {
         if (adConfig.enabled && !placeholder) {
-            // Simulate ad loading
             const timer = setTimeout(() => {
                 const randomAd = sampleAds[Math.floor(Math.random() * sampleAds.length)]
                 setCurrentAd(randomAd)
@@ -83,7 +82,6 @@ export function AdBanner({
         }
     }, [adConfig.enabled, placeholder])
 
-    // Show consent required message
     if (!adConfig.enabled && !placeholder) {
         return (
             <Card className={`w-full max-w-sm ${className}`} style={{ minHeight: dimensions.height }}>
@@ -104,7 +102,6 @@ export function AdBanner({
         )
     }
 
-    // Show loading state
     if (adConfig.enabled && !isLoaded && !placeholder) {
         return (
             <Card className={`w-full max-w-sm ${className}`} style={{ minHeight: dimensions.height }}>
@@ -119,11 +116,9 @@ export function AdBanner({
         )
     }
 
-    // Show actual ad or placeholder
     return (
         <Card className={`w-full max-w-sm ${className} relative group`} style={{ minHeight: dimensions.height }}>
             <CardContent className="p-0 relative overflow-hidden">
-                {/* Ad content */}
                 <div className="relative">
                     <img
                         src={currentAd.image || "/placeholder.svg"}
@@ -145,7 +140,6 @@ export function AdBanner({
                     </div>
                 </div>
 
-                {/* Ad metadata */}
                 <div className="absolute top-2 left-2 flex gap-1">
                     <Badge variant="secondary" className="text-xs">
                         Ad
@@ -155,14 +149,12 @@ export function AdBanner({
                     </Badge>
                 </div>
 
-                {/* Privacy indicator */}
+
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button variant="ghost" size="sm" className="h-6 w-6 p-0" title="Ad preferences" onClick={openSettings}>
                         <Eye className="h-3 w-3" />
                     </Button>
                 </div>
-
-                {/* Personalization indicator */}
                 {adConfig.canShowPersonalized && (
                     <div className="absolute bottom-2 right-2">
                         <Badge variant="outline" className="text-xs">

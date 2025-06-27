@@ -73,7 +73,7 @@ export default async function LocaleLayout({
                                         <div className="mt-6">
                                             <CookieConsentButton />
                                         </div>
-                                        <CookieDebugPanel />
+                                        {/* <CookieDebugPanel /> */}
                                         <FooterSection />
                                     </ZodProvider>
                                 </NextIntlClientProvider>

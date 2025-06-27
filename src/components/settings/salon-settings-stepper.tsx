@@ -17,6 +17,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { formatPostalCode, salonConfigSchema, type SalonFormValues } from "@/schemas/salon"
 import { toast } from "sonner"
 import { createSalon } from "@/requests/create-salon"
+import { redirect } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
 
 const steps = [
     {
@@ -84,6 +86,7 @@ const subscriptionPlans = [
 ]
 
 export default function SalonSettingsStepper() {
+    const locale = useLocale()
     const [currentStep, setCurrentStep] = useState(0)
     const [isTransitioning, setIsTransitioning] = useState(false)
     const [animationDirection, setAnimationDirection] = useState<"forward" | "backward">("forward")
@@ -276,30 +279,32 @@ export default function SalonSettingsStepper() {
         setSelectedPlan("pro")
         setIsAnnual(false)
     }
-
-    // Success screen
     if (isCompleted) {
-        return (
-            <div className="max-w-2xl mx-auto p-6">
-                <Card className="text-center">
-                    <CardContent className="pt-6">
-                        <div className="mx-auto flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                            <CheckCircle className="w-8 h-8 text-green-600" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-green-900 mb-2">Configuração Concluída!</h2>
-                        <p className="text-muted-foreground mb-6">
-                            Seu salão foi configurado com sucesso e está pronto para receber agendamentos.
-                        </p>
-                        <div className="space-y-2">
-                            <Button onClick={resetForm} variant="outline" className="mr-2">
-                                Configurar Outro Salão
-                            </Button>
-                            <Button onClick={() => (window.location.href = "/dashboard")}>Ir para Dashboard</Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
-        )
+        toast.success('Configuração Concluída!', {
+            description: 'Seu salão foi configurado com sucesso e está pronto para receber agendamentos.'
+        })
+        redirect({ href: '/professionals', locale })
+        // return (
+        //     <div className="max-w-2xl mx-auto p-6">
+        //         <Card className="text-center">
+        //             <CardContent className="pt-6">
+        //                 <div className="mx-auto flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+        //                     <CheckCircle className="w-8 h-8 text-green-600" />
+        //                 </div>
+        //                 <h2 className="text-2xl font-bold text-green-900 mb-2">Configuração Concluída!</h2>
+        //                 <p className="text-muted-foreground mb-6">
+        //                     Seu salão foi configurado com sucesso e está pronto para receber agendamentos.
+        //                 </p>
+        //                 <div className="space-y-2">
+        //                     <Button onClick={resetForm} variant="outline" className="mr-2">
+        //                         Configurar Outro Salão
+        //                     </Button>
+        //                     <Button onClick={() => (window.location.href = "/dashboard")}>Ir para Dashboard</Button>
+        //                 </div>
+        //             </CardContent>
+        //         </Card>
+        //     </div>
+        // )
     }
 
     return (

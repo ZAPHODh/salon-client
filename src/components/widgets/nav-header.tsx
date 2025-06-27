@@ -79,6 +79,15 @@ export function MainNav({
                 {t('customers')}
             </Link>
             <Link
+                href="/services"
+                className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary",
+                    pathname.includes("/customers") ? "" : "text-muted-foreground"
+                )}
+            >
+                {t('services')}
+            </Link>
+            <Link
                 href="/calendar/week-view"
                 className={cn(
                     "text-sm font-medium transition-colors hover:text-primary",
