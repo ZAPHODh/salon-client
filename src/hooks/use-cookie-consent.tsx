@@ -3,6 +3,12 @@
 import { deleteCookie, getCookie, setCookie } from "@/lib/cookies"
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react"
 
+declare global {
+    interface Window {
+        gtag?: (...args: any[]) => void
+    }
+}
+
 export type CookieCategory = "necessary" | "analytics" | "marketing" | "preferences"
 
 export interface CookieConsent {
