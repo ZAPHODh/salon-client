@@ -12,8 +12,7 @@ import NavHeader from '@/components/widgets/nav-header';
 import SessionProvider from '@/components/providers/session';
 import { ZodProvider } from '@/components/providers/zodI18n';
 import Adsense from "@/components/adsense";
-import { GoogleTagManager } from "@next/third-parties/google";
-
+import { getTranslations } from 'next-intl/server';
 import { verifySession } from '@/lib/auth/dal';
 import { CookieConsentProvider } from '@/components/providers/cookie-consent';
 import { CookieConsentButton } from '@/components/cookie/cookie-consent-button';
@@ -44,6 +43,7 @@ export default async function LocaleLayout({
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
+    const t = await getTranslations('auth');
 
     return (
         <html lang={locale} className={`${inter.variable} ${roboto_mono.variable}`} suppressHydrationWarning>

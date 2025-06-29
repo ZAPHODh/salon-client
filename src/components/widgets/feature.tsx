@@ -14,9 +14,7 @@ import {
     DollarSign,
     Users,
     Scissors,
-    Home,
     FileText,
-    TrendingUp,
     Smartphone,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -28,6 +26,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from 'next-intl';
 
 type AppFeature = {
     id: string;
@@ -39,86 +38,57 @@ type AppFeature = {
     image?: string;
 };
 
-const appFeatures: AppFeature[] = [
-    {
-        id: "agendamentos",
-        name: "Agendamentos",
-        description:
-            "Sistema completo de agendamento online com confirmação automática, lembretes por SMS/e-mail e integração com calendários.",
-        icon: CalendarCheck,
-        color: "text-blue-500",
-        functionalities: [
-            "Agendamento online 24 horas",
-            "Lembretes automáticos para clientes",
-            "Bloqueio de horários indisponíveis",
-            "Integração com Google Calendar e Outlook",
-        ],
-        image: AppointmentImage.src,
-    },
-    {
-        id: "financeiro",
-        name: "Financeiro",
-        description:
-            "Controle financeiro completo com relatórios detalhados, gestão de despesas e acompanhamento de métricas-chave.",
-        icon: DollarSign,
-        color: "text-green-500",
-        functionalities: [
-            "Controle de fluxo de caixa em tempo real",
-            "Geração automática de relatórios financeiros",
-            "Integração com sistemas contábeis",
-            "Gestão de comissões para profissionais",
-        ],
-        image: FinanceImage.src,
-    },
-    {
-        id: "profissionais",
-        name: "Profissionais",
-        description:
-            "Gestão completa da equipe com controle de agenda, especialidades e desempenho individual.",
-        icon: Users,
-        color: "text-purple-500",
-        functionalities: [
-            "Perfis personalizados para cada profissional",
-            "Controle de disponibilidade e folgas",
-            "Acompanhamento de produtividade",
-            "Sistema de avaliação de clientes",
-        ],
-        image: ProfessionalImage.src,
-    },
-    {
-        id: "servicos",
-        name: "Serviços",
-        description:
-            "Catálogo digital de serviços com gestão de preços, duração e recursos necessários para cada procedimento.",
-        icon: Scissors,
-        color: "text-pink-500",
-        functionalities: [
-            "Cadastro ilimitado de serviços e pacotes",
-            "Fotos antes/depois dos procedimentos",
-            "Controle de estoque de produtos",
-            "Sugestão de serviços personalizados",
-        ],
-        image: ServiceImage.src,
-    },
-    {
-        id: "relatorios",
-        name: "Relatórios",
-        description:
-            "Análises detalhadas e personalizáveis para acompanhar o desempenho do salão em tempo real.",
-        icon: FileText,
-        color: "text-red-500",
-        functionalities: [
-            "Relatórios de clientes frequentes",
-            "Análise de horários mais populares",
-            "Desempenho por serviço/profissional",
-            "Exportação para Excel e PDF",
-        ],
-        image: ReportImage.src,
-    },
-];
 
 export default function SalonFeaturesSection() {
-    const [activeFeature, setActiveFeature] = useState<string>(appFeatures[0].id);
+    const t = useTranslations("hero.featuresSection");
+    const [activeFeature, setActiveFeature] = useState<string>("agendamentos");
+
+    const getFeatureData = (featureId: string) => {
+        return {
+            name: t(`features.${featureId}.name`),
+            description: t(`features.${featureId}.description`),
+            functionalities: t.raw(`features.${featureId}.functionalities`) as string[]
+        };
+    };
+
+    const appFeatures: AppFeature[] = [
+        {
+            id: "agendamentos",
+            ...getFeatureData("agendamentos"),
+            icon: CalendarCheck,
+            color: "text-blue-500",
+            image: AppointmentImage.src,
+        },
+        {
+            id: "financeiro",
+            ...getFeatureData("financeiro"),
+            icon: DollarSign,
+            color: "text-green-500",
+            image: FinanceImage.src,
+        },
+        {
+            id: "profissionais",
+            ...getFeatureData("profissionais"),
+            icon: Users,
+            color: "text-purple-500",
+            image: ProfessionalImage.src,
+        },
+        {
+            id: "servicos",
+            ...getFeatureData("servicos"),
+            icon: Scissors,
+            color: "text-pink-500",
+            image: ServiceImage.src,
+        },
+        {
+            id: "relatorios",
+            ...getFeatureData("relatorios"),
+            icon: FileText,
+            color: "text-red-500",
+            image: ReportImage.src,
+        },
+    ];
+
     const currentFeature = appFeatures.find(f => f.id === activeFeature) || appFeatures[0];
 
     return (
@@ -126,15 +96,13 @@ export default function SalonFeaturesSection() {
             <div className="container mx-auto px-4 md:px-6 2xl:max-w-[1400px]">
                 <div className="mx-auto mb-16 max-w-3xl space-y-4 text-center">
                     <div className="bg-primary/10 text-primary inline-block rounded-lg px-3 py-1 text-sm">
-                        Funcionalidades
+                        {t('subtitle')}
                     </div>
                     <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-                        Tudo que Você Precisa para Gerir Seu Salão
+                        {t('title')}
                     </h2>
                     <p className="text-muted-foreground">
-                        Nossa plataforma oferece todas as ferramentas necessárias para
-                        gerenciar seu salão com eficiência e proporcionar a melhor
-                        experiência para seus clientes.
+                        {t('description')}
                     </p>
                 </div>
 
@@ -147,7 +115,7 @@ export default function SalonFeaturesSection() {
                         <div className="w-full md:hidden">
                             <Select value={activeFeature} onValueChange={setActiveFeature}>
                                 <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Selecione uma funcionalidade" />
+                                    <SelectValue placeholder={t('selectPlaceholder')} />
                                 </SelectTrigger>
                                 <SelectContent>
                                     {appFeatures.map((feature) => (
@@ -195,7 +163,7 @@ export default function SalonFeaturesSection() {
                             </p>
 
                             <div className="space-y-3 pt-2">
-                                <h4 className="font-medium">Principais Recursos:</h4>
+                                <h4 className="font-medium">{t('featureLabel')}</h4>
                                 <ul className="space-y-2">
                                     {currentFeature.functionalities.map((func, i) => (
                                         <li key={i} className="flex items-start gap-2">
@@ -214,7 +182,7 @@ export default function SalonFeaturesSection() {
                                 <div className="relative aspect-[4/3] overflow-hidden">
                                     <Image
                                         src={currentFeature.image}
-                                        alt={`Imagem ilustrativa para ${currentFeature.name}`}
+                                        alt={`${currentFeature.name} feature`}
                                         fill
                                         className="object-cover"
                                     />
@@ -247,10 +215,10 @@ export default function SalonFeaturesSection() {
 
                 <div className="mt-16 text-center">
                     <p className="text-muted-foreground mx-auto mb-6 max-w-2xl">
-                        Pronto para revolucionar a gestão do seu salão de beleza?
+                        {t('cta.text')}
                     </p>
                     <Button asChild size="lg">
-                        <Link href="/agendamento">Experimente Grátis</Link>
+                        <Link href="/agendamento">{t('cta.button')}</Link>
                     </Button>
                 </div>
             </div>

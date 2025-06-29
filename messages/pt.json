@@ -371,6 +371,8 @@
         "home": "Me leve para a página inicial"
     },
     "auth": {
+        "back": "Voltar",
+        "welcome": "Bem vindo ao",
         "signin": {
             "welcome": "Bem vindo novamente!",
             "description": "Preencha seus dados para fazer login em nossa página.",
@@ -458,6 +460,69 @@
         }
     },
     "hero": {
+        "featuresSection": {
+            "subtitle": "Funcionalidades",
+            "title": "Tudo que Você Precisa para Gerir Seu Salão",
+            "description": "Nossa plataforma oferece todas as ferramentas necessárias para gerenciar seu salão com eficiência e proporcionar a melhor experiência para seus clientes.",
+            "selectPlaceholder": "Selecione uma funcionalidade",
+            "featureLabel": "Principais Recursos:",
+            "cta": {
+                "text": "Pronto para revolucionar a gestão do seu salão de beleza?",
+                "button": "Experimente Grátis"
+            },
+            "features": {
+                "agendamentos": {
+                    "name": "Agendamentos",
+                    "description": "Sistema completo de agendamento online com confirmação automática, lembretes por SMS/e-mail e integração com calendários.",
+                    "functionalities": [
+                        "Agendamento online 24 horas",
+                        "Lembretes automáticos para clientes",
+                        "Bloqueio de horários indisponíveis",
+                        "Integração com Google Calendar e Outlook"
+                    ]
+                },
+                "financeiro": {
+                    "name": "Financeiro",
+                    "description": "Controle financeiro completo com relatórios detalhados, gestão de despesas e acompanhamento de métricas-chave.",
+                    "functionalities": [
+                        "Controle de fluxo de caixa em tempo real",
+                        "Geração automática de relatórios financeiros",
+                        "Integração com sistemas contábeis",
+                        "Gestão de comissões para profissionais"
+                    ]
+                },
+                "profissionais": {
+                    "name": "Profissionais",
+                    "description": "Gestão completa da equipe com controle de agenda, especialidades e desempenho individual.",
+                    "functionalities": [
+                        "Perfis personalizados para cada profissional",
+                        "Controle de disponibilidade e folgas",
+                        "Acompanhamento de produtividade",
+                        "Sistema de avaliação de clientes"
+                    ]
+                },
+                "servicos": {
+                    "name": "Serviços",
+                    "description": "Catálogo digital de serviços com gestão de preços, duração e recursos necessários para cada procedimento.",
+                    "functionalities": [
+                        "Cadastro ilimitado de serviços e pacotes",
+                        "Fotos antes/depois dos procedimentos",
+                        "Controle de estoque de produtos",
+                        "Sugestão de serviços personalizados"
+                    ]
+                },
+                "relatorios": {
+                    "name": "Relatórios",
+                    "description": "Análises detalhadas e personalizáveis para acompanhar o desempenho do salão em tempo real.",
+                    "functionalities": [
+                        "Relatórios de clientes frequentes",
+                        "Análise de horários mais populares",
+                        "Desempenho por serviço/profissional",
+                        "Exportação para Excel e PDF"
+                    ]
+                }
+            }
+        },
         "brand": "PROJECT",
         "heading": {
             "part1": "A gestão do seu salão ficou"
@@ -793,6 +858,15 @@
                 "title": "Novo Agendamento",
                 "description": "Preencha os detalhes do novo agendamento",
                 "fields": {
+                    "status": {
+                        "label": "Status",
+                        "options": {
+                            "scheduled": "Agendado",
+                            "completed": "Concluído",
+                            "cancelled": "Cancelado",
+                            "noShow": "Não compareceu"
+                        }
+                    },
                     "startDate": {
                         "label": "Data de Início",
                         "placeholder": "Selecione uma data"
@@ -810,7 +884,7 @@
                     "professional": {
                         "label": "Profissional",
                         "placeholder": "Selecione um profissional",
-                        "description": "Escolha o profissional para este agendamento"
+                        "description": "Escolha o profissional"
                     },
                     "service": {
                         "label": "Serviço",

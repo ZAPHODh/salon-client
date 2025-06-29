@@ -370,6 +370,8 @@
         "home": "Take mehome"
     },
     "auth": {
+        "back": "Go Back",
+        "welcome": "Welcome to",
         "signin": {
             "welcome": "Welcome back!",
             "description": "Fill in your details to log in to our page.",
@@ -456,6 +458,69 @@
         }
     },
     "hero": {
+        "featuresSection": {
+            "subtitle": "Features",
+            "title": "Everything You Need to Manage Your Salon",
+            "description": "Our platform offers all the tools you need to efficiently manage your salon and provide the best experience for your clients.",
+            "selectPlaceholder": "Select a feature",
+            "featureLabel": "Key Features:",
+            "cta": {
+                "text": "Ready to revolutionize your beauty salon management?",
+                "button": "Try for Free"
+            },
+            "features": {
+                "agendamentos": {
+                    "name": "Appointments",
+                    "description": "Complete online booking system with automatic confirmations, SMS/email reminders, and calendar integration.",
+                    "functionalities": [
+                        "24/7 online booking",
+                        "Automatic client reminders",
+                        "Block unavailable time slots",
+                        "Google Calendar and Outlook integration"
+                    ]
+                },
+                "financeiro": {
+                    "name": "Finance",
+                    "description": "Complete financial control with detailed reports, expense management, and key metrics tracking.",
+                    "functionalities": [
+                        "Real-time cash flow control",
+                        "Automatic financial reports",
+                        "Integration with accounting systems",
+                        "Commission management for professionals"
+                    ]
+                },
+                "profissionais": {
+                    "name": "Professionals",
+                    "description": "Complete team management with schedule control, specialties, and individual performance tracking.",
+                    "functionalities": [
+                        "Custom profiles for each professional",
+                        "Availability and time-off control",
+                        "Productivity tracking",
+                        "Client rating system"
+                    ]
+                },
+                "servicos": {
+                    "name": "Services",
+                    "description": "Digital service catalog with price management, duration, and resources required for each procedure.",
+                    "functionalities": [
+                        "Unlimited service and package registration",
+                        "Before/after photos of procedures",
+                        "Product inventory control",
+                        "Personalized service suggestions"
+                    ]
+                },
+                "relatorios": {
+                    "name": "Reports",
+                    "description": "Detailed customizable analytics to track salon performance in real-time.",
+                    "functionalities": [
+                        "Frequent customer reports",
+                        "Peak hours analysis",
+                        "Performance by service/professional",
+                        "Export to Excel and PDF"
+                    ]
+                }
+            }
+        },
         "brand": "PROJECT",
         "heading": {
             "part1": "Your salon management just got"
@@ -504,7 +569,66 @@
             "experience": {
                 "title": "Premium Experience",
                 "description": "Stand out from the competition with a complete and easy-to-use system."
+            },
+            "agendamentos": {
+                "name": "Appointments",
+                "description": "Complete online scheduling system with automatic confirmation, SMS/email reminders, and calendar integration.",
+                "functionalities": [
+                    "24/7 online booking",
+                    "Automatic client reminders",
+                    "Unavailable time blocking",
+                    "Integration with Google Calendar and Outlook"
+                ]
+            },
+            "financeiro": {
+                "name": "Finance",
+                "description": "Complete financial control with detailed reports, expense management, and key metric tracking.",
+                "functionalities": [
+                    "Real-time cash flow management",
+                    "Automatic financial report generation",
+                    "Integration with accounting systems",
+                    "Commission management for professionals"
+                ]
+            },
+            "profissionais": {
+                "name": "Professionals",
+                "description": "Complete team management with schedule control, specialties, and individual performance tracking.",
+                "functionalities": [
+                    "Personalized profiles for each professional",
+                    "Availability and time-off control",
+                    "Productivity monitoring",
+                    "Client rating system"
+                ]
+            },
+            "servicos": {
+                "name": "Services",
+                "description": "Digital service catalog with price, duration, and required resources management for each procedure.",
+                "functionalities": [
+                    "Unlimited service and package registration",
+                    "Before/after procedure photos",
+                    "Product stock control",
+                    "Personalized service suggestions"
+                ]
+            },
+            "relatorios": {
+                "name": "Reports",
+                "description": "Detailed and customizable analytics to monitor salon performance in real time.",
+                "functionalities": [
+                    "Frequent client reports",
+                    "Popular time slot analysis",
+                    "Performance by service/professional",
+                    "Export to Excel and PDF"
+                ]
             }
+        },
+        "section": {
+            "tag": "Features",
+            "title": "Everything You Need to Manage Your Salon",
+            "description": "Our platform provides all the tools you need to efficiently manage your salon and deliver the best experience to your clients.",
+            "selectFeaturePlaceholder": "Select a feature",
+            "keyFeaturesTitle": "Key Features:",
+            "ctaText": "Ready to revolutionize your salon management?",
+            "ctaButton": "Try for Free"
         },
         "heroParallax": {
             "title": "You",
@@ -819,6 +943,15 @@
                         "label": "Customer",
                         "placeholder": "Select a customer",
                         "description": "Choose the customer"
+                    },
+                    "status": {
+                        "label": "Status",
+                        "options": {
+                            "scheduled": "Scheduled",
+                            "completed": "Completed",
+                            "cancelled": "Cancelled",
+                            "noShow": "No-show"
+                        }
                     },
                     "description": {
                         "label": "Description",

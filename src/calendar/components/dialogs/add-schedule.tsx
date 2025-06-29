@@ -350,7 +350,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                         <RadioGroup
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
-                                            className="flex flex-col space-y-1"
+                                            className="flex flex-col md:flex-row space-y-1"
                                         >
                                             <div className="flex items-center space-x-2">
                                                 <RadioGroupItem value="SCHEDULED" id="scheduled" />
