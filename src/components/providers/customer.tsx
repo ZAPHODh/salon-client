@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import { useSession } from "./session";
+import { createCustomer as createCustomerAction, deleteCustomer as deleteCustomerAction, updateCustomer as updateCustomerAction } from "@/requests/customers";
 
 interface CustomerContextProps {
     customers: Customer[];
@@ -36,18 +37,8 @@ export const CustomerProvider: React.FC<CustomerProviderProps> = ({
 
     const updateCustomer = async (updates: Partial<Customer>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/customers/${updates.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-                body: JSON.stringify(updates),
-            });
-
-            if (!res.ok) throw new Error("Erro ao atualizar cliente");
-
-            const { customer } = await res.json();
+            const customer = await updateCustomerAction(updates)
+            if (!customer) throw new Error("Erro ao atualizar cliente");
             setCustomers(prev => prev.map(c => (c.id === updates.id ? customer : c)));
         } catch (err) {
             handleApiError(err, "Falha na atualização do cliente");
@@ -56,14 +47,9 @@ export const CustomerProvider: React.FC<CustomerProviderProps> = ({
 
     const deleteCustomer = async (id: string) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/customers/${id}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${session?.accessToken}`,
-                }
-            });
 
-            if (!res.ok) throw new Error("Erro ao excluir cliente");
+            const isDeleted = await deleteCustomerAction(id)
+            if (!isDeleted) throw new Error("Erro ao excluir cliente");
 
             setCustomers(prev => prev.filter(c => c.id !== id));
             setError(null);
@@ -73,18 +59,8 @@ export const CustomerProvider: React.FC<CustomerProviderProps> = ({
     };
     const createCustomer = async (newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt'>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/customers`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-                body: JSON.stringify(newCustomer),
-            });
-
-            if (!res.ok) throw new Error("Erro ao criar cliente");
-
-            const customer = await res.json();
+            const customer = await createCustomerAction(newCustomer)
+            if (!customer) throw new Error("Erro ao criar cliente");
             setCustomers(prev => [...prev, customer]);
             setError(null);
         } catch (err) {
