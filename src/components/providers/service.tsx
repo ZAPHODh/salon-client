@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "./session";
+import { createService as createServiceAction, deleteService as deleteServiceAction, updateService as updateServiceAction } from "@/requests/services";
 
 interface ServiceContextProps {
     services: Service[];
@@ -17,37 +18,19 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode, initialServi
     const { session } = useSession();
     const updateService = async (id: string, updates: Partial<Service>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/services/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-                body: JSON.stringify(updates),
-            });
-
-            if (!res.ok) throw new Error("Erro ao atualizar serviço.");
-
-            const updated = await res.json();
+            const updated = await updateServiceAction(id, updates)
+            if (!updated) throw new Error("Erro ao atualizar serviço.");
             setServices(prev =>
-                prev.map(s => (s.id === id ? updated.service : s))
+                prev.map(s => (s.id === id ? updated : s))
             );
         } catch (err) {
             console.error(err);
         }
     };
-
     const deleteService = async (id: string) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/services/${id}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-            });
-
-            if (!res.ok) throw new Error("Erro ao deletar serviço.");
-
+            const deleted = await deleteServiceAction(id)
+            if (!deleted) throw new Error("Erro ao deletar serviço.");
             setServices(prev => prev.filter(s => s.id !== id));
         } catch (err) {
             console.error(err);
@@ -55,18 +38,9 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode, initialServi
     };
     const createService = async (newService: Omit<Service, 'id'>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/services`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-                body: JSON.stringify(newService),
-            });
+            const createdService = await createServiceAction(newService)
 
-            if (!res.ok) throw new Error("Erro ao criar serviço.");
-
-            const createdService = await res.json();
+            if (!createdService) throw new Error("Erro ao criar serviço.");
             setServices(prev => [...prev, createdService]);
         } catch (err) {
             console.error(err);

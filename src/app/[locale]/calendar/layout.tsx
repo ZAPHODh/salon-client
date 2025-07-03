@@ -7,22 +7,24 @@ import { CalendarProvider } from "@/calendar/contexts/calendar";
 import { getSchedules } from "@/calendar/requests";
 import { CustomerProvider } from "@/components/providers/customer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { redirect } from "@/i18n/navigation";
 import { getServerSession } from "@/lib/auth/server-session";
-import { getCustomers } from "@/requests/get-customers";
-import { getProfessionalsData } from "@/requests/get-professionals";
-import { getServicesData } from "@/requests/get-services";
+import { getCustomers } from "@/requests/customers";
+import { getProfessionalsData } from "@/requests/professionals";
+import { getServicesData } from "@/requests/services";
 import { Settings } from "lucide-react";
 
 
 
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children, params }: { children: React.ReactNode, params: Promise<{ locale: string }>; }) {
     const session = await getServerSession()
+    const locale = (await params).locale
+    if (!session) redirect({ href: 'auth/signin', locale })
     const professionals = await getProfessionalsData()
     const services = await getServicesData()
     const schedules = await getSchedules()
     const customers = await getCustomers()
-    console.log(schedules)
     return (
         <CustomerProvider initialCustomers={customers}>
             <CalendarProvider initialProfessionals={professionals} schedules={schedules} initialServices={services}>

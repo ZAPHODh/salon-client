@@ -1,8 +1,9 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useSession } from "./session";
 import { createProfessionalSchemaType } from "@/schemas/professional";
+import { createProfessional as createProfessionalAction, deleteProfessional as deleteProfessionalAction, updateProfessional as updateProfessionalAction } from "@/requests/professionals";
 
 
 interface ProfessionalContextProps {
@@ -36,18 +37,8 @@ export const ProfessionalProvider: React.FC<ProfessionalProviderProps> = ({
     };
     const updateProfessional = async (updates: Partial<Professional>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals/${updates.id}`, {
-                method: "PUT",
-                headers: {
-                    Authorization: `Bearer ${session?.accessToken}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ ...updates, commissionRate: parseInt(updates.commissionRate as string) }),
-            });
-
-            if (!res.ok) throw new Error("Erro ao atualizar profissional");
-
-            const professional = await res.json();
+            const professional = await updateProfessionalAction(updates)
+            if (!professional) throw new Error("Erro ao atualizar profissional");
             setProfessionals(prev => prev.map(p => (p.id === updates.id ? professional : p)))
         } catch (err) {
             handleApiError(err, "Falha na atualização do profissional");
@@ -56,15 +47,9 @@ export const ProfessionalProvider: React.FC<ProfessionalProviderProps> = ({
 
     const deleteProfessional = async (id: string) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals/${id}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${session?.accessToken}`,
-                    "Content-Type": "application/json",
-                },
-            });
+            const deleted = await deleteProfessionalAction(id)
 
-            if (!res.ok) throw new Error("Erro ao excluir profissional");
+            if (!deleted) throw new Error("Erro ao excluir profissional");
 
             setProfessionals(prev => prev.filter(p => p.id !== id));
             setError(null);
@@ -74,18 +59,9 @@ export const ProfessionalProvider: React.FC<ProfessionalProviderProps> = ({
     };
     const createProfessional = async (newProfessional: Omit<createProfessionalSchemaType, 'id'>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${session?.accessToken}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ ...newProfessional, commissionRate: parseInt(newProfessional.commissionRate as string) }),
-            });
+            const professional = await createProfessionalAction(newProfessional)
 
-            if (!res.ok) throw new Error("Erro ao criar profissional");
-
-            const professional = await res.json();
+            if (!professional) throw new Error("Erro ao criar profissional");
             setProfessionals(prev => [...prev, professional]);
             setError(null);
         } catch (err) {

@@ -3,8 +3,7 @@ import { ProfessionalProvider } from "@/components/providers/professional";
 import { ServiceProvider } from "@/components/providers/service";
 
 import getFinancialData from "@/requests/get-financial-data";
-import { getProfessionalsData } from "@/requests/get-professionals";
-import { getServicesData } from "@/requests/get-services";
+
 import { redirect } from "next/navigation";
 
 export default async function Layout(props: { children: React.ReactNode }) {
