@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
             }),
         }
     );
-
+    console.log(res.ok)
     const user = await res.json();
     if (user && res.ok) {
         const session = await encode(user);
