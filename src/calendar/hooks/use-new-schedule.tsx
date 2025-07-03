@@ -1,14 +1,13 @@
 'use client';
 
-import { useSession } from "@/components/providers/session";
 import { useCalendar } from "../contexts/calendar";
 import { ISchedule } from "../interfaces";
 import { toast } from "sonner";
 import { scheduleSchema } from "../schema";
+import { createSchedule as createScheduleAction } from "@/requests/schedule";
 
 export function useCreateSchedule() {
     const { setSchedules } = useCalendar();
-    const { session } = useSession();
 
     const createSchedule = async (scheduleData: Partial<ISchedule>) => {
 
@@ -24,23 +23,14 @@ export function useCreateSchedule() {
             return
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/appointments`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${session?.accessToken}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(parsed.data)
-        });
+        const createdSchedule = await createScheduleAction(parsed.data)
 
-        if (!res.ok) {
+        if (!createdSchedule) {
             toast('Não foi possível criar o agendamento', {
                 description: 'Erro ao criar'
             });
             return;
         }
-
-        const createdSchedule: ISchedule = await res.json();
         setSchedules(prev => [...prev, createdSchedule]);
     };
 
