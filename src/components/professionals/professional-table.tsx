@@ -93,7 +93,7 @@ export function ProfessionalsDataTable() {
                             <AlertDescription>{error}</AlertDescription>
                         </Alert>
                     )}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 justify-between mb-6">
                         <div className="flex items-center space-x-2">
                             <div className="relative">
                                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />

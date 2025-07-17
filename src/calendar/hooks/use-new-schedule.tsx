@@ -31,6 +31,7 @@ export function useCreateSchedule() {
             });
             return;
         }
+        console.log('createdSchedule', createdSchedule);
         setSchedules(prev => [...prev, createdSchedule]);
     };
 

@@ -15,7 +15,6 @@ const ServiceContext = createContext<ServiceContextProps | undefined>(undefined)
 
 export const ServiceProvider: React.FC<{ children: React.ReactNode, initialServices: Service[] }> = ({ children, initialServices }) => {
     const [services, setServices] = useState<Service[]>(initialServices);
-    const { session } = useSession();
     const updateService = async (id: string, updates: Partial<Service>) => {
         try {
             const updated = await updateServiceAction(id, updates)

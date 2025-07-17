@@ -88,7 +88,6 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
             endDate: values.endDate.toISOString(),
         })
         onClose()
-        form.reset()
     }
 
     return (
