@@ -15,10 +15,7 @@ interface FinancialOverviewProps {
 }
 
 export function FinancialOverview({ dateRange }: FinancialOverviewProps) {
-    const { sales, expenses, commissions, transactions, loading, fetchFinancialData } = useFinancial()
-    useEffect(() => {
-        fetchFinancialData(dateRange)
-    }, [dateRange, fetchFinancialData])
+    const { sales, expenses, commissions, transactions, loading } = useFinancial()
 
     const filteredSales = sales.filter((sale) =>
         isWithinInterval(new Date(sale.createdAt), { start: dateRange.from, end: dateRange.to }),

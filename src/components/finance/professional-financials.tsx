@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
 import { useState } from "react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -22,10 +21,13 @@ export function ProfessionalFinancials({ dateRange }: ProfessionalFinancialsProp
     const { professionals } = useProfessional()
     const [selectedProfessional, setSelectedProfessional] = useState<string>("all")
 
+    const fetchData = useCallback(() => {
+        fetchFinancialData(dateRange)
+    }, [dateRange.from.getTime(), dateRange.to.getTime()])
 
     useEffect(() => {
-        fetchFinancialData(dateRange)
-    }, [dateRange, fetchFinancialData])
+        fetchData()
+    }, [fetchData])
 
     const filteredSales = sales.filter((sale) =>
         isWithinInterval(new Date(sale.createdAt), { start: dateRange.from, end: dateRange.to }),
@@ -68,7 +70,6 @@ export function ProfessionalFinancials({ dateRange }: ProfessionalFinancialsProp
             currency: "BRL",
         }).format(value)
     }
-
 
     const chartData = professionalStats.slice(0, 10).map((professional) => ({
         name: professional.name.split(" ")[0],
@@ -192,9 +193,7 @@ export function ProfessionalFinancials({ dateRange }: ProfessionalFinancialsProp
                                             {index + 1}
                                         </Badge>
                                         <Avatar className="h-8 w-8">
-                                            <AvatarFallback>
-                                                P
-                                            </AvatarFallback>
+                                            <AvatarFallback>P</AvatarFallback>
                                         </Avatar>
                                         <div>
                                             <p className="text-sm font-medium">{professional.name}</p>
