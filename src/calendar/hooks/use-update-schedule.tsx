@@ -14,7 +14,7 @@ export function useUpdateSchedule() {
         const typedSchedule: Omit<ISchedule, 'service' | 'professional' | 'customer'> = newSchedule;
         typedSchedule.startDate = new Date(schedule.startDate).toISOString();
         typedSchedule.endDate = new Date(schedule.endDate).toISOString();
-        const isUpdated = await updateScheduleAction(schedule)
+        const isUpdated = await updateScheduleAction(typedSchedule)
         if (!isUpdated) {
             toast('Não foi posssivel editar o agendamento', {
                 description: 'Erro ao editar'

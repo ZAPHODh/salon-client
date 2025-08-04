@@ -717,21 +717,21 @@
             "title": "Links Rápidos",
             "links": {
                 "home": "Início",
-                "products": "Produtos",
+                "products": "Entrar",
                 "account": "Conta",
                 "faq": "FAQ"
             }
         },
         "logoSection": {
-            "title": "Project",
+            "title": "BelezaPro",
             "addressLines": [
-                "project",
-                "project",
-                "project",
-                "project",
-                "project",
-                "project",
-                "project"
+                "Sistema completo para salões de beleza",
+                "Agendamentos online, PDV e gestão",
+                "Plano Grátis com o essencial",
+                "Plano Pro com funcionalidades avançadas",
+                "Plano Enterprise para grandes salões",
+                "Facilite sua rotina e aumente seus lucros",
+                "Experimente grátis agora!"
             ]
         },
         "followUs": {
