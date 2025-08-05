@@ -4,7 +4,16 @@ type InventoryMovementType = 'entry' | 'exit' | 'adjustment';
 type AppointmentStatus = 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'RESCHEDULED' | 'SCHEDULED';
 type CashRegisterStatus = 'open' | 'closed' | 'reconciled';
 type CommissionType = 'percentage' | 'fixed';
-
+type SubscriptionPlan = {
+    name: string;
+    description: string;
+    stripePriceId: string;
+};
+type UserSubscriptionPlan = SubscriptionPlan &
+    Pick<User, "stripeCustomerId" | "stripeSubscriptionId"> & {
+        stripeCurrentPeriodEnd: number;
+        isPro: boolean;
+    };
 // Interfaces principais
 interface User {
     id: string;
