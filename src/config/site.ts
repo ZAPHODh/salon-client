@@ -1,5 +1,5 @@
 export const siteUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://salon-client-six.vercel.app/";
+    process.env.NEXT_PUBLIC_BASE_URL || "https://salon-client-six.vercel.app/";
 
 export const siteConfig = (locale: string = "en") => ({
     name: "PL",
