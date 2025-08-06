@@ -126,6 +126,16 @@ function MobileNav() {
                         {t('finance')}
                     </Link>
                     <Link
+                        href="/services"
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                            "text-sm font-medium transition-colors hover:text-primary",
+                            pathname.includes("/services") ? "" : "text-muted-foreground"
+                        )}
+                    >
+                        {t('services')}
+                    </Link>
+                    <Link
                         href="/professionals"
                         onClick={() => setOpen(false)}
                         className={cn(
