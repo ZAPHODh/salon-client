@@ -1,8 +1,8 @@
 import { ImageResponse } from "next/og";
 import { RenderIMGEl } from "@/components/OGImgEl";
 import { siteUrl } from "@/config/site";
-import Logo from "public/pj.png";
-import homepageImage from "public/pjhomepage.png";
+import Logo from "@/../public/pj.jpg";
+import homepageImage from "@/../public/pjhomepage.jpg";
 import { getLocale } from "next-intl/server";
 
 export const runtime = "edge";
