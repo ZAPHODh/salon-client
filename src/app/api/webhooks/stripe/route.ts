@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         // the subscription id and customer id.
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/subscrpitons/${session?.metadata?.user}`,
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/subscrpitons/async-succeeded/${session?.metadata?.userId}`,
                 {
                     method: "POST",
                     headers: {
@@ -62,20 +62,6 @@ export async function POST(req: NextRequest) {
             if (!response.ok) {
                 throw new Error("Failed to update user subscription");
             }
-
-            // await prisma.user.update({
-            //     where: {
-            //         id: session?.metadata?.userId,
-            //     },
-            //     data: {
-            //         stripeSubscriptionId: subscription.id,
-            //         stripeCustomerId: subscription.customer as string,
-            //         stripePriceId: subscription.items.data[0].price.id,
-            //         stripeCurrentPeriodEnd: new Date(
-            //             subscription.items.data[0].current_period_end! * 1000
-            //         ),
-            //     },
-            // });
         } catch (error) {
             console.error(error);
         }
@@ -93,7 +79,7 @@ export async function POST(req: NextRequest) {
         try {
 
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/${subscription.customer}`,
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/succeeded/${subscription.id}`,
                 {
                     method: "POST",
                     headers: {
@@ -111,17 +97,6 @@ export async function POST(req: NextRequest) {
             if (!response.ok) {
                 throw new Error("Failed to update user subscription");
             }
-            // await prisma.user.update({
-            //     where: {
-            //         stripeSubscriptionId: subscription.id,
-            //     },
-            //     data: {
-            //         stripePriceId: subscription.items.data[0].price.id,
-            //         stripeCurrentPeriodEnd: new Date(
-            //             subscription.items.data[0].current_period_end! * 1000
-            //         ),
-            //     },
-            // });
         } catch (error) {
             console.error(error);
         }

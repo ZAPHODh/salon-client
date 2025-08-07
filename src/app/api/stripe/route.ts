@@ -10,7 +10,7 @@ import { getUserSubscriptionPlan, stripe } from "@/lib/payment";
 export async function GET(req: NextRequest) {
     const locale = await getLocale()
 
-    const billingUrl = siteConfig(locale).url + "/dashboard/billing/";
+    const billingUrl = siteConfig(locale).url + "/billing/";
     try {
         const { session } = await verifySession();
 
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
                 userId: session.user.id,
             },
         });
-        revalidatePath(`/dashboard/billing`);
+        revalidatePath(`/billing`);
         return new Response(JSON.stringify({ url: stripeSession.url }));
     } catch (error) {
         if (error instanceof z.ZodError) {
