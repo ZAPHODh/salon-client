@@ -33,12 +33,6 @@ const steps = [
         description: "Configure os horários de trabalho",
         icon: Clock,
     },
-    // {
-    //     id: "subscription",
-    //     title: "Plano de Assinatura",
-    //     description: "Escolha seu plano e forma de pagamento",
-    //     icon: CreditCard,
-    // },
 ]
 
 const weekDays = [
@@ -51,47 +45,11 @@ const weekDays = [
     { key: 6, label: "Sábado" },
 ]
 
-// const subscriptionPlans = [
-//     {
-//         id: "free",
-//         name: "Free",
-//         description: "Para começar",
-//         monthlyPrice: 0,
-//         annualPrice: 0,
-//         features: ["Até 50 agendamentos/mês", "1 usuário", "Suporte por email", "Funcionalidades básicas"],
-//     },
-//     {
-//         id: "pro",
-//         name: "Pro",
-//         description: "Para salões em crescimento",
-//         monthlyPrice: 49.9,
-//         annualPrice: 499.9,
-//         features: [
-//             "Agendamentos ilimitados",
-//             "Até 5 usuários",
-//             "Suporte prioritário",
-//             "Relatórios avançados",
-//             "Integração com WhatsApp",
-//         ],
-//         popular: true,
-//     },
-//     {
-//         id: "enterprise",
-//         name: "Enterprise",
-//         description: "Para grandes salões",
-//         monthlyPrice: 99.9,
-//         annualPrice: 999.9,
-//         features: ["Tudo do Pro", "Usuários ilimitados", "Suporte 24/7", "API personalizada", "Treinamento dedicado"],
-//     },
-// ]
-
 export default function SalonSettingsStepper() {
     const locale = useLocale()
     const [currentStep, setCurrentStep] = useState(0)
     const [isTransitioning, setIsTransitioning] = useState(false)
     const [animationDirection, setAnimationDirection] = useState<"forward" | "backward">("forward")
-    const [isAnnual, setIsAnnual] = useState(false)
-    const [selectedPlan, setSelectedPlan] = useState("pro")
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isCompleted, setIsCompleted] = useState(false)
 
@@ -230,6 +188,7 @@ export default function SalonSettingsStepper() {
             })
 
             setIsCompleted(true)
+
         } catch (error) {
             console.error("Error submitting form:", error)
             toast.error("Erro ao salvar configuração", {
@@ -259,28 +218,11 @@ export default function SalonSettingsStepper() {
         form.setValue("workingHours", workingHours)
     }
 
-    const resetForm = () => {
-        setIsCompleted(false)
-        setCurrentStep(0)
-        form.reset()
-        setActiveDays({
-            0: false,
-            1: true,
-            2: true,
-            3: true,
-            4: true,
-            5: true,
-            6: false,
-        })
-        setSelectedPlan("pro")
-        setIsAnnual(false)
-    }
     if (isCompleted) {
         toast.success('Configuração Concluída!', {
             description: 'Seu salão foi configurado com sucesso e está pronto para receber agendamentos.'
         })
-        redirect({ href: '/professionals', locale })
-
+        redirect({ href: '/professional', locale })
     }
 
     return (
@@ -434,6 +376,235 @@ export default function SalonSettingsStepper() {
                                 </Card>
                             )}
                             {currentStep === 1 && (
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle className="hidden sm:block">Horários de Funcionamento</CardTitle>
+                                        <CardDescription className="hidden sm:block">
+                                            Configure os horários de trabalho do seu salão
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
+                                        <div className="p-4 rounded-lg space-y-4">
+                                            <div>
+                                                <h3 className="text-lg font-semibold mb-1">Horários Visíveis</h3>
+                                                <p className="text-sm text-muted-foreground">
+                                                    Intervalo que aparecerá no agendamento
+                                                </p>
+                                            </div>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <FormField
+                                                    control={form.control}
+                                                    name="visibleHours.from"
+                                                    render={({ field }) => (
+                                                        <FormItem>
+                                                            <FormLabel className="text-sm font-medium">Horário inicial</FormLabel>
+                                                            <Select
+                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                defaultValue={field.value?.toString()}
+                                                            >
+                                                                <FormControl>
+                                                                    <SelectTrigger className="h-11">
+                                                                        <SelectValue />
+                                                                    </SelectTrigger>
+                                                                </FormControl>
+                                                                <SelectContent>
+                                                                    {Array.from({ length: 24 }, (_, i) => (
+                                                                        <SelectItem key={i} value={i.toString()}>
+                                                                            {formatTime(i)}
+                                                                        </SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                                <FormField
+                                                    control={form.control}
+                                                    name="visibleHours.to"
+                                                    render={({ field }) => (
+                                                        <FormItem>
+                                                            <FormLabel className="text-sm font-medium">Horário final</FormLabel>
+                                                            <Select
+                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                defaultValue={field.value?.toString()}
+                                                            >
+                                                                <FormControl>
+                                                                    <SelectTrigger className="h-11">
+                                                                        <SelectValue />
+                                                                    </SelectTrigger>
+                                                                </FormControl>
+                                                                <SelectContent>
+                                                                    {Array.from({ length: 24 }, (_, i) => (
+                                                                        <SelectItem key={i} value={i.toString()}>
+                                                                            {formatTime(i)}
+                                                                        </SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            </div>
+                                        </div>
+                                        <Separator />
+                                        <div className="space-y-4">
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <h3 className="text-lg font-semibold">Dias de Funcionamento</h3>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Info className="w-4 h-4 text-muted-foreground" />
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="max-w-80 text-center">
+                                                            <p>Ative os dias e configure os horários de funcionamento</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                {weekDays.map((day) => (
+                                                    <div
+                                                        key={day.key}
+                                                        className={`border rounded-lg p-4 transition-all ${activeDays[day.key]
+                                                            ? 'border-primary/20 bg-primary/5'
+                                                            : 'border-border bg-background'
+                                                            }`}
+                                                    >
+                                                        <div className="flex items-center justify-between mb-3">
+                                                            <div className="flex items-center gap-3">
+                                                                <Switch
+                                                                    checked={activeDays[day.key]}
+                                                                    onCheckedChange={(checked) => toggleDay(day.key, checked)}
+                                                                />
+                                                                <div>
+                                                                    <span className="font-medium">
+                                                                        <span className="sm:hidden">{day.label}</span>
+                                                                        <span className="hidden sm:inline">{day.label}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            {!activeDays[day.key] && (
+                                                                <Badge variant="secondary" className="text-xs">
+                                                                    <Moon className="w-3 h-3 mr-1" />
+                                                                    Fechado
+                                                                </Badge>
+                                                            )}
+                                                        </div>
+                                                        {activeDays[day.key] && (
+                                                            <div className="space-y-3 pl-0 sm:pl-8">
+                                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                                    <FormField
+                                                                        control={form.control}
+                                                                        name={`workingHours.${day.key}.from` as any}
+                                                                        render={({ field }) => (
+                                                                            <FormItem>
+                                                                                <FormLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                                                                                    Abertura
+                                                                                </FormLabel>
+                                                                                <Select
+                                                                                    onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                                    value={field.value?.toString()}
+                                                                                >
+                                                                                    <FormControl>
+                                                                                        <SelectTrigger className="h-10">
+                                                                                            <SelectValue />
+                                                                                        </SelectTrigger>
+                                                                                    </FormControl>
+                                                                                    <SelectContent>
+                                                                                        {Array.from({ length: 24 }, (_, i) => (
+                                                                                            <SelectItem key={i} value={i.toString()}>
+                                                                                                {formatTime(i)}
+                                                                                            </SelectItem>
+                                                                                        ))}
+                                                                                    </SelectContent>
+                                                                                </Select>
+                                                                                <FormMessage />
+                                                                            </FormItem>
+                                                                        )}
+                                                                    />
+                                                                    <FormField
+                                                                        control={form.control}
+                                                                        name={`workingHours.${day.key}.to` as any}
+                                                                        render={({ field }) => (
+                                                                            <FormItem>
+                                                                                <FormLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                                                                                    Fechamento
+                                                                                </FormLabel>
+                                                                                <Select
+                                                                                    onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                                    value={field.value?.toString()}
+                                                                                >
+                                                                                    <FormControl>
+                                                                                        <SelectTrigger className="h-10">
+                                                                                            <SelectValue />
+                                                                                        </SelectTrigger>
+                                                                                    </FormControl>
+                                                                                    <SelectContent>
+                                                                                        {Array.from({ length: 25 }, (_, i) => (
+                                                                                            <SelectItem key={i} value={i.toString()}>
+                                                                                                {i === 24 ? "00:00" : formatTime(i)}
+                                                                                            </SelectItem>
+                                                                                        ))}
+                                                                                    </SelectContent>
+                                                                                </Select>
+                                                                                <FormMessage />
+                                                                            </FormItem>
+                                                                        )}
+                                                                    />
+                                                                </div>
+                                                                <div className="text-sm text-muted-foreground bg-muted/50 px-3 py-2 rounded">
+                                                                    Funcionamento: {formatTime(form.watch(`workingHours.${day.key}.from`) || 0)} às {' '}
+                                                                    {form.watch(`workingHours.${day.key}.to`) === 24
+                                                                        ? "00:00"
+                                                                        : formatTime(form.watch(`workingHours.${day.key}.to`) || 0)
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="flex flex-wrap gap-2 pt-4 border-t">
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        const weekdays = [1, 2, 3, 4, 5];
+                                                        weekdays.forEach(day => toggleDay(day, true));
+                                                    }}
+                                                >
+                                                    Seg-Sex (9h-18h)
+                                                </Button>
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        weekDays.forEach(day => toggleDay(day.key, false));
+                                                    }}
+                                                >
+                                                    Limpar Tudo
+                                                </Button>
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        [1, 2, 3, 4, 5, 6].forEach(day => toggleDay(day, true));
+                                                    }}
+                                                >
+                                                    Seg-Sáb
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            )}
+                            {/* {currentStep === 1 && (
                                 <Card className="transform transition-all duration-300">
                                     <CardHeader>
                                         <CardTitle>Horários de Funcionamento</CardTitle>
@@ -603,61 +774,6 @@ export default function SalonSettingsStepper() {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            )}
-                            {/* {currentStep === 2 && (
-                                <Card className="transform transition-all duration-300">
-                                    <CardHeader>
-                                        <CardTitle>Escolha seu Plano</CardTitle>
-                                        <CardDescription>Selecione o plano que melhor atende às suas necessidades</CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-6">
-                                        <div className="flex items-center justify-center gap-4">
-                                            <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensal</span>
-                                            <Switch checked={isAnnual} onCheckedChange={setIsAnnual} />
-                                            <span className={`text-sm ${isAnnual ? "font-medium" : "text-muted-foreground"}`}>Anual</span>
-                                            {isAnnual && (
-                                                <Badge variant="secondary" className="ml-2">
-                                                    2 meses grátis
-                                                </Badge>
-                                            )}
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            {subscriptionPlans.map((plan) => (
-                                                <Card
-                                                    key={plan.id}
-                                                    className={`relative cursor-pointer transition-all ${selectedPlan === plan.id ? "ring-2 ring-primary border-primary" : "hover:border-primary/50"
-                                                        }`}
-                                                    onClick={() => setSelectedPlan(plan.id)}
-                                                >
-                                                    {plan.popular && (
-                                                        <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2">Mais Popular</Badge>
-                                                    )}
-                                                    <CardHeader className="text-center">
-                                                        <CardTitle className="text-xl">{plan.name}</CardTitle>
-                                                        <CardDescription>{plan.description}</CardDescription>
-                                                        <div className="mt-4">
-                                                            <span className="text-3xl font-bold">
-                                                                R$ {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                                                            </span>
-                                                            <span className="text-muted-foreground">/{isAnnual ? "ano" : "mês"}</span>
-                                                        </div>
-                                                    </CardHeader>
-                                                    <CardContent>
-                                                        <ul className="space-y-2">
-                                                            {plan.features.map((feature, index) => (
-                                                                <li key={index} className="flex items-center gap-2 text-sm">
-                                                                    <Check className="w-4 h-4 text-primary" />
-                                                                    {feature}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </CardContent>
-                                                </Card>
-                                            ))}
-                                        </div>
-                                    </CardContent>
-                                </Card>
                             )} */}
                         </div>
                     </div>
@@ -701,6 +817,6 @@ export default function SalonSettingsStepper() {
                     </div>
                 </form>
             </Form>
-        </div>
+        </div >
     )
 }
