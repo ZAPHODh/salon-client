@@ -145,8 +145,8 @@ function SignUp({
                                         className="w-4 h-4 text-gray-800 dark:text-white"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
+                                        width="4"
+                                        height="4"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >

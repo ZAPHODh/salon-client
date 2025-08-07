@@ -33,12 +33,12 @@ const steps = [
         description: "Configure os horários de trabalho",
         icon: Clock,
     },
-    {
-        id: "subscription",
-        title: "Plano de Assinatura",
-        description: "Escolha seu plano e forma de pagamento",
-        icon: CreditCard,
-    },
+    // {
+    //     id: "subscription",
+    //     title: "Plano de Assinatura",
+    //     description: "Escolha seu plano e forma de pagamento",
+    //     icon: CreditCard,
+    // },
 ]
 
 const weekDays = [
@@ -51,39 +51,39 @@ const weekDays = [
     { key: 6, label: "Sábado" },
 ]
 
-const subscriptionPlans = [
-    {
-        id: "free",
-        name: "Free",
-        description: "Para começar",
-        monthlyPrice: 0,
-        annualPrice: 0,
-        features: ["Até 50 agendamentos/mês", "1 usuário", "Suporte por email", "Funcionalidades básicas"],
-    },
-    {
-        id: "pro",
-        name: "Pro",
-        description: "Para salões em crescimento",
-        monthlyPrice: 49.9,
-        annualPrice: 499.9,
-        features: [
-            "Agendamentos ilimitados",
-            "Até 5 usuários",
-            "Suporte prioritário",
-            "Relatórios avançados",
-            "Integração com WhatsApp",
-        ],
-        popular: true,
-    },
-    {
-        id: "enterprise",
-        name: "Enterprise",
-        description: "Para grandes salões",
-        monthlyPrice: 99.9,
-        annualPrice: 999.9,
-        features: ["Tudo do Pro", "Usuários ilimitados", "Suporte 24/7", "API personalizada", "Treinamento dedicado"],
-    },
-]
+// const subscriptionPlans = [
+//     {
+//         id: "free",
+//         name: "Free",
+//         description: "Para começar",
+//         monthlyPrice: 0,
+//         annualPrice: 0,
+//         features: ["Até 50 agendamentos/mês", "1 usuário", "Suporte por email", "Funcionalidades básicas"],
+//     },
+//     {
+//         id: "pro",
+//         name: "Pro",
+//         description: "Para salões em crescimento",
+//         monthlyPrice: 49.9,
+//         annualPrice: 499.9,
+//         features: [
+//             "Agendamentos ilimitados",
+//             "Até 5 usuários",
+//             "Suporte prioritário",
+//             "Relatórios avançados",
+//             "Integração com WhatsApp",
+//         ],
+//         popular: true,
+//     },
+//     {
+//         id: "enterprise",
+//         name: "Enterprise",
+//         description: "Para grandes salões",
+//         monthlyPrice: 99.9,
+//         annualPrice: 999.9,
+//         features: ["Tudo do Pro", "Usuários ilimitados", "Suporte 24/7", "API personalizada", "Treinamento dedicado"],
+//     },
+// ]
 
 export default function SalonSettingsStepper() {
     const locale = useLocale()
@@ -216,10 +216,6 @@ export default function SalonSettingsStepper() {
                     cleanedWorkingHours[dayIndex] = { from: 0, to: 0 }
                 }
             }
-            const subscription = {
-                plan: selectedPlan,
-                billing: isAnnual ? "annual" : "monthly",
-            }
             const finalData = {
                 ...data,
                 workingHours: cleanedWorkingHours,
@@ -284,27 +280,7 @@ export default function SalonSettingsStepper() {
             description: 'Seu salão foi configurado com sucesso e está pronto para receber agendamentos.'
         })
         redirect({ href: '/professionals', locale })
-        // return (
-        //     <div className="max-w-2xl mx-auto p-6">
-        //         <Card className="text-center">
-        //             <CardContent className="pt-6">
-        //                 <div className="mx-auto flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-        //                     <CheckCircle className="w-8 h-8 text-green-600" />
-        //                 </div>
-        //                 <h2 className="text-2xl font-bold text-green-900 mb-2">Configuração Concluída!</h2>
-        //                 <p className="text-muted-foreground mb-6">
-        //                     Seu salão foi configurado com sucesso e está pronto para receber agendamentos.
-        //                 </p>
-        //                 <div className="space-y-2">
-        //                     <Button onClick={resetForm} variant="outline" className="mr-2">
-        //                         Configurar Outro Salão
-        //                     </Button>
-        //                     <Button onClick={() => (window.location.href = "/dashboard")}>Ir para Dashboard</Button>
-        //                 </div>
-        //             </CardContent>
-        //         </Card>
-        //     </div>
-        // )
+
     }
 
     return (
@@ -628,14 +604,13 @@ export default function SalonSettingsStepper() {
                                     </CardContent>
                                 </Card>
                             )}
-                            {currentStep === 2 && (
+                            {/* {currentStep === 2 && (
                                 <Card className="transform transition-all duration-300">
                                     <CardHeader>
                                         <CardTitle>Escolha seu Plano</CardTitle>
                                         <CardDescription>Selecione o plano que melhor atende às suas necessidades</CardDescription>
                                     </CardHeader>
                                     <CardContent className="space-y-6">
-                                        {/* Billing Toggle */}
                                         <div className="flex items-center justify-center gap-4">
                                             <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensal</span>
                                             <Switch checked={isAnnual} onCheckedChange={setIsAnnual} />
@@ -683,7 +658,7 @@ export default function SalonSettingsStepper() {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            )}
+                            )} */}
                         </div>
                     </div>
                     <div className="flex justify-between mt-8">

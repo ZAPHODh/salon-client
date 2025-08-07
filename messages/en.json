@@ -325,7 +325,10 @@
         "customers": "Customers",
         "services": "Services",
         "schedule": "Schedule",
-        "signin": "Sign in"
+        "signin": "Sign in",
+        "profile": "Profile",
+        "plan": "Plan",
+        "logout": "Log out"
     },
     "form": {
         "errors": {

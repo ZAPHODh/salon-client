@@ -326,7 +326,10 @@
         "customers": "Clientes",
         "services": "Serviços",
         "schedule": "Agenda",
-        "signin": "Entrar"
+        "signin": "Entrar",
+        "profile": "Perfil",
+        "plan": "Plano",
+        "logout": "Sair"
     },
     "form": {
         "errors": {

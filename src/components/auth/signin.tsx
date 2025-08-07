@@ -83,11 +83,11 @@ function SignIn({
                 <CardContent>
                     <Button variant="outline" className="w-full my-2 rounded">
                         <svg
-                            className="w-6 h-6 text-gray-800 dark:text-white"
+                            className="w-4 h-4 text-gray-800 dark:text-white"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width="6"
+                            height="6"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                         >
@@ -100,7 +100,7 @@ function SignIn({
                         {t('social', { provider: "Google" })}
                     </Button>
                     <Button variant="outline" className="w-full my-2 rounded">
-                        <Apple />
+                        <Apple width={4} height={4} />
                         {t('social', { provider: "Apple" })}
                     </Button>
                     <Separator />

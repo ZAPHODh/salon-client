@@ -12,7 +12,6 @@ import { useTranslations } from "next-intl";
 
 export function UserNav() {
     const { session, logout } = useSession()
-    console.log(session)
     const t = useTranslations('header')
     const router = useRouter()
 
@@ -68,21 +67,21 @@ export function UserNav() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem onClick={() => router.push('/account')}>
-                        Profile
+                        {t('profile')}
                         <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        Professionals
+                        {t('professionals')}
                         <DropdownMenuShortcut>⇧B</DropdownMenuShortcut>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        Plan
+                        {t('plan')}
                         <DropdownMenuShortcut>⇧S</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => logout()}>
-                    Log out
+                    {t('logout')}
                     <DropdownMenuShortcut>⇧Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
             </DropdownMenuContent>
