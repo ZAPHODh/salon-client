@@ -1,6 +1,6 @@
 import { CreditCard, Download, FileText, Package, RefreshCw, Settings, Zap } from "lucide-react";
 import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Progress } from "../ui/progress";
 const invoices = [
@@ -29,12 +29,9 @@ function Billing() {
     return (
         <div className="container mx-auto px-4 py-6 md:px-6 2xl:max-w-[1400px]">
             <div className="mx-auto max-w-4xl">
-                {/* Header */}
-
-
-                {/* Current Plan */}
                 <Card className="mb-8 p-0">
                     <CardContent className="p-6">
+                        <CardTitle> ALL ITENS BELOW IS FAKE</CardTitle>
                         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row">
                             <div>
                                 <div className="flex items-center gap-2">
