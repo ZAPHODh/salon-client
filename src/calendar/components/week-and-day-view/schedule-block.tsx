@@ -13,6 +13,7 @@ import type { ISchedule } from "@/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
 import { useCalendar } from "@/calendar/contexts/calendar";
 import { ScheduleDetailsDialog } from "../dialogs/detail-schedule";
+import { EditScheduleDialog } from "../dialogs/edit-schedule";
 
 const calendarWeekScheduleCardVariants = cva(
     "flex select-none flex-col gap-0.5 truncate whitespace-nowrap rounded-md border px-2 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -66,7 +67,7 @@ export function ScheduleBlock({ schedule, className }: IProps) {
 
     return (
         <DraggableSchedule schedule={schedule}>
-            <ScheduleDetailsDialog schedule={schedule}>
+            {/* <ScheduleDetailsDialog schedule={schedule}>
                 <div role="button" tabIndex={0} className={calendarWeekScheduleCardClasses} style={{ height: `${heightInPixels}px` }} onKeyDown={handleKeyDown}>
                     <div className="flex items-center gap-1.5 truncate">
                         {["mixed", "dot"].includes(badgeVariant) && (
@@ -86,7 +87,28 @@ export function ScheduleBlock({ schedule, className }: IProps) {
                         </p>
                     )}
                 </div>
-            </ScheduleDetailsDialog>
+            </ScheduleDetailsDialog> */}
+            <EditScheduleDialog schedule={schedule}>
+                <div role="button" tabIndex={0} className={calendarWeekScheduleCardClasses} style={{ height: `${heightInPixels}px` }} onKeyDown={handleKeyDown}>
+                    <div className="flex items-center gap-1.5 truncate">
+                        {["mixed", "dot"].includes(badgeVariant) && (
+                            <svg width="8" height="8" viewBox="0 0 8 8" className="schedule-dot shrink-0">
+                                <circle cx="4" cy="4" r="4" />
+                            </svg>
+                        )}
+                        <div>
+                            <p className="truncate font-semibold">{schedule.customer.name}</p>
+                            <p className="truncate ">{schedule.service.name}</p>
+                        </div>
+                    </div>
+
+                    {durationInMinutes > 25 && (
+                        <p>
+                            {format(start, "h:mm a")} - {format(end, "h:mm a")}
+                        </p>
+                    )}
+                </div>
+            </EditScheduleDialog>
         </DraggableSchedule>
     );
 }
