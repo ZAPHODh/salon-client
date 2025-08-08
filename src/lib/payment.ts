@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { freePlan, proPlan } from "@/config/subscriptions";
+import { verifySession } from "./auth/dal";
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: "2025-04-30.basil",
@@ -9,7 +10,14 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 export async function getUserSubscriptionPlan(
     userId: string
 ): Promise<UserSubscriptionPlan> {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/${userId}`)
+    const { session } = await verifySession();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/${userId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${session?.accessToken}`,
+        }
+    })
     if (!response.ok) {
         throw new Error("Failed to fetch user subscription plan");
     }
@@ -18,7 +26,6 @@ export async function getUserSubscriptionPlan(
         throw new Error("User not found");
     }
 
-    // Check if user is on a pro plan.
     const isPro = Boolean(
         user.stripePriceId &&
         user.stripeCurrentPeriodEnd?.getTime()! + 86_400_000 > Date.now()
