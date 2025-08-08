@@ -32,7 +32,6 @@ export function BillingForm({
 
         setIsLoading(true);
 
-        // Get a Stripe session URL.
         const response = await fetch("/api/stripe");
 
         if (!response?.ok) {
@@ -55,12 +54,12 @@ export function BillingForm({
 
     return (
         <form className={cn(className)} onSubmit={onSubmit} {...props}>
-            <Card>
+            <Card className="max-w-sm">
                 <CardHeader>
-                    <CardTitle>Subscription</CardTitle>
+                    <CardTitle>Inscrição</CardTitle>
                     <CardDescription>
                         <em>
-                            Currently on the <strong>{subscriptionPlan.name}</strong> plan.
+                            Atualmente no plano <strong>{subscriptionPlan.name}</strong>.
                         </em>
                     </CardDescription>
                 </CardHeader>

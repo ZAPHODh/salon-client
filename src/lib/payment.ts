@@ -11,10 +11,9 @@ export async function getUserSubscriptionPlan(
     userId: string
 ): Promise<UserSubscriptionPlan> {
     const { session } = await verifySession();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscriptions/${userId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/subscriptions/${userId}`, {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${session?.accessToken}`,
         }
     })

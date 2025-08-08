@@ -10,21 +10,19 @@ import { getUserSubscriptionPlan, stripe } from "@/lib/payment";
 export async function GET(req: NextRequest) {
     const locale = await getLocale()
 
-    const billingUrl = siteConfig(locale).url + "/billing/";
+    const billingUrl = siteConfig(locale).url + "/billing";
     try {
         const { session } = await verifySession();
-
         if (!session) {
             return new Response("Unauthorized", { status: 401 });
         }
 
         const subscriptionPlan = await getUserSubscriptionPlan(session.user.id);
-
         // The user is on the pro plan.
         // Create a portal session to manage subscription.
         if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
             const stripeSession = await stripe.billingPortal.sessions.create({
-                customer: String(subscriptionPlan.stripeCustomerId),
+                customer: subscriptionPlan.stripeCustomerId as string,
                 return_url: billingUrl,
             });
 
@@ -33,6 +31,7 @@ export async function GET(req: NextRequest) {
 
         // The user is on the free plan.
         // Create a checkout session to upgrade.
+        console.log("initializing stripeSession")
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: billingUrl,
             cancel_url: billingUrl,
@@ -49,7 +48,8 @@ export async function GET(req: NextRequest) {
                 userId: session.user.id,
             },
         });
-        revalidatePath(`/billing`);
+        console.log("Stripe session:", stripeSession)
+        revalidatePath(`${locale}/billing`);
         return new Response(JSON.stringify({ url: stripeSession.url }));
     } catch (error) {
         if (error instanceof z.ZodError) {

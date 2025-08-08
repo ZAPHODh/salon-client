@@ -10,7 +10,6 @@ export default async function Billing() {
     if (!session) redirect('/auth/signin')
     const subscriptionPlan = await getUserSubscriptionPlan(session.user.id as string);
 
-    // If user has a pro plan, check cancel status on Stripe.
     let isCanceled = false;
     if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
         const stripePlan = await stripe.subscriptions.retrieve(
@@ -20,26 +19,6 @@ export default async function Billing() {
     }
     return (
         <div className="space-y-8">
-            <Alert>
-                <div className="flex items-center gap-2">
-                    <AlertTriangleIcon className="h-5 w-5 shrink-0" />
-                    <div>
-                        <AlertDescription>
-                            <strong>ChadNext</strong> just demonstrates how to use Stripe in
-                            Next.js App router. Please use test cards from{" "}
-                            <a
-                                href="https://stripe.com/docs/testing#cards"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="font-medium underline underline-offset-4"
-                            >
-                                Stripe docs
-                            </a>
-                            .
-                        </AlertDescription>
-                    </div>
-                </div>
-            </Alert>
             <BillingForm
                 subscriptionPlan={{
                     ...subscriptionPlan,
