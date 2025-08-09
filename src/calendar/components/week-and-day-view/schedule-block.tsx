@@ -67,27 +67,6 @@ export function ScheduleBlock({ schedule, className }: IProps) {
 
     return (
         <DraggableSchedule schedule={schedule}>
-            {/* <ScheduleDetailsDialog schedule={schedule}>
-                <div role="button" tabIndex={0} className={calendarWeekScheduleCardClasses} style={{ height: `${heightInPixels}px` }} onKeyDown={handleKeyDown}>
-                    <div className="flex items-center gap-1.5 truncate">
-                        {["mixed", "dot"].includes(badgeVariant) && (
-                            <svg width="8" height="8" viewBox="0 0 8 8" className="schedule-dot shrink-0">
-                                <circle cx="4" cy="4" r="4" />
-                            </svg>
-                        )}
-                        <div>
-                            <p className="truncate font-semibold">{schedule.customer.name}</p>
-                            <p className="truncate ">{schedule.service.name}</p>
-                        </div>
-                    </div>
-
-                    {durationInMinutes > 25 && (
-                        <p>
-                            {format(start, "h:mm a")} - {format(end, "h:mm a")}
-                        </p>
-                    )}
-                </div>
-            </ScheduleDetailsDialog> */}
             <EditScheduleDialog schedule={schedule}>
                 <div role="button" tabIndex={0} className={calendarWeekScheduleCardClasses} style={{ height: `${heightInPixels}px` }} onKeyDown={handleKeyDown}>
                     <div className="flex items-center gap-1.5 truncate">

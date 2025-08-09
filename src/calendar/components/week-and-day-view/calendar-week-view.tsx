@@ -18,6 +18,8 @@ import { getScheduleBlockStyle, getVisibleHours, groupSchedules, isWorkingHour }
 import { WeekViewMultiDaySchedulesRow } from "./week-view-multi-day-schedule-row";
 import { AddScheduleDialog } from "../dialogs/add-schedule";
 import { CalendarTimeline } from "./calendar-timeline";
+import { useLocale } from "next-intl";
+import { getFnsLocale } from "@/lib/helper";
 
 interface IProps {
     singleDaySchedules: ISchedule[];
@@ -26,7 +28,8 @@ interface IProps {
 
 export function CalendarWeekView({ singleDaySchedules, multiDaySchedules }: IProps) {
     const { selectedDate, workingHours, visibleHours } = useCalendar();
-
+    const locale = useLocale()
+    const l = getFnsLocale(locale)
     const { hours, earliestScheduleHour, latestScheduleHour } = getVisibleHours(visibleHours, singleDaySchedules);
 
     const weekStart = startOfWeek(selectedDate);
@@ -35,8 +38,8 @@ export function CalendarWeekView({ singleDaySchedules, multiDaySchedules }: IPro
     return (
         <>
             <div className="flex flex-col items-center justify-center border-b py-4 text-sm text-muted-foreground sm:hidden">
-                <p>Weekly view is not available on smaller devices.</p>
-                <p>Please switch to daily or monthly view.</p>
+                <p>Visão semanal não habilitada para Mobile</p>
+                <p>Por favor, altere para diária ou mensal.</p>
             </div>
 
             <div className="hidden flex-col sm:flex">
@@ -48,8 +51,8 @@ export function CalendarWeekView({ singleDaySchedules, multiDaySchedules }: IPro
                         <div className="w-18"></div>
                         <div className="grid flex-1 grid-cols-7 divide-x border-l">
                             {weekDays.map((day, index) => (
-                                <span key={index} className="py-2 text-center text-xs font-medium text-muted-foreground">
-                                    {format(day, "EE")} <span className="ml-1 font-semibold text-foreground">{format(day, "d")}</span>
+                                <span key={index} className="py-2 text-center text-xs font-medium text-muted-foreground capitalize">
+                                    {format(day, "EE", { locale: l })} <span className="ml-1 font-semibold text-foreground">{format(day, "d", { locale: l })}</span>
                                 </span>
                             ))}
                         </div>

@@ -95,30 +95,6 @@ export function MonthScheduleBadge({ schedule, cellDate, currentDay, totalDays, 
 
     return (
         <DraggableSchedule schedule={schedule}>
-            {/* <ScheduleDetailsDialog schedule={schedule}>
-                <div role="button" tabIndex={0} className={scheduleBadgeClasses} onKeyDown={handleKeyDown}>
-                    <div className="flex items-center gap-1.5 truncate">
-                        {!["middle", "last"].includes(position) && ["mixed", "dot"].includes(badgeVariant) && (
-                            <svg width="8" height="8" viewBox="0 0 8 8" className="schedule-dot shrink-0">
-                                <circle cx="4" cy="4" r="4" />
-                            </svg>
-                        )}
-
-                        {renderBadgeText && (
-                            <p className="flex-1 truncate font-semibold">
-                                {currentDay && (
-                                    <span className="text-xs">
-                                        Day {currentDay} of {totalDays} •{" "}
-                                    </span>
-                                )}
-                                {schedule.service.name}
-                            </p>
-                        )}
-                    </div>
-
-                    {renderBadgeText && <span>{format(new Date(schedule.startDate), "h:mm a")}</span>}
-                </div>
-            </ScheduleDetailsDialog> */}
             <EditScheduleDialog schedule={schedule}>
                 <div role="button" tabIndex={0} className={scheduleBadgeClasses} onKeyDown={handleKeyDown}>
                     <div className="flex items-center gap-1.5 truncate">

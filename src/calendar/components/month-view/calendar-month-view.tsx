@@ -4,7 +4,7 @@ import type { ISchedule } from "@/calendar/interfaces";
 import { useCalendar } from "@/calendar/contexts/calendar";
 import { calculateMonthSchedulePositions, getCalendarCells } from "@/calendar/helper";
 import { DayCell } from "./day-cell";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface IProps {
     singleDaySchedules: ISchedule[];
@@ -13,10 +13,8 @@ interface IProps {
 
 
 const WEEK_DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const;
-
 export function CalendarMonthView({ singleDaySchedules, multiDaySchedules }: IProps) {
     const t = useTranslations('calendar.weekDays');
-
     const WEEK_DAYS = WEEK_DAY_KEYS.map(key => t(key));
     const { selectedDate } = useCalendar();
 
