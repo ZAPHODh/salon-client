@@ -69,13 +69,13 @@ export function BillingForm({
                 <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
                     <Button type="submit" role="link" disabled={isLoading}>
                         {isLoading && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to PRO"}
+                        {subscriptionPlan.isPro ? "Gerencie assinatura" : "Assine agora"}
                     </Button>
                     {subscriptionPlan.isPro ? (
                         <p className="rounded-full text-xs font-medium md:self-end">
                             {subscriptionPlan.isCanceled
-                                ? "Your plan will be canceled on "
-                                : "Your plan renews on "}
+                                ? "Sua assinatura ficará ativa até "
+                                : "Sua assinatura renovará em "}
                             {formatDate(subscriptionPlan.stripeCurrentPeriodEnd)}.
                         </p>
                     ) : null}

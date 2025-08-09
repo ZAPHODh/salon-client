@@ -27,7 +27,7 @@ export function UserNav() {
             }
             if (e.key === "s" && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault()
-                router.push('/account/plan')
+                router.push('/account/billing')
             }
             if (e.key === "q" && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault()
@@ -70,11 +70,11 @@ export function UserNav() {
                         {t('profile')}
                         <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/account/professionals')}>
                         {t('professionals')}
                         <DropdownMenuShortcut>⇧B</DropdownMenuShortcut>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/account/billing')}>
                         {t('plan')}
                         <DropdownMenuShortcut>⇧S</DropdownMenuShortcut>
                     </DropdownMenuItem>

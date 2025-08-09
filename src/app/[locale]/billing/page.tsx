@@ -18,7 +18,7 @@ export default async function Billing() {
         isCanceled = stripePlan.cancel_at_period_end;
     }
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 container mx-auto">
             <BillingForm
                 subscriptionPlan={{
                     ...subscriptionPlan,

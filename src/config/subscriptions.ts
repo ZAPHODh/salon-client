@@ -2,13 +2,13 @@
 export const freePlan: SubscriptionPlan = {
     name: "Free",
     description:
-        "Free plan for individuals and small teams to get started.",
+        "Assinatura básica com recursos limitados. Ideal para testar o software.",
     stripePriceId: "",
 };
 
 export const proPlan: SubscriptionPlan = {
     name: "PRO",
-    description: "Unlock advanced features and priority support.",
+    description: "Habilite todos os recursos para seu salão.",
     stripePriceId: process.env.STRIPE_PRO_PLAN_ID as string,
 };
 

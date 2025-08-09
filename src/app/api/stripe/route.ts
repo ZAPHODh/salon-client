@@ -9,8 +9,8 @@ import { getUserSubscriptionPlan, stripe } from "@/lib/payment";
 
 export async function GET(req: NextRequest) {
     const locale = await getLocale()
-
-    const billingUrl = siteConfig(locale).url + "/billing";
+    const currency = locale === 'pt' ? 'brl' : 'usd'
+    const billingUrl = siteConfig(locale).url + "/account/billing/";
     try {
         const { session } = await verifySession();
         if (!session) {
@@ -35,8 +35,10 @@ export async function GET(req: NextRequest) {
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: billingUrl,
             cancel_url: billingUrl,
+            currency: currency,
             payment_method_types: ["card"],
             mode: "subscription",
+            phone_number_collection: { enabled: true },
             customer_email: session.email!,
             line_items: [
                 {
@@ -48,8 +50,7 @@ export async function GET(req: NextRequest) {
                 userId: session.user.id,
             },
         });
-        console.log("Stripe session:", stripeSession)
-        revalidatePath(`${locale}/billing`);
+        revalidatePath(`/billing`);
         return new Response(JSON.stringify({ url: stripeSession.url }));
     } catch (error) {
         if (error instanceof z.ZodError) {
