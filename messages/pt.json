@@ -891,7 +891,7 @@
                     },
                     "service": {
                         "label": "Serviço",
-                        "placeholder": "Selecione um serviço",
+                        "placeholder": "Selecione",
                         "description": "Escolha o tipo de serviço"
                     },
                     "customer": {

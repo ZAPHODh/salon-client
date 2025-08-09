@@ -244,7 +244,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                                     >
                                                         {field.value
                                                             ? professionals?.find((professional) => professional.id === field.value)?.name
-                                                            : t("fields.professional.placeholder")}
+                                                            : t("fields.service.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
                                                 </FormControl>
