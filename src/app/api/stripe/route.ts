@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
                 userId: session.user.id,
             },
         });
-        revalidatePath(`/billing`);
+        revalidatePath(`account/billing`);
         return new Response(JSON.stringify({ url: stripeSession.url }));
     } catch (error) {
         if (error instanceof z.ZodError) {

@@ -222,7 +222,7 @@ export default function SalonSettingsStepper() {
         toast.success('Configuração Concluída!', {
             description: 'Seu salão foi configurado com sucesso e está pronto para receber agendamentos.'
         })
-        redirect({ href: '/billing', locale })
+        redirect({ href: '/account/billing', locale })
     }
 
     return (
