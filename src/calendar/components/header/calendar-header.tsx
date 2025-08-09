@@ -90,7 +90,7 @@ export function CalendarHeader({ view, schedules }: IProps) {
                 <AddScheduleDialog>
                     <Button className="w-full sm:w-auto">
                         <Plus />
-                        Add Schedule
+                        Agendar
                     </Button>
                 </AddScheduleDialog>
             </div>
