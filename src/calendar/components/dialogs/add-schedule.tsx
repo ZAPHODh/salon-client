@@ -41,6 +41,7 @@ interface IProps {
     children: React.ReactNode
     startDate?: Date
     startTime?: { hour: number; minute: number }
+
 }
 
 export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
@@ -244,7 +245,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                                     >
                                                         {field.value
                                                             ? professionals?.find((professional) => professional.id === field.value)?.name
-                                                            : t("fields.service.placeholder")}
+                                                            : t("fields.professional.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
                                                 </FormControl>

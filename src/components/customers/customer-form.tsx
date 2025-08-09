@@ -154,7 +154,7 @@ export function CustomerForm({ open, onOpenChange, customer }: CustomerFormProps
                                         <FormLabel>Gênero</FormLabel>
                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="w-full">
                                                     <SelectValue placeholder="Selecione" />
                                                 </SelectTrigger>
                                             </FormControl>

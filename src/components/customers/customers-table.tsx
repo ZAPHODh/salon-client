@@ -225,43 +225,45 @@ export function CustomersDataTable() {
                         />
                     </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <ImportCustomer />
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline">
-                                Colunas <ChevronDown className="ml-2 h-4 w-4" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            {table
-                                .getAllColumns()
-                                .filter((column) => column.getCanHide())
-                                .map((column) => {
-                                    const columnNames: Record<string, string> = {
-                                        name: "Nome",
-                                        email: "Email",
-                                        phone: "Telefone",
-                                        city: "Cidade",
-                                        genre: "Gênero",
-                                        birthDay: "Aniversário",
-                                        appointments: "Agendamentos",
-                                        sales: "Vendas",
-                                    }
+                <div className="flex flex-col sm:flex-row items-start sm:items-center space-x-2 gap-2">
+                    <div className="flex gap-2">
+                        <ImportCustomer />
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outline">
+                                    Colunas <ChevronDown className="ml-2 h-4 w-4" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                {table
+                                    .getAllColumns()
+                                    .filter((column) => column.getCanHide())
+                                    .map((column) => {
+                                        const columnNames: Record<string, string> = {
+                                            name: "Nome",
+                                            email: "Email",
+                                            phone: "Telefone",
+                                            city: "Cidade",
+                                            genre: "Gênero",
+                                            birthDay: "Aniversário",
+                                            appointments: "Agendamentos",
+                                            sales: "Vendas",
+                                        }
 
-                                    return (
-                                        <DropdownMenuCheckboxItem
-                                            key={column.id}
-                                            className="capitalize"
-                                            checked={column.getIsVisible()}
-                                            onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                                        >
-                                            {columnNames[column.id] || column.id}
-                                        </DropdownMenuCheckboxItem>
-                                    )
-                                })}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                        return (
+                                            <DropdownMenuCheckboxItem
+                                                key={column.id}
+                                                className="capitalize"
+                                                checked={column.getIsVisible()}
+                                                onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                                            >
+                                                {columnNames[column.id] || column.id}
+                                            </DropdownMenuCheckboxItem>
+                                        )
+                                    })}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                     <Button onClick={() => setShowForm(true)}>
                         <Plus className="mr-2 h-4 w-4" />
                         Novo Cliente
