@@ -46,7 +46,7 @@ export function VisibleHoursInput({ initialVisibleHours, onChange }: VisibleHour
     return (
         <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold">Visible hours</p>
+                <p className="text-sm font-semibold">Horas visíveis</p>
 
                 <TooltipProvider delayDuration={100}>
                     <Tooltip>
@@ -56,8 +56,9 @@ export function VisibleHoursInput({ initialVisibleHours, onChange }: VisibleHour
 
                         <TooltipContent className="max-w-80 text-center">
                             <p>
-                                If an event falls outside the specified visible hours, the visible hours will automatically adjust to
-                                include that event.
+                                Se um evento ocorrer fora do horário visível especificado, o horário visível
+                                será ajustado automaticamente para incluir esse evento.
+
                             </p>
                         </TooltipContent>
                     </Tooltip>
@@ -65,7 +66,7 @@ export function VisibleHoursInput({ initialVisibleHours, onChange }: VisibleHour
             </div>
 
             <div className="flex items-center gap-4">
-                <p>From</p>
+                <p>De</p>
                 <TimeInput
                     id="start-time"
                     hourCycle={12}
@@ -73,7 +74,7 @@ export function VisibleHoursInput({ initialVisibleHours, onChange }: VisibleHour
                     value={from as TimeValue}
                     onChange={(value) => handleTimeChange("from", value)}
                 />
-                <p>To</p>
+                <p>Para</p>
                 <TimeInput
                     id="end-time"
                     hourCycle={12}

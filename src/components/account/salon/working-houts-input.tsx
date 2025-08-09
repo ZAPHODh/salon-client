@@ -62,7 +62,7 @@ export function WorkingHoursInput({ initialWorkingHours, onChange }: WorkingHour
     return (
         <div className="flex flex-col gap-2 max-w-full">
             <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold">Working hours</p>
+                <p className="text-sm font-semibold">Horas trabalhadas</p>
 
                 <TooltipProvider delayDuration={100}>
                     <Tooltip>
@@ -72,8 +72,8 @@ export function WorkingHoursInput({ initialWorkingHours, onChange }: WorkingHour
 
                         <TooltipContent className="max-w-80 text-center">
                             <p>
-                                This will apply a dashed background to the hour cells that fall outside the working hours — only for
-                                week and day views.
+                                Isto aplicará um fundo tracejado nas células de hora que estão fora do horário de trabalho — apenas para
+                                as visualizações de semana e dia.
                             </p>
                         </TooltipContent>
                     </Tooltip>
@@ -94,7 +94,7 @@ export function WorkingHoursInput({ initialWorkingHours, onChange }: WorkingHour
                             {isDayActive ? (
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center gap-2">
-                                        <span>From</span>
+                                        <span>De</span>
                                         <TimeInput
                                             id={`${day.name.toLowerCase()}-from`}
                                             hourCycle={12}
@@ -105,7 +105,7 @@ export function WorkingHoursInput({ initialWorkingHours, onChange }: WorkingHour
                                     </div>
 
                                     <div className="flex items-center gap-2">
-                                        <span>To</span>
+                                        <span>Até</span>
                                         <TimeInput
                                             id={`${day.name.toLowerCase()}-to`}
                                             hourCycle={12}
@@ -118,7 +118,7 @@ export function WorkingHoursInput({ initialWorkingHours, onChange }: WorkingHour
                             ) : (
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                     <Moon className="size-4" />
-                                    <span>Closed</span>
+                                    <span>Fechado</span>
                                 </div>
                             )}
                         </div>
