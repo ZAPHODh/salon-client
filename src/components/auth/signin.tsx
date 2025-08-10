@@ -81,7 +81,7 @@ function SignIn({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Button variant="outline" className="w-full my-2 rounded">
+                    {/* <Button variant="outline" className="w-full my-2 rounded">
                         <svg
                             className="w-4 h-4 text-gray-800 dark:text-white"
                             aria-hidden="true"
@@ -103,7 +103,7 @@ function SignIn({
                         <Apple width={4} height={4} />
                         {t('social', { provider: "Apple" })}
                     </Button>
-                    <Separator />
+                    <Separator /> */}
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full my-2">
                             <div className="flex flex-col lg:flex-row gap-2">

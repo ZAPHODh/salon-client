@@ -69,7 +69,8 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
             status: "SCHEDULED",
         },
     })
-
+    const serviceId = form.watch("serviceId")
+    const startTimeValue = form.watch("startTime")
     useEffect(() => {
         if (startDate || startTime) {
             form.reset({
@@ -81,6 +82,24 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
             })
         }
     }, [startDate, startTime, form])
+    useEffect(() => {
+        if (!serviceId || !startTimeValue) return
+
+        const selectedService = services?.find((s) => s.id === serviceId)
+        if (!selectedService || !selectedService.duration) return
+
+        const duration = selectedService.duration
+        let newHour = startTimeValue.hour
+        let newMinute = startTimeValue.minute + duration
+
+        while (newMinute >= 60) {
+            newMinute -= 60
+            newHour += 1
+        }
+        newHour = newHour % 24
+
+        form.setValue("endTime", { hour: newHour, minute: newMinute })
+    }, [serviceId, startTimeValue, services, form])
 
     const onSubmit = async (values: TScheduleFormData) => {
         createSchedule({

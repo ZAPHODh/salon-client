@@ -138,7 +138,7 @@ function SignUp({
                                     </FormItem>
                                 )}
                             />
-                            <Separator />
+                            {/* <Separator />
                             <div>
                                 <Button variant="outline" className="w-full my-2 rounded gap-2">
                                     <svg
@@ -162,7 +162,7 @@ function SignUp({
                                     <Apple className="w-4 h-4" />
                                     {t('social', { provider: "Apple" })}
                                 </Button>
-                            </div>
+                            </div> */}
                             <Separator />
                             <Button type="submit" className="w-full rounded">
                                 {t('submit')}

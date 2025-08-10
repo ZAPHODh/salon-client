@@ -31,7 +31,6 @@ export async function GET(req: NextRequest) {
 
         // The user is on the free plan.
         // Create a checkout session to upgrade.
-        console.log("initializing stripeSession")
         const stripeSession = await stripe.checkout.sessions.create({
             success_url: billingUrl,
             cancel_url: billingUrl,
