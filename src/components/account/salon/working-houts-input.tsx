@@ -11,13 +11,13 @@ import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 const DAYS_OF_WEEK = [
-    { index: 0, name: "Sunday" },
-    { index: 1, name: "Monday" },
-    { index: 2, name: "Tuesday" },
-    { index: 3, name: "Wednesday" },
-    { index: 4, name: "Thursday" },
-    { index: 5, name: "Friday" },
-    { index: 6, name: "Saturday" },
+    { index: 0, name: "Domingo" },
+    { index: 1, name: "Segunda" },
+    { index: 2, name: "Terça" },
+    { index: 3, name: "Quarta" },
+    { index: 4, name: "Quinta" },
+    { index: 5, name: "Sexta" },
+    { index: 6, name: "Sábado" },
 ]
 
 
