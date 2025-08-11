@@ -25,13 +25,13 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
-import { Apple, LoaderCircle } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { LoaderCircle } from "lucide-react";
+import { Link, redirect } from "@/i18n/navigation";
 import { signinSchema } from "@/schemas/signin";
 import { useSession } from "../providers/session";
-import { useRouter } from "@/i18n/navigation";
+
 import { toast } from "sonner";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Session } from "@/lib/auth/types";
 import { useState } from "react";
 
@@ -43,7 +43,7 @@ function SignIn({
     const t = useTranslations('auth.signin');
     const [isLoading, setIsLoading] = useState(false);
     const { setSession } = useSession();
-    const { refresh } = useRouter();
+    const locale = useLocale()
 
     const form = useForm<z.infer<typeof signinSchema>>({
         resolver: zodResolver(signinSchema),
@@ -73,7 +73,7 @@ function SignIn({
         const session: Session = await res.json();
         setSession(session);
         setIsLoading(false);
-        refresh()
+        redirect({ href: '/account', locale })
     }
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
