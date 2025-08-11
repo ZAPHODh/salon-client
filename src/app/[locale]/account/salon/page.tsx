@@ -31,9 +31,9 @@ export default async function Page() {
             >
                 <div className="space-y-6" >
                     <div>
-                        <h3 className="text-lg font-medium" >title </h3>
+                        <h3 className="text-lg font-medium" >Configurações do salão</h3>
                         < p className="text-sm text-muted-foreground" >
-                            desription
+                            Configure as informações do seu salão, como nome, descrição, horário de funcionamento e outros detalhes importantes.
                         </p>
                     </div>
                     < Separator />

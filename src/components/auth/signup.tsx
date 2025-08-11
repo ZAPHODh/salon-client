@@ -24,7 +24,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
-import { Apple } from "lucide-react";
+import { Apple, LoaderCircle } from "lucide-react";
 
 import { signupSchema } from "@/schemas/signup";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -32,6 +32,7 @@ import { useSession } from "../providers/session";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { PasswordInput } from "../ui/input/password";
+import { useState } from "react";
 
 function SignUp({
     className,
@@ -40,6 +41,7 @@ function SignUp({
     const t = useTranslations('auth.signup');
     const { setSession } = useSession()
     const { push } = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
     const form = useForm<z.infer<typeof signupSchema>>({
         resolver: zodResolver(signupSchema),
         defaultValues: {
@@ -57,6 +59,7 @@ function SignUp({
     ];
 
     async function onSubmit(values: z.infer<typeof signupSchema>) {
+        setIsLoading(true);
         const res = await fetch(`/api/auth/credentials-signup`, {
             method: "POST",
             headers: {
@@ -74,6 +77,7 @@ function SignUp({
             return;
         }
         setSession(session);
+        setIsLoading(false);
         push('/settings')
     }
 
@@ -164,7 +168,8 @@ function SignUp({
                                 </Button>
                             </div> */}
                             <Separator />
-                            <Button type="submit" className="w-full rounded">
+                            <Button type="submit" className="w-full rounded" disabled={isLoading}>
+                                {isLoading && <LoaderCircle className="h-4 w-4 animate-spin" />}
                                 {t('submit')}
                             </Button>
                         </form>
