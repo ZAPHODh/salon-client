@@ -8,10 +8,10 @@ const HeroBackground: FC = () => {
     const t = useTranslations('hero');
 
     const stats = [
-        { key: "salons", value: "300+" },
-        { key: "transactions", value: "1M+" },
-        { key: "satisfaction", value: "99%" },
-        { key: "years", value: "5+" },
+        { key: "salons", value: "1" },
+        { key: "transactions", value: "20" },
+        { key: "satisfaction", value: "100%" },
+        { key: "years", value: "0" },
     ];
 
     return (

@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 function Hero() {
   const t = useTranslations('hero');
   const [titleNumber, setTitleNumber] = useState(0);
-
+  const { push } = useRouter();
   // Array de chaves para os títulos
   const titleKeys = useMemo(
     () => ['title1', 'title2', 'title3', 'title4', 'title5'],
@@ -69,7 +70,7 @@ function Hero() {
             <Button size="lg" className="gap-4" variant="outline">
               {t('buttons.contact')} <PhoneCall className="w-4 h-4" />
             </Button>
-            <Button size="lg" className="gap-4">
+            <Button size="lg" className="gap-4" onClick={() => push("auth/signup")}>
               {t('buttons.trial')} <MoveRight className="w-4 h-4" />
             </Button>
           </div>

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { CheckIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import NumberFlow from "@number-flow/react"
 import { useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 
 export type PlanLevel = "free" | "starter" | "enterprise" | string
 
@@ -47,11 +48,11 @@ export function PricingTable({
   ...props
 }: PricingTableProps) {
   const t = useTranslations('hero.pricing')
-
+  const { push } = useRouter()
   const [isYearly, setIsYearly] = React.useState(defaultInterval === "yearly")
   const [selectedPlan, setSelectedPlan] = React.useState<PlanLevel>(defaultPlan)
   const handleCheckout = async (planLevel: string) => {
-
+    push('/account/billing')
 
   }
   const handlePlanSelect = (plan: PlanLevel) => {
