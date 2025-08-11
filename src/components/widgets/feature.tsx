@@ -212,15 +212,6 @@ export default function SalonFeaturesSection() {
                         </div>
                     </div>
                 </Tabs>
-
-                <div className="mt-16 text-center">
-                    <p className="text-muted-foreground mx-auto mb-6 max-w-2xl">
-                        {t('cta.text')}
-                    </p>
-                    <Button asChild size="lg">
-                        <Link href="/agendamento">{t('cta.button')}</Link>
-                    </Button>
-                </div>
             </div>
         </section>
     );
