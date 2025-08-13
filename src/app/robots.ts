@@ -10,11 +10,8 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: [
                     "/account",
                     "/calendar",
-                    "/cash-flow",
                     "/customers",
-                    "/dashboard",
                     "/finance",
-                    "/playground",
                     "/professionals",
                     "/services",
                     "/api/",

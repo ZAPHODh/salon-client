@@ -6,7 +6,6 @@ const paths = [
     'auth/signin',
     'auth/signup',
     'calendar',
-    'cash-flow',
     'customers',
     'finance',
     'professionals',
