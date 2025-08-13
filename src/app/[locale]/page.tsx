@@ -1,7 +1,7 @@
 import { HeroFeature } from "@/components/widgets/hero-feature";
 import { Hero } from "@/components/ui/animated-hero";
 import { HeroBackground } from "@/components/widgets/hero-background";
-import { HeroPricing } from "@/components/widgets/hero-pricing";
+// import { HeroPricing } from "@/components/widgets/hero-pricing";
 import SalonFeaturesSection from "@/components/widgets/feature";
 
 
@@ -12,7 +12,7 @@ export default function Home() {
       <SalonFeaturesSection />
       <HeroBackground />
       <HeroFeature />
-      <HeroPricing />
+      {/* <HeroPricing /> */}
     </div>
   );
 }

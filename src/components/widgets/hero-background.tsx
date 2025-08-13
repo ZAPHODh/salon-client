@@ -9,7 +9,6 @@ const HeroBackground: FC = () => {
 
     const stats = [
         { key: "salons", value: "1" },
-        { key: "transactions", value: "20" },
         { key: "satisfaction", value: "100%" },
         { key: "years", value: "0" },
     ];

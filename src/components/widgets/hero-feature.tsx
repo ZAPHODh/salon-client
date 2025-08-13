@@ -1,21 +1,19 @@
 import { cn } from "@/lib/utils";
 import {
   IconCalendarEvent,
-  IconCreditCard,
+  // IconCreditCard,
   IconUsers,
   IconBrush,
   IconLifebuoy,
   IconHeartHandshake,
-  IconCash,
+  // IconCash,
 } from "@tabler/icons-react";
 import { BarChart } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 function HeroFeature() {
   const features = [
-    { key: "cashSystem", icon: <IconCash /> },
     { key: "scheduling", icon: <IconCalendarEvent /> },
-    { key: "payments", icon: <IconCreditCard /> },
     { key: "reports", icon: <BarChart /> },
     { key: "clients", icon: <IconUsers /> },
     { key: "services", icon: <IconBrush /> },
