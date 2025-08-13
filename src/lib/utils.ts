@@ -12,3 +12,17 @@ export function formatDate(input: string | number): string {
     year: "numeric",
   });
 }
+export function getInitials(name: string, maxLength?: number): string {
+  const initials = name
+    .split(' ')
+    .filter(word => word.length > 0)
+    .map(word => word[0])
+    .join('')
+    .toUpperCase();
+
+  if (maxLength !== undefined) {
+    return initials.slice(0, maxLength);
+  }
+
+  return initials;
+}

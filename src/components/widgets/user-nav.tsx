@@ -8,6 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { useSession } from "../providers/session";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { getInitials } from "@/lib/utils";
 
 
 export function UserNav() {
@@ -51,7 +52,7 @@ export function UserNav() {
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                     <Avatar className="h-8 w-8">
                         <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>{getInitials(session.user.name, 2)}</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
