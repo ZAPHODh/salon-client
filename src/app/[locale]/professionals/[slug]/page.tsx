@@ -20,7 +20,9 @@ export default async function Page({
     if (!professional.ok) {
         redirect('/professionals')
     }
+
     const professionalData = await professional.json()
+    console.log('professional', professionalData)
     return (
         <ProfessionalDetailPage professional={professionalData} />
 

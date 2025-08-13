@@ -13,7 +13,7 @@ export function ProfessionalStats({ professional }: ProfessionalStatsProps) {
     const totalServices = professional.services?.length || 0
     const totalAppointments = professional.appointments?.length || 0
     const totalCommissions = professional.commissions?.reduce((sum, commission) => sum + commission.amount, 0) || 0
-    const totalRevenue = professional.appointments?.reduce((sum, appointment) => sum + appointment.service.price, 0) || 0
+    const totalRevenue = professional.appointments?.reduce((sum, appointment) => sum + appointment.service?.price || 0, 0) || 0
     const currentMonth = new Date().getMonth()
     const currentYear = new Date().getFullYear()
 
