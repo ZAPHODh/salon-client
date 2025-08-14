@@ -219,7 +219,7 @@ card content`,
                 setColumns(previousColumns => [
                     ...previousColumns,
                     {
-                        id: createId(),
+                        id: 'createId()',
                         title,
                         color:
                             KANBAN_BOARD_CIRCLE_COLORS[previousColumns.length] ?? 'primary',
@@ -260,7 +260,7 @@ card content`,
                 column.id === columnId
                     ? {
                         ...column,
-                        items: [...column.items, { id: createId(), title: cardContent }],
+                        items: [...column.items, { id: 'createId()', title: cardContent }],
                     }
                     : column,
             ),
