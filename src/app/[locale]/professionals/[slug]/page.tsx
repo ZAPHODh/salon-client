@@ -10,21 +10,21 @@ export default async function Page({
     const { slug } = await params
     const { session } = await verifySession()
     if (!session) redirect('/auth/signin')
-    const professional = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals/${slug}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals/${slug}`, {
         next: { revalidate: 60 },
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session.accessToken}`,
         },
     })
-    if (!professional.ok) {
+    if (!res.ok) {
         redirect('/professionals')
     }
 
-    const professionalData = await professional.json()
-    console.log('professional', professionalData)
+    const professional = await res.json()
+
     return (
-        <ProfessionalDetailPage professional={professionalData} />
+        <ProfessionalDetailPage professional={professional} />
 
     )
 }

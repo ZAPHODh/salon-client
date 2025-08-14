@@ -87,7 +87,7 @@ async function deleteCustomer(id: string) {
     }
 };
 
-async function createCustomer(newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt'>): Promise<Customer | null> {
+async function createCustomer(newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt' | 'slug'>): Promise<Customer | null> {
     const { session } = await verifySession()
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/customers`, {

@@ -33,153 +33,13 @@ import { CustomerForm } from "./customer-form"
 import Link from "next/link"
 import { useCustomer } from "../providers/customer"
 import { ImportCustomer } from "../widgets/import-customer"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog"
+import { set } from "date-fns"
+import { deleteCustomer } from "@/requests/customers"
 
 
-export const columns: ColumnDef<Customer>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Selecionar todos"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Selecionar linha"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: "name",
-        header: ({ column }) => {
-            return (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-                    Nome
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        cell: ({ row }) => <div className="font-medium">{row.getValue("name")}</div>,
-    },
-    {
-        accessorKey: "email",
-        header: "Email",
-        cell: ({ row }) => {
-            const email = row.getValue("email") as string
-            return <div className="text-muted-foreground">{email || "N/A"}</div>
-        },
-    },
-    {
-        accessorKey: "phone",
-        header: "Telefone",
-        cell: ({ row }) => {
-            const phone = row.getValue("phone") as string
-            return <div>{phone || "N/A"}</div>
-        },
-    },
-    {
-        accessorKey: "city",
-        header: "Cidade",
-        cell: ({ row }) => {
-            const city = row.getValue("city") as string
-            return <div>{city || "N/A"}</div>
-        },
-    },
-    {
-        accessorKey: "genre",
-        header: "Gênero",
-        cell: ({ row }) => {
-            const genre = row.getValue("genre") as string
-            return (
-                <Badge variant="outline">
-                    {genre === "male" ? "Masculino" : genre === "female" ? "Feminino" : genre || "N/A"}
-                </Badge>
-            )
-        },
-    },
-    {
-        accessorKey: "birthDay",
-        header: "Aniversário",
-        cell: ({ row }) => {
-            const birthDay = row.getValue("birthDay") as Date
-            if (!birthDay) return <div>N/A</div>
-            return <div>{new Date(birthDay).toLocaleDateString("pt-BR")}</div>
-        },
-    },
-    {
-        accessorKey: "appointments",
-        header: "Agendamentos",
-        cell: ({ row }) => {
-            const appointments = row.original.appointments || []
-            return <div className="text-center">{appointments.length}</div>
-        },
-    },
-    {
-        accessorKey: "sales",
-        header: "Vendas",
-        cell: ({ row }) => {
-            const sales = row.original.sales || []
-            const totalSales = sales.reduce((sum, sale) => sum + (sale.totalAmount || 0), 0)
-            return (
-                <div className="font-medium">
-                    {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                    }).format(totalSales)}
-                </div>
-            )
-        },
-    },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            const customer = row.original
-            const { deleteCustomer } = useCustomer()
 
-            const handleDelete = async () => {
-                if (confirm("Tem certeza que deseja excluir este cliente?")) {
-                    await deleteCustomer(customer.id)
-                }
-            }
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Abrir menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/customers/${customer.id}`}>
-                                <Eye className="mr-2 h-4 w-4" />
-                                Ver detalhes
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-red-600" onClick={handleDelete}>
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        },
-    },
-]
 
 export function CustomersDataTable() {
     const { customers, error } = useCustomer()
@@ -188,7 +48,146 @@ export function CustomersDataTable() {
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = useState({})
     const [showForm, setShowForm] = useState(false)
+    const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
+    const [deletingCustomer, setDeletingCustomer] = useState<Customer | null>(null)
+    const columns: ColumnDef<Customer>[] = [
+        {
+            id: "select",
+            header: ({ table }) => (
+                <Checkbox
+                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Selecionar todos"
+                />
+            ),
+            cell: ({ row }) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Selecionar linha"
+                />
+            ),
+            enableSorting: false,
+            enableHiding: false,
+        },
+        {
+            accessorKey: "name",
+            header: ({ column }) => {
+                return (
+                    <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+                        Nome
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                )
+            },
+            cell: ({ row }) => <div className="font-medium">{row.getValue("name")}</div>,
+        },
+        {
+            accessorKey: "email",
+            header: "Email",
+            cell: ({ row }) => {
+                const email = row.getValue("email") as string
+                return <div className="text-muted-foreground">{email || "N/A"}</div>
+            },
+        },
+        {
+            accessorKey: "phone",
+            header: "Telefone",
+            cell: ({ row }) => {
+                const phone = row.getValue("phone") as string
+                return <div>{phone || "N/A"}</div>
+            },
+        },
+        {
+            accessorKey: "city",
+            header: "Cidade",
+            cell: ({ row }) => {
+                const city = row.getValue("city") as string
+                return <div>{city || "N/A"}</div>
+            },
+        },
+        {
+            accessorKey: "genre",
+            header: "Gênero",
+            cell: ({ row }) => {
+                const genre = row.getValue("genre") as string
+                return (
+                    <Badge variant="outline">
+                        {genre === "male" ? "Masculino" : genre === "female" ? "Feminino" : genre || "N/A"}
+                    </Badge>
+                )
+            },
+        },
+        {
+            accessorKey: "birthDay",
+            header: "Aniversário",
+            cell: ({ row }) => {
+                const birthDay = row.getValue("birthDay") as Date
+                if (!birthDay) return <div>N/A</div>
+                return <div>{new Date(birthDay).toLocaleDateString("pt-BR")}</div>
+            },
+        },
+        {
+            accessorKey: "appointments",
+            header: "Agendamentos",
+            cell: ({ row }) => {
+                const appointments = row.original.appointments || []
+                return <div className="text-center">{appointments.length}</div>
+            },
+        },
+        {
+            accessorKey: "sales",
+            header: "Vendas",
+            cell: ({ row }) => {
+                const sales = row.original.sales || []
+                const totalSales = sales.reduce((sum, sale) => sum + (sale.totalAmount || 0), 0)
+                return (
+                    <div className="font-medium">
+                        {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                        }).format(totalSales)}
+                    </div>
+                )
+            },
+        },
+        {
+            id: "actions",
+            enableHiding: false,
+            cell: ({ row }) => {
+                const customer = row.original
 
+                return (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Abrir menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Ações</DropdownMenuLabel>
+                            <DropdownMenuItem asChild>
+                                <Link href={`/customers/${customer.slug}`}>
+                                    <Eye className="mr-2 h-4 w-4" />
+                                    Ver detalhes
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => setEditingCustomer(customer)}>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Editar
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-red-600" onClick={() => setDeletingCustomer(customer)}>
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Excluir
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                )
+            },
+        },
+    ]
     const table = useReactTable({
         data: customers,
         columns,
@@ -207,7 +206,12 @@ export function CustomersDataTable() {
             rowSelection,
         },
     })
-
+    const handleDelete = async () => {
+        if (deletingCustomer) {
+            await deleteCustomer(deletingCustomer.id)
+            setDeletingCustomer(null)
+        }
+    }
     return (
         <div className="w-full space-y-4">
             {error &&
@@ -325,7 +329,36 @@ export function CustomersDataTable() {
                     </Button>
                 </div>
             </div>
-
+            {editingCustomer && (
+                <CustomerForm
+                    customer={editingCustomer as any}
+                    open={!!editingCustomer}
+                    onOpenChange={(setOpen) => {
+                        if (!setOpen) setEditingCustomer(null)
+                    }
+                    }
+                />
+            )}
+            <AlertDialog open={!!deletingCustomer} onOpenChange={(open) => !open && setDeletingCustomer(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Tem certeza que deseja excluir o profissional <strong>{deletingCustomer?.name}</strong>? Esta ação não
+                            pode ser desfeita.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={handleDelete}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                        >
+                            Excluir
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
             <CustomerForm open={showForm} onOpenChange={setShowForm} />
         </div>
     )

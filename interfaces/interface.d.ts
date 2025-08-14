@@ -98,6 +98,7 @@ interface Professional {
 interface Customer {
     id: string;
     name: string;
+    slug: string;
     city?: string;
     address?: string;
     genre?: string;
@@ -221,7 +222,7 @@ interface Appointment {
     professionalId: string;
     customerId: string;
     serviceId: string;
-    date: Date;
+    startDate: Date;
     status: AppointmentStatus;
     notes?: string;
     createdAt: Date;

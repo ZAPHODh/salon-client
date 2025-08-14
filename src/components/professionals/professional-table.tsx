@@ -26,10 +26,10 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Plus, Search, MoreHorizontal, Edit, Trash2, Mail, Phone, AlertCircle } from "lucide-react"
+import { Plus, Search, MoreHorizontal, Edit, Trash2, Mail, Phone, AlertCircle, Eye } from "lucide-react"
 import { ProfessionalForm } from "./professional-form"
 import { useProfessional } from "../providers/professional"
-import { useRouter } from "@/i18n/navigation"
+import { Link, useRouter } from "@/i18n/navigation"
 
 
 export function ProfessionalsDataTable() {
@@ -188,6 +188,14 @@ export function ProfessionalsDataTable() {
                                                     <DropdownMenuContent align="end">
                                                         <DropdownMenuItem onClick={(e) => {
                                                             e.stopPropagation()
+                                                        }}>
+                                                            <Link href={`/customers/${professional.slug}`}>
+                                                                <Eye className="mr-2 h-4 w-4" />
+                                                                Ver detalhes
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem onClick={(e) => {
+                                                            e.stopPropagation()
                                                             setEditingProfessional(professional)
                                                         }}>
                                                             <Edit className="mr-2 h-4 w-4" />
@@ -209,8 +217,6 @@ export function ProfessionalsDataTable() {
                             </TableBody>
                         </Table>
                     </div>
-
-                    {/* Stats */}
                     <div className="flex items-center justify-between text-sm text-muted-foreground mt-4">
                         <div>
                             Total: {professionals.length} profissionais

@@ -17,6 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useCustomer } from "../providers/customer"
+import { useRouter } from "next/navigation"
 
 
 const customerFormSchema = z.object({
@@ -39,6 +40,7 @@ interface CustomerFormProps {
 
 export function CustomerForm({ open, onOpenChange, customer }: CustomerFormProps) {
     const { createCustomer, updateCustomer } = useCustomer()
+    const { refresh } = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<CustomerFormValues>({
@@ -58,7 +60,7 @@ export function CustomerForm({ open, onOpenChange, customer }: CustomerFormProps
         setIsLoading(true)
 
         try {
-            const customerData: Omit<Customer, 'id' | 'salonId' | 'createdAt'> = {
+            const customerData: Omit<Customer, 'id' | 'salonId' | 'createdAt' | 'slug'> = {
                 ...data,
                 email: data.email || undefined,
                 phone: data.phone || undefined,
@@ -70,15 +72,18 @@ export function CustomerForm({ open, onOpenChange, customer }: CustomerFormProps
 
             if (customer) {
                 await updateCustomer({ ...customerData, id: customer.id })
+
             } else {
                 await createCustomer(customerData)
             }
-            onOpenChange(false)
+
             form.reset()
         } catch (error) {
             console.error("Error saving customer:", error)
         } finally {
             setIsLoading(false)
+            onOpenChange(false)
+            refresh()
         }
     }
 

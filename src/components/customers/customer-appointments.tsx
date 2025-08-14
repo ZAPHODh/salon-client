@@ -39,17 +39,17 @@ export function CustomerAppointments({ appointments }: CustomerAppointmentsProps
                                 <div className="flex items-center space-x-2">
                                     <Calendar className="h-4 w-4 text-muted-foreground" />
                                     <span className="font-medium">
-                                        {format(new Date(appointment.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                                        {format(new Date(appointment.startDate), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
                                     </span>
                                     <Clock className="h-4 w-4 text-muted-foreground ml-4" />
                                     <span>
-                                        {format(new Date(appointment.date), "HH:mm")}
+                                        {format(new Date(appointment.startDate), "HH:mm")}
                                     </span>
                                 </div>
-                                <div className="text-sm text-muted-foreground">{appointment.service.name}</div>
+                                <div className="text-sm text-muted-foreground">{appointment.service?.name}</div>
                                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                                     <User className="h-3 w-3" />
-                                    <span>{appointment.professional.name}</span>
+                                    <span>{appointment.professional?.name}</span>
                                 </div>
                             </div>
                             <div className="text-right space-y-2">
@@ -58,7 +58,7 @@ export function CustomerAppointments({ appointments }: CustomerAppointmentsProps
                                     {new Intl.NumberFormat("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
-                                    }).format(appointment.service.price)}
+                                    }).format(appointment.service?.price)}
                                 </div>
                             </div>
                         </div>

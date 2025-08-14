@@ -8,7 +8,7 @@ interface CustomerContextProps {
     customers: Customer[];
     setCustomers: React.Dispatch<React.SetStateAction<Customer[]>>;
     error: string | null;
-    createCustomer: (newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt'>) => Promise<void>;
+    createCustomer: (newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt' | 'slug'>) => Promise<void>;
     updateCustomer: (updates: Partial<Customer>) => Promise<void>;
     deleteCustomer: (id: string) => Promise<void>;
 }
@@ -57,7 +57,7 @@ export const CustomerProvider: React.FC<CustomerProviderProps> = ({
             handleApiError(err, "Falha na exclusão do cliente");
         }
     };
-    const createCustomer = async (newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt'>) => {
+    const createCustomer = async (newCustomer: Omit<Customer, 'id' | 'salonId' | 'createdAt' | "slug">) => {
         try {
             const customer = await createCustomerAction(newCustomer)
             if (!customer) throw new Error("Erro ao criar cliente");
