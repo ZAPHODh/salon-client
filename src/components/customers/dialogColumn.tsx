@@ -15,7 +15,7 @@ export function getServiceHistoryColumns(locale: string, messages: Record<string
             header: ({ column }) => (
                 <DataTableColumnHeader column={column} title={t("serviceDate")} />
             ),
-            cell: ({ row }) => formatDate(row.original.date, locale),
+            cell: ({ row }) => formatDate(row.original.startDate, locale),
         },
         {
             accessorKey: "service.name",
@@ -86,7 +86,7 @@ export function getAppointmentHistoryColumns(locale: string, messages: Record<st
             header: ({ column }) => (
                 <DataTableColumnHeader column={column} title={t("appointmentDate")} />
             ),
-            cell: ({ row }) => formatDate(row.original.date, locale),
+            cell: ({ row }) => formatDate(row.original.startDate, locale),
         },
         {
             accessorKey: "service.name",
