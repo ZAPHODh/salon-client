@@ -19,6 +19,7 @@ import { toast } from "sonner"
 import { createSalon } from "@/requests/create-salon"
 import { redirect } from "@/i18n/navigation"
 import { useLocale } from "next-intl"
+import { formatTime } from "@/lib/utils"
 
 const steps = [
     {
@@ -35,7 +36,7 @@ const steps = [
     },
 ]
 
-const weekDays = [
+export const weekDays = [
     { key: 0, label: "Domingo" },
     { key: 1, label: "Segunda-feira" },
     { key: 2, label: "Terça-feira" },
@@ -199,9 +200,7 @@ export default function SalonSettingsStepper() {
         }
     }
 
-    const formatTime = (hour: number) => {
-        return `${hour.toString().padStart(2, "0")}:00`
-    }
+
 
     const toggleDay = (dayIndex: number, isActive: boolean) => {
         setActiveDays((prev) => ({
@@ -604,177 +603,6 @@ export default function SalonSettingsStepper() {
                                     </CardContent>
                                 </Card>
                             )}
-                            {/* {currentStep === 1 && (
-                                <Card className="transform transition-all duration-300">
-                                    <CardHeader>
-                                        <CardTitle>Horários de Funcionamento</CardTitle>
-                                        <CardDescription>Configure os horários de trabalho do seu salão</CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-6">
-                                        <div>
-                                            <h3 className="text-lg font-medium mb-4">Horários Visíveis para Agendamento</h3>
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="visibleHours.from"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>Início</FormLabel>
-                                                            <Select
-                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
-                                                                defaultValue={field.value?.toString()}
-                                                            >
-                                                                <FormControl>
-                                                                    <SelectTrigger>
-                                                                        <SelectValue />
-                                                                    </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent>
-                                                                    {Array.from({ length: 24 }, (_, i) => (
-                                                                        <SelectItem key={i} value={i.toString()}>
-                                                                            {formatTime(i)}
-                                                                        </SelectItem>
-                                                                    ))}
-                                                                </SelectContent>
-                                                            </Select>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-
-                                                <FormField
-                                                    control={form.control}
-                                                    name="visibleHours.to"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>Fim</FormLabel>
-                                                            <Select
-                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
-                                                                defaultValue={field.value?.toString()}
-                                                            >
-                                                                <FormControl>
-                                                                    <SelectTrigger>
-                                                                        <SelectValue />
-                                                                    </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent>
-                                                                    {Array.from({ length: 24 }, (_, i) => (
-                                                                        <SelectItem key={i} value={i.toString()}>
-                                                                            {formatTime(i)}
-                                                                        </SelectItem>
-                                                                    ))}
-                                                                </SelectContent>
-                                                            </Select>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <Separator />
-
-                                        <div>
-                                            <div className="flex items-center gap-2 mb-4">
-                                                <h3 className="text-lg font-medium">Horários de Trabalho por Dia</h3>
-                                                <TooltipProvider delayDuration={100}>
-                                                    <Tooltip>
-                                                        <TooltipTrigger>
-                                                            <Info className="w-4 h-4 text-muted-foreground" />
-                                                        </TooltipTrigger>
-                                                        <TooltipContent className="max-w-80 text-center">
-                                                            <p>Ative apenas os dias em que o salão estará aberto</p>
-                                                        </TooltipContent>
-                                                    </Tooltip>
-                                                </TooltipProvider>
-                                            </div>
-
-                                            <div className="space-y-4">
-                                                {weekDays.map((day) => (
-                                                    <div key={day.key} className="flex items-center gap-4">
-                                                        <div className="flex w-40 items-center gap-2">
-                                                            <Switch
-                                                                checked={activeDays[day.key]}
-                                                                onCheckedChange={(checked) => toggleDay(day.key, checked)}
-                                                            />
-                                                            <span className="text-sm font-medium">{day.label}</span>
-                                                        </div>
-
-                                                        {activeDays[day.key] ? (
-                                                            <div className="flex items-center gap-4">
-                                                                <div className="flex items-center gap-2">
-                                                                    <span className="text-sm">Das</span>
-                                                                    <FormField
-                                                                        control={form.control}
-                                                                        name={`workingHours.${day.key}.from` as any}
-                                                                        render={({ field }) => (
-                                                                            <FormItem>
-                                                                                <Select
-                                                                                    onValueChange={(value) => field.onChange(Number.parseInt(value))}
-                                                                                    value={field.value?.toString()}
-                                                                                >
-                                                                                    <FormControl>
-                                                                                        <SelectTrigger className="w-20">
-                                                                                            <SelectValue />
-                                                                                        </SelectTrigger>
-                                                                                    </FormControl>
-                                                                                    <SelectContent>
-                                                                                        {Array.from({ length: 24 }, (_, i) => (
-                                                                                            <SelectItem key={i} value={i.toString()}>
-                                                                                                {formatTime(i)}
-                                                                                            </SelectItem>
-                                                                                        ))}
-                                                                                    </SelectContent>
-                                                                                </Select>
-                                                                                <FormMessage />
-                                                                            </FormItem>
-                                                                        )}
-                                                                    />
-                                                                </div>
-
-                                                                <div className="flex items-center gap-2">
-                                                                    <span className="text-sm">às</span>
-                                                                    <FormField
-                                                                        control={form.control}
-                                                                        name={`workingHours.${day.key}.to` as any}
-                                                                        render={({ field }) => (
-                                                                            <FormItem>
-                                                                                <Select
-                                                                                    onValueChange={(value) => field.onChange(Number.parseInt(value))}
-                                                                                    value={field.value?.toString()}
-                                                                                >
-                                                                                    <FormControl>
-                                                                                        <SelectTrigger className="w-20">
-                                                                                            <SelectValue />
-                                                                                        </SelectTrigger>
-                                                                                    </FormControl>
-                                                                                    <SelectContent>
-                                                                                        {Array.from({ length: 25 }, (_, i) => (
-                                                                                            <SelectItem key={i} value={i.toString()}>
-                                                                                                {i === 24 ? "00:00" : formatTime(i)}
-                                                                                            </SelectItem>
-                                                                                        ))}
-                                                                                    </SelectContent>
-                                                                                </Select>
-                                                                                <FormMessage />
-                                                                            </FormItem>
-                                                                        )}
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="flex items-center gap-2 text-muted-foreground">
-                                                                <Moon className="w-4 h-4" />
-                                                                <span className="text-sm">Fechado</span>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            )} */}
                         </div>
                     </div>
                     <div className="flex justify-between mt-8">

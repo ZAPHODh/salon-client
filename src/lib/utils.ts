@@ -26,3 +26,6 @@ export function getInitials(name: string, maxLength?: number): string {
 
   return initials;
 }
+export function formatTime(hour: number) {
+  return `${hour.toString().padStart(2, "0")}:00`
+}

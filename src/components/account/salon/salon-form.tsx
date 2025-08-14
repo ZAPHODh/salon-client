@@ -22,6 +22,13 @@ import Cookies from "js-cookie"
 import { countries, defaultVisibleHours, defaultWorkingHours } from "@/lib/helper"
 import { updateSalon } from "@/requests/update-salon"
 import { useRouter } from "next/navigation"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Info, Moon } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
+import { Badge } from "@/components/ui/badge"
+import { formatTime } from "@/lib/utils"
+import { weekDays } from "@/components/settings/salon-settings-stepper"
 
 interface SalonConfigProps {
     initialData?: {
@@ -55,8 +62,16 @@ export function SalonConfigForm({ initialData }: SalonConfigProps) {
     const tAddress = useTranslations("address")
 
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [workingHours, setWorkingHours] = useState<TWorkingHours>(initialData?.workingHours || defaultWorkingHours)
-    const [visibleHours, setVisibleHours] = useState<TVisibleHours>(initialData?.visibleHours || defaultVisibleHours)
+
+    const [activeDays, setActiveDays] = useState<Record<number, boolean>>({
+        0: false,
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true,
+        6: false,
+    })
     const [countryCode, setCountryCode] = useState<string>(initialData?.countryCode || "BR")
     const form = useForm<SalonFormValues>({
         resolver: zodResolver(salonConfigSchema),
@@ -64,7 +79,10 @@ export function SalonConfigForm({ initialData }: SalonConfigProps) {
             name: initialData?.name || "",
             address: initialData?.address || "",
             city: initialData?.city || "",
+            countryCode: initialData?.countryCode || "BR",
             cep: initialData?.cep || "",
+            workingHours: initialData?.workingHours || defaultWorkingHours,
+            visibleHours: initialData?.visibleHours || defaultVisibleHours,
         },
     })
 
@@ -90,29 +108,44 @@ export function SalonConfigForm({ initialData }: SalonConfigProps) {
 
         form.setValue("cep", "")
     }
+    const toggleDay = (dayIndex: number, isActive: boolean) => {
+        setActiveDays((prev) => ({
+            ...prev,
+            [dayIndex]: isActive,
+        }))
 
+        const workingHours = { ...form.getValues("workingHours") }
+        if (isActive) {
+            workingHours[dayIndex] = { from: 9, to: 18 }
+        } else {
+            workingHours[dayIndex] = { from: 0, to: 0 }
+        }
+        form.setValue('workingHours', workingHours)
+    }
     async function handleSubmit(data: SalonFormValues) {
+        setIsSubmitting(true)
         try {
-            setIsSubmitting(true)
 
-            const completeData: SalonFormValues = {
+            const cleanedWorkingHours = { ...data.workingHours }
+
+            for (const dayKey in activeDays) {
+                const dayIndex = Number(dayKey)
+                if (!activeDays[dayIndex]) {
+                    cleanedWorkingHours[dayIndex] = { from: 0, to: 0 }
+                }
+            }
+            const finalData = {
                 ...data,
-                workingHours,
-                visibleHours,
+                workingHours: cleanedWorkingHours,
             }
-            console.log("Submitting salon data to backend:", completeData)
-            const updatedSalon = await updateSalon(completeData)
+            const updatedSalon = await updateSalon((initialData as any).id as string, finalData)
             if (!updatedSalon) {
-                throw new Error(t("toast.errorDescription"))
+                throw new Error(t("toast.error"))
             }
-            toast.success(t("toast.success"), {
-                description: t("toast.successDescription"),
-            })
+            toast.success(t("toast.success"),)
             refresh()
         } catch (error) {
-            toast.error(t("toast.error"), {
-                description: error instanceof Error ? error.message : t("toast.errorDescription"),
-            })
+            toast.error(t("toast.error"))
         } finally {
             setIsSubmitting(false)
         }
@@ -216,9 +249,234 @@ export function SalonConfigForm({ initialData }: SalonConfigProps) {
                     <div className="space-y-6" id="working-hours-section">
                         <h3 className="text-lg font-medium">{t("sections.hoursConfig")}</h3>
                         <div className="space-y-6">
-                            <WorkingHoursInput initialWorkingHours={workingHours} onChange={setWorkingHours} />
-                            <Separator className="my-4" />
-                            <VisibleHoursInput initialVisibleHours={visibleHours} onChange={setVisibleHours} />
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="hidden sm:block">Horários de Funcionamento</CardTitle>
+                                    <CardDescription className="hidden sm:block">
+                                        Configure os horários de trabalho do seu salão
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-6">
+                                    <div className="p-4 rounded-lg space-y-4">
+                                        <div>
+                                            <h3 className="text-lg font-semibold mb-1">Horários Visíveis</h3>
+                                            <p className="text-sm text-muted-foreground">
+                                                Intervalo que aparecerá no agendamento
+                                            </p>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <FormField
+                                                control={form.control}
+                                                name="visibleHours.from"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className="text-sm font-medium">Horário inicial</FormLabel>
+                                                        <Select
+                                                            onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                            defaultValue={field.value?.toString()}
+                                                        >
+                                                            <FormControl>
+                                                                <SelectTrigger className="h-11">
+                                                                    <SelectValue />
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {Array.from({ length: 24 }, (_, i) => (
+                                                                    <SelectItem key={i} value={i.toString()}>
+                                                                        {formatTime(i)}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name="visibleHours.to"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className="text-sm font-medium">Horário final</FormLabel>
+                                                        <Select
+                                                            onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                            defaultValue={field.value?.toString()}
+                                                        >
+                                                            <FormControl>
+                                                                <SelectTrigger className="h-11">
+                                                                    <SelectValue />
+                                                                </SelectTrigger>
+                                                            </FormControl>
+                                                            <SelectContent>
+                                                                {Array.from({ length: 24 }, (_, i) => (
+                                                                    <SelectItem key={i} value={i.toString()}>
+                                                                        {formatTime(i)}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
+                                    <Separator />
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <h3 className="text-lg font-semibold">Dias de Funcionamento</h3>
+                                            <TooltipProvider delayDuration={100}>
+                                                <Tooltip>
+                                                    <TooltipTrigger>
+                                                        <Info className="w-4 h-4 text-muted-foreground" />
+                                                    </TooltipTrigger>
+                                                    <TooltipContent className="max-w-80 text-center">
+                                                        <p>Ative os dias e configure os horários de funcionamento</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            {weekDays.map((day) => (
+                                                <div
+                                                    key={day.key}
+                                                    className={`border rounded-lg p-4 transition-all ${activeDays[day.key]
+                                                        ? 'border-primary/20 bg-primary/5'
+                                                        : 'border-border bg-background'
+                                                        }`}
+                                                >
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <div className="flex items-center gap-3">
+                                                            <Switch
+                                                                checked={activeDays[day.key]}
+                                                                onCheckedChange={(checked) => toggleDay(day.key, checked)}
+                                                            />
+                                                            <div>
+                                                                <span className="font-medium">
+                                                                    <span className="sm:hidden">{day.label}</span>
+                                                                    <span className="hidden sm:inline">{day.label}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {!activeDays[day.key] && (
+                                                            <Badge variant="secondary" className="text-xs">
+                                                                <Moon className="w-3 h-3 mr-1" />
+                                                                Fechado
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                    {activeDays[day.key] && (
+                                                        <div className="space-y-3 pl-0 sm:pl-8">
+                                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                                <FormField
+                                                                    control={form.control}
+                                                                    name={`workingHours.${day.key}.from` as any}
+                                                                    render={({ field }) => (
+                                                                        <FormItem>
+                                                                            <FormLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                                                                                Abertura
+                                                                            </FormLabel>
+                                                                            <Select
+                                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                                value={field.value?.toString()}
+                                                                            >
+                                                                                <FormControl>
+                                                                                    <SelectTrigger className="h-10">
+                                                                                        <SelectValue />
+                                                                                    </SelectTrigger>
+                                                                                </FormControl>
+                                                                                <SelectContent>
+                                                                                    {Array.from({ length: 24 }, (_, i) => (
+                                                                                        <SelectItem key={i} value={i.toString()}>
+                                                                                            {formatTime(i)}
+                                                                                        </SelectItem>
+                                                                                    ))}
+                                                                                </SelectContent>
+                                                                            </Select>
+                                                                            <FormMessage />
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                                <FormField
+                                                                    control={form.control}
+                                                                    name={`workingHours.${day.key}.to` as any}
+                                                                    render={({ field }) => (
+                                                                        <FormItem>
+                                                                            <FormLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                                                                                Fechamento
+                                                                            </FormLabel>
+                                                                            <Select
+                                                                                onValueChange={(value) => field.onChange(Number.parseInt(value))}
+                                                                                value={field.value?.toString()}
+                                                                            >
+                                                                                <FormControl>
+                                                                                    <SelectTrigger className="h-10">
+                                                                                        <SelectValue />
+                                                                                    </SelectTrigger>
+                                                                                </FormControl>
+                                                                                <SelectContent>
+                                                                                    {Array.from({ length: 25 }, (_, i) => (
+                                                                                        <SelectItem key={i} value={i.toString()}>
+                                                                                            {i === 24 ? "00:00" : formatTime(i)}
+                                                                                        </SelectItem>
+                                                                                    ))}
+                                                                                </SelectContent>
+                                                                            </Select>
+                                                                            <FormMessage />
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                            </div>
+                                                            <div className="text-sm text-muted-foreground bg-muted/50 px-3 py-2 rounded">
+                                                                Funcionamento: {formatTime(form.watch(`workingHours.${day.key}.from`) || 0)} às {' '}
+                                                                {form.watch(`workingHours.${day.key}.to`) === 24
+                                                                    ? "00:00"
+                                                                    : formatTime(form.watch(`workingHours.${day.key}.to`) || 0)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 pt-4 border-t">
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => {
+                                                    const weekdays = [1, 2, 3, 4, 5];
+                                                    weekdays.forEach(day => toggleDay(day, true));
+                                                }}
+                                            >
+                                                Seg-Sex (9h-18h)
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => {
+                                                    weekDays.forEach(day => toggleDay(day.key, false));
+                                                }}
+                                            >
+                                                Limpar Tudo
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => {
+                                                    [1, 2, 3, 4, 5, 6].forEach(day => toggleDay(day, true));
+                                                }}
+                                            >
+                                                Seg-Sáb
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+
                         </div>
                     </div>
                     <Button type="submit" disabled={isSubmitting} id="save-config-button" className="w-full md:w-[300px]">
