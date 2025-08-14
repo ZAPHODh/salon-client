@@ -154,7 +154,7 @@ export function ProfessionalAppointments({ appointments }: ProfessionalAppointme
                                 <TableBody>
                                     {filteredAppointments.map((appointment) => (
                                         <TableRow key={appointment.id}>
-                                            <TableCell className="text-xs sm:text-sm">{formatDate(appointment.date)}</TableCell>
+                                            <TableCell className="text-xs sm:text-sm">{formatDate(appointment.startDate)}</TableCell>
                                             <TableCell className="font-medium text-xs sm:text-sm">{appointment.customer.name}</TableCell>
                                             <TableCell className="text-xs sm:text-sm">{appointment.service.name}</TableCell>
                                             <TableCell className="text-xs sm:text-sm">{formatCurrency(appointment.service.price)}</TableCell>

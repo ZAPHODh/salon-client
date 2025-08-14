@@ -19,7 +19,7 @@ export function ProfessionalStats({ professional }: ProfessionalStatsProps) {
 
     const thisMonthAppointments =
         professional.appointments?.filter((appointment) => {
-            const appointmentDate = new Date(appointment.date)
+            const appointmentDate = new Date(appointment.startDate)
             return appointmentDate.getMonth() === currentMonth && appointmentDate.getFullYear() === currentYear
         }) || []
 
