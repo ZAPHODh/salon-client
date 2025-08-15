@@ -15,7 +15,6 @@ async function updateSalon(id: string, data: SalonFormValues) {
         return null;
     }
     const updatedSalon = await res.json();
-    console.log("Updated salon:", updatedSalon);
     return updatedSalon;
 }
 
