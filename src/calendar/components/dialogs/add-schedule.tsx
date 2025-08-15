@@ -217,7 +217,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                             />
                         </div>
 
-                        <div className="fflex w-full flex-col md:flex-row gap-4">
+                        <div className="flex w-full flex-col md:flex-row gap-4">
                             <FormField
 
                                 control={form.control}

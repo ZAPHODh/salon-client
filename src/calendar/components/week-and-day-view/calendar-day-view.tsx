@@ -144,7 +144,7 @@ export function CalendarDayView({ singleDaySchedules, multiDaySchedules }: IProp
             </div>
 
             <div className="hidden w-64 divide-y border-l md:block">
-                <SingleCalendar className="mx-auto w-fit" mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus />
+                <SingleCalendar mode="single" selected={selectedDate} onSelect={setSelectedDate} />
 
                 <div className="flex-1 space-y-3">
                     {currentSchedules.length > 0 ? (
@@ -154,10 +154,10 @@ export function CalendarDayView({ singleDaySchedules, multiDaySchedules }: IProp
                                 <span className="relative inline-flex size-2.5 rounded-full bg-green-600"></span>
                             </span>
 
-                            <p className="text-sm font-semibold text-foreground">Happening now</p>
+                            <p className="text-sm font-semibold text-foreground">Acontecendo agora</p>
                         </div>
                     ) : (
-                        <p className="p-4 text-center text-sm italic text-muted-foreground">No appointments or consultations at the moment</p>
+                        <p className="p-4 text-center text-sm italic text-muted-foreground">Sem agendamentos no momento</p>
                     )}
 
                     {currentSchedules.length > 0 && (
