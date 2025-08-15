@@ -1,4 +1,5 @@
 'use server';
+
 import { verifySession } from "@/lib/auth/dal";
 import { SalonFormValues } from "@/schemas/salon";
 async function updateSalon(id: string, data: SalonFormValues) {

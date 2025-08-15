@@ -886,7 +886,7 @@
                     },
                     "professional": {
                         "label": "Profissional",
-                        "placeholder": "Selecione um profissional",
+                        "placeholder": "Selecione",
                         "description": "Escolha o profissional"
                     },
                     "service": {
@@ -920,6 +920,15 @@
                 "success": "Agendamento atualizado com sucesso!",
                 "error": "Ocorreu um erro ao atualizar o agendamento.",
                 "fields": {
+                    "status": {
+                        "label": "Status",
+                        "options": {
+                            "scheduled": "Agendado",
+                            "completed": "Concluído",
+                            "cancelled": "Cancelado",
+                            "noShow": "Não compareceu"
+                        }
+                    },
                     "professional": {
                         "label": "Profissional",
                         "placeholder": "Selecione um profissional",

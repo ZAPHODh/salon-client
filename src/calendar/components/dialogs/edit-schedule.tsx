@@ -28,7 +28,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Textarea } from "@/components/ui/textarea"
 import { TimeInput } from "@/components/ui/time-input"
 import { SingleDayPickerInput } from "@/components/ui/single-day-picker-input"
-import { cn } from "@/lib/utils"
+import { cn, truncateText } from "@/lib/utils"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 import { scheduleSchema } from "@/calendar/schema"
@@ -121,12 +121,12 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col md:flex-row gap-4">
                             <FormField
                                 control={form.control}
                                 name="professionalId"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.professional.label")}</FormLabel>
                                         <Popover open={professionalOpen} onOpenChange={setProfessionalOpen}>
                                             <PopoverTrigger asChild>
@@ -138,7 +138,7 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                                                         className="w-full justify-between"
                                                     >
                                                         {field.value
-                                                            ? professionals?.find((professional) => professional.id === field.value)?.name
+                                                            ? truncateText(professionals?.find((professional) => professional.id === field.value)?.name ?? "", 20)
                                                             : t("fields.professional.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
@@ -181,7 +181,7 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                                 control={form.control}
                                 name="serviceId"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.service.label")}</FormLabel>
                                         <Popover open={serviceOpen} onOpenChange={setServiceOpen}>
                                             <PopoverTrigger asChild>
@@ -193,7 +193,7 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                                                         className="w-full justify-between"
                                                     >
                                                         {field.value
-                                                            ? services?.find((service) => service.id === field.value)?.name
+                                                            ? truncateText(services?.find((service) => service.id === field.value)?.name ?? "", 20)
                                                             : t("fields.service.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
@@ -241,7 +241,7 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                                 <FormItem className="space-y-3">
                                     <FormLabel>{t("fields.status.label")}</FormLabel>
                                     <FormControl>
-                                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-col space-y-1">
+                                        <RadioGroup onValueChange={field.onChange} value={field.value} className="flex flex-col md:flex-row space-y-1">
                                             <div className="flex items-center space-x-2">
                                                 <RadioGroupItem value="SCHEDULED" id="edit-scheduled" />
                                                 <label htmlFor="edit-scheduled" className="text-sm font-normal cursor-pointer">
@@ -273,12 +273,12 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                             )}
                         />
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col md:flex-row gap-4">
                             <FormField
                                 control={form.control}
                                 name="startDate"
                                 render={({ field, fieldState }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.startDate.label")}</FormLabel>
                                         <FormControl>
                                             <SingleDayPickerInput
@@ -297,7 +297,7 @@ export function EditScheduleDialog({ children, schedule }: IProps) {
                                 control={form.control}
                                 name="endDate"
                                 render={({ field, fieldState }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.endDate.label")}</FormLabel>
                                         <FormControl>
                                             <SingleDayPickerInput

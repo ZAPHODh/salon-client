@@ -24,7 +24,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Textarea } from "@/components/ui/textarea"
 import { TimeInput } from "@/components/ui/time-input"
 import { SingleDayPickerInput } from "@/components/ui/single-day-picker-input"
-import { cn } from "@/lib/utils"
+import { cn, truncateText } from "@/lib/utils"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 import { scheduleSchema } from "@/calendar/schema"
@@ -137,7 +137,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                                     className="w-full justify-between"
                                                 >
                                                     {field.value
-                                                        ? customers?.find((customer) => customer.id === field.value)?.name
+                                                        ? truncateText(customers?.find((customer) => customer.id === field.value)?.name ?? "", 20)
                                                         : t("fields.customer.placeholder")}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
@@ -177,12 +177,12 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                             )}
                         />
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="flex w-full flex-col md:flex-row gap-4">
                             <FormField
                                 control={form.control}
                                 name="startDate"
                                 render={({ field, fieldState }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.startDate.label")}</FormLabel>
                                         <FormControl>
                                             <SingleDayPickerInput
@@ -201,7 +201,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                 control={form.control}
                                 name="endDate"
                                 render={({ field, fieldState }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.endDate.label")}</FormLabel>
                                         <FormControl>
                                             <SingleDayPickerInput
@@ -217,12 +217,13 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="fflex w-full flex-col md:flex-row gap-4">
                             <FormField
+
                                 control={form.control}
                                 name="startTime"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.startTime.label")}</FormLabel>
                                         <FormControl>
                                             <TimeInput value={field.value as TimeValue} onChange={field.onChange} />
@@ -235,7 +236,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                 control={form.control}
                                 name="endTime"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.endTime.label")}</FormLabel>
                                         <FormControl>
                                             <TimeInput value={field.value as TimeValue} onChange={field.onChange} />
@@ -246,12 +247,12 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="flex w-full flex-col md:flex-row gap-4">
                             <FormField
                                 control={form.control}
                                 name="professionalId"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.professional.label")}</FormLabel>
                                         <Popover open={professionalOpen} onOpenChange={setProfessionalOpen}>
                                             <PopoverTrigger asChild>
@@ -263,7 +264,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                                         className="w-full justify-between"
                                                     >
                                                         {field.value
-                                                            ? professionals?.find((professional) => professional.id === field.value)?.name
+                                                            ? truncateText(professionals?.find((professional) => professional.id === field.value)?.name ?? "", 20)
                                                             : t("fields.professional.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>
@@ -306,7 +307,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                 control={form.control}
                                 name="serviceId"
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className="w-full">
                                         <FormLabel>{t("fields.service.label")}</FormLabel>
                                         <Popover open={serviceOpen} onOpenChange={setServiceOpen}>
                                             <PopoverTrigger asChild>
@@ -318,7 +319,7 @@ export function AddScheduleDialog({ children, startDate, startTime }: IProps) {
                                                         className="w-full justify-between"
                                                     >
                                                         {field.value
-                                                            ? services?.find((service) => service.id === field.value)?.name
+                                                            ? truncateText(services?.find((service) => service.id === field.value)?.name ?? "", 20)
                                                             : t("fields.service.placeholder")}
                                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                     </Button>

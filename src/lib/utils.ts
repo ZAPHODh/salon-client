@@ -29,3 +29,9 @@ export function getInitials(name: string, maxLength?: number): string {
 export function formatTime(hour: number) {
   return `${hour.toString().padStart(2, "0")}:00`
 }
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.slice(0, maxLength) + "...";
+}

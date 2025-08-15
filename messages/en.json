@@ -977,6 +977,15 @@
                 "success": "Schedule updated successfully!",
                 "error": "There was an error updating the schedule.",
                 "fields": {
+                    "status": {
+                        "label": "Status",
+                        "options": {
+                            "scheduled": "Scheduled",
+                            "completed": "Completed",
+                            "cancelled": "Cancelled",
+                            "noShow": "No-show"
+                        }
+                    },
                     "professional": {
                         "label": "Professional",
                         "placeholder": "Select a professional",
