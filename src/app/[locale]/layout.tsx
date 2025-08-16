@@ -50,7 +50,6 @@ export default async function LocaleLayout({
             <head>
                 <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID} nonce='' />
                 <Adsense />
-
             </head>
             <body>
                 <SessionProvider initialSession={session}>

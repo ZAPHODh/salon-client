@@ -19,10 +19,12 @@ export default async function Layout({ children, params }: { children: React.Rea
     const session = await getServerSession()
     const locale = (await params).locale
     if (!session) redirect({ href: 'auth/signin', locale })
-    const professionals = await getProfessionalsData()
-    const services = await getServicesData()
-    const schedules = await getSchedules()
-    const customers = await getCustomers()
+    const [professionals, services, schedules, customers] = await Promise.all([
+        getProfessionalsData(),
+        getServicesData(),
+        getSchedules(),
+        getCustomers(),
+    ])
     return (
         <CustomerProvider initialCustomers={customers}>
             <CalendarProvider initialProfessionals={professionals} schedules={schedules} initialServices={services}>

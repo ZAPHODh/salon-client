@@ -1,31 +1,25 @@
 import { ProfessionalProvider } from "@/components/providers/professional";
 import { ServiceProvider } from "@/components/providers/service";
 import { ServicesDataTable } from "@/components/services/service-table";
+import { redirect } from "@/i18n/navigation";
 import { verifySession } from "@/lib/auth/dal";
+import { getProfessionalsData } from "@/requests/professionals";
+import { getServicesData } from "@/requests/services";
+import { getLocale } from "next-intl/server";
 
 
 export default async function ServicesPage() {
     const { session } = await verifySession()
-    const [resProf, resService] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/professionals`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${session?.accessToken}`,
-            },
-        }),
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/services`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${session?.accessToken}`,
-            },
-        }),
-    ]);
+    const locale = await getLocale()
+    if (!session) {
+        redirect({ href: '/auth/signin', locale })
+        return null;
+    }
     const [professionals, services] = await Promise.all([
-        resProf.json(),
-        resService.json(),
+        getProfessionalsData(),
+        getServicesData()
     ]);
+
     return (
         <ProfessionalProvider initialProfessionals={professionals}>
             <ServiceProvider initialServices={services}>

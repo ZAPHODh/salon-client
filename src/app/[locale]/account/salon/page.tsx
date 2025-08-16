@@ -2,14 +2,13 @@
 
 import { SalonConfigForm } from "@/components/account/salon/salon-form"
 import { Separator } from "@/components/ui/separator"
-import { TourCard } from "@/components/widgets/tour";
+
 import { redirect } from "@/i18n/navigation";
 import { verifySession } from "@/lib/auth/dal";
-import { salonConfigSteps } from "@/lib/tour/steps/salon";
+
 import { getLocale } from "next-intl/server";
 
 
-import { Onborda, OnbordaProvider } from "onborda";
 
 export default async function Page() {
     const { session } = await verifySession()
@@ -22,24 +21,15 @@ export default async function Page() {
     if (!res.ok) redirect({ locale, href: '/settings' })
     const data = await res.json()
     return (
-        <OnbordaProvider>
-            <Onborda
-                steps={salonConfigSteps}
-                cardComponent={TourCard}
-                shadowOpacity="0.8"
-                cardTransition={{ type: "spring", stiffness: 100, damping: 10 }}
-            >
-                <div className="space-y-6" >
-                    <div>
-                        <h3 className="text-lg font-medium" >Configurações do salão</h3>
-                        < p className="text-sm text-muted-foreground" >
-                            Configure as informações do seu salão, como nome, descrição, horário de funcionamento e outros detalhes importantes.
-                        </p>
-                    </div>
-                    < Separator />
-                    <SalonConfigForm initialData={res.ok && data} />
-                </div>
-            </Onborda>
-        </OnbordaProvider>
+        <div className="space-y-6" >
+            <div>
+                <h3 className="text-lg font-medium" >Configurações do salão</h3>
+                < p className="text-sm text-muted-foreground" >
+                    Configure as informações do seu salão, como nome, descrição, horário de funcionamento e outros detalhes importantes.
+                </p>
+            </div>
+            < Separator />
+            <SalonConfigForm initialData={res.ok && data} />
+        </div>
     )
 }

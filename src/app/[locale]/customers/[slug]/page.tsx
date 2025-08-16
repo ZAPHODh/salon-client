@@ -18,6 +18,7 @@ export default async function Page({
     }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/customers/${slug}`, {
+        next: { revalidate: 60 },
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session.accessToken}`,
