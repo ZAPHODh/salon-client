@@ -8,7 +8,6 @@ export default function Loading() {
         <div className="container mx-auto py-4 px-4 sm:py-6 space-y-4 sm:space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
                 <div>
-                    teste
                     <Skeleton className="h-6 sm:h-8 w-48 mb-2" />
                     <Skeleton className="h-4 w-64" />
                 </div>

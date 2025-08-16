@@ -23,8 +23,6 @@ export default async function Page({
 
     const professional = await res.json()
 
-    return (
-        <ProfessionalDetailPage professional={professional} />
+    return <ProfessionalDetailPage professional={professional} />
 
-    )
 }

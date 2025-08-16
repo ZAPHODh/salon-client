@@ -27,6 +27,5 @@ export default async function Page({
         redirect({ href: '/customers', locale })
     }
     const customer = await res.json()
-    console.log('customer', customer)
     return <CustomerPage customer={customer} />
 }

@@ -7,14 +7,13 @@ import { getLocale } from "next-intl/server"
 export default async function Page() {
     const { session } = await verifySession()
     const locale = await getLocale()
+
     if (!session) {
         redirect({ href: '/auth/signin', locale })
     }
     const salon = await getSalon()
     if (salon) redirect({ href: 'account', locale })
-    return (
-        <>
-            <SalonSettingsStepper />
-        </>
-    )
+
+    return <SalonSettingsStepper />
+
 }   

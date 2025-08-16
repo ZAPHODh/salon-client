@@ -16,7 +16,7 @@ import Adsense from "@/components/adsense";
 import { verifySession } from '@/lib/auth/dal';
 import { CookieConsentProvider } from '@/components/providers/cookie-consent';
 import { CookieConsentButton } from '@/components/cookie/cookie-consent-button';
-import { CookieDebugPanel } from '@/components/cookie/cookies-debug-pannel';
+// import { CookieDebugPanel } from '@/components/cookie/cookies-debug-pannel';
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
