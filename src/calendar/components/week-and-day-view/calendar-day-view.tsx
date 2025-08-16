@@ -1,4 +1,4 @@
-import { Calendar, Clock, User } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, User } from "lucide-react";
 import { parseISO, areIntervalsOverlapping, format } from "date-fns";
 
 
@@ -20,7 +20,8 @@ import { useCalendar } from "@/calendar/contexts/calendar";
 import { getCurrentSchedules, getScheduleBlockStyle, getVisibleHours, groupSchedules, isWorkingHour } from "@/calendar/helper";
 import { AddScheduleDialog } from "../dialogs/add-schedule";
 import { CalendarTimeline } from "./calendar-timeline";
-import { SingleCalendar } from "@/components/ui/single-calendar";
+import { Calendar } from "@/components/ui/calendar";
+// import { SingleCalendar } from "@/components/ui/single-calendar";
 
 interface IProps {
     singleDaySchedules: ISchedule[];
@@ -144,7 +145,7 @@ export function CalendarDayView({ singleDaySchedules, multiDaySchedules }: IProp
             </div>
 
             <div className="hidden w-64 divide-y border-l md:block">
-                <SingleCalendar mode="single" selected={selectedDate} onSelect={setSelectedDate} />
+                <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} />
 
                 <div className="flex-1 space-y-3">
                     {currentSchedules.length > 0 ? (
@@ -178,7 +179,7 @@ export function CalendarDayView({ singleDaySchedules, multiDaySchedules }: IProp
                                             )}
 
                                             <div className="flex items-center gap-1.5 text-muted-foreground">
-                                                <Calendar className="size-3.5" />
+                                                <CalendarIcon className="size-3.5" />
                                                 <span className="text-sm">{format(new Date(), "MMM d, yyyy")}</span>
                                             </div>
 
