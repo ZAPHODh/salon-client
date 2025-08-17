@@ -64,10 +64,12 @@
         }
     },
     "cookies": {
-        "message": "We use cookies to enhance your experience on our website.",
-        "readMore": "Read more",
-        "reject": "Reject",
-        "accept": "Accept"
+        "title": "We use cookies",
+        "description": "We use cookies to ensure you get the best experience on our website. For more information on how we use cookies, please see our cookie policy.",
+        "consentMessage": "By clicking \"Accept\", you agree to our use of cookies.",
+        "learnMore": "Learn more",
+        "accept": "Accept",
+        "decline": "Decline"
     },
     "finance": {
         "nav": {

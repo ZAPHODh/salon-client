@@ -14,9 +14,8 @@ import { ZodProvider } from '@/components/providers/zodI18n';
 import Adsense from "@/components/adsense";
 
 import { verifySession } from '@/lib/auth/dal';
-import { CookieConsentProvider } from '@/components/providers/cookie-consent';
-import { CookieConsentButton } from '@/components/cookie/cookie-consent-button';
-// import { CookieDebugPanel } from '@/components/cookie/cookies-debug-pannel';
+import CookieConsent from '@/components/cookie-consent';
+
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
@@ -40,11 +39,22 @@ export default async function LocaleLayout({
     const cookieStore = await cookies()
     const font = cookieStore.get('font')?.value
     const { locale } = await params;
+
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
+    const onAcceptCookies = () => {
+        cookieStore.set('analytics', 'enabled', { expires: 365 });
+        cookieStore.set("preferences", "enabled", { expires: 365 });
+        cookieStore.set("marketing", "enabled", { expires: 365 });
+    };
 
 
+    const onDeclineCookies = () => {
+        cookieStore.set("preferences", "disabled", { expires: 365 });
+        cookieStore.set("analytics", "disabled", { expires: 365 });
+        cookieStore.set("marketing", "disabled", { expires: 365 });
+    };
     return (
         <html lang={locale} className={`${inter.variable} ${roboto_mono.variable}`} suppressHydrationWarning>
             <head>
@@ -53,33 +63,25 @@ export default async function LocaleLayout({
             </head>
             <body>
                 <SessionProvider initialSession={session}>
-                    <CookieConsentProvider
-                        googleAnalyticsId={process.env.NEXT_PUBLIC_GA_ID}
-                        googleAdsId={process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                        nonce={nonce as string | undefined}
                     >
-                        <ThemeProvider
-                            attribute="class"
-                            defaultTheme="system"
-                            enableSystem
-                            disableTransitionOnChange
-                            nonce={nonce as string | undefined}
-                        >
-                            <FontProvider defaultFont={font || inter.variable}>
-                                <NextIntlClientProvider>
-                                    <ZodProvider>
-                                        <NavHeader />
-                                        {children}
-                                        <div className="mt-6">
-                                            <CookieConsentButton />
-                                        </div>
-                                        {/* <CookieDebugPanel /> */}
-                                        <FooterSection />
-                                    </ZodProvider>
-                                </NextIntlClientProvider>
-                                <Toaster />
-                            </FontProvider>
-                        </ThemeProvider>
-                    </CookieConsentProvider>
+                        <FontProvider defaultFont={font || inter.variable}>
+                            <NextIntlClientProvider>
+                                <ZodProvider>
+                                    <NavHeader />
+                                    {children}
+                                    <CookieConsent variant="default" onAcceptCallback={onAcceptCookies} onDeclineCallback={onDeclineCookies} />
+                                    <FooterSection />
+                                </ZodProvider>
+                            </NextIntlClientProvider>
+                            <Toaster />
+                        </FontProvider>
+                    </ThemeProvider>
                 </SessionProvider>
             </body>
         </html >
