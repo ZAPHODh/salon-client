@@ -74,6 +74,7 @@ function SignUp({
         const session = await res.json();
         if (!res.ok) {
             toast(t('error.title'), { description: t('error.description') });
+            setIsLoading(false);
             return;
         }
         setSession(session);

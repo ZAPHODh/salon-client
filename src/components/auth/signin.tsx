@@ -67,6 +67,7 @@ function SignIn({
 
         if (!res.ok) {
             toast(t('error.title'), { description: t('error.description') });
+            setIsLoading(false);
             return;
         }
 
