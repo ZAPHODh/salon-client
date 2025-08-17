@@ -15,6 +15,7 @@ import Adsense from "@/components/adsense";
 
 import { verifySession } from '@/lib/auth/dal';
 import CookieConsent from '@/components/cookie-consent';
+import { acceptCookies, declineCookies } from '@/actions/cookies';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -43,18 +44,7 @@ export default async function LocaleLayout({
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
-    const onAcceptCookies = () => {
-        cookieStore.set('analytics', 'enabled', { expires: 365 });
-        cookieStore.set("preferences", "enabled", { expires: 365 });
-        cookieStore.set("marketing", "enabled", { expires: 365 });
-    };
 
-
-    const onDeclineCookies = () => {
-        cookieStore.set("preferences", "disabled", { expires: 365 });
-        cookieStore.set("analytics", "disabled", { expires: 365 });
-        cookieStore.set("marketing", "disabled", { expires: 365 });
-    };
     return (
         <html lang={locale} className={`${inter.variable} ${roboto_mono.variable}`} suppressHydrationWarning>
             <head>
@@ -75,7 +65,7 @@ export default async function LocaleLayout({
                                 <ZodProvider>
                                     <NavHeader />
                                     {children}
-                                    <CookieConsent variant="default" onAcceptCallback={onAcceptCookies} onDeclineCallback={onDeclineCookies} />
+                                    <CookieConsent variant="default" />
                                     <FooterSection />
                                 </ZodProvider>
                             </NextIntlClientProvider>

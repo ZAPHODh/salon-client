@@ -13,7 +13,6 @@ export default async function Adsense() {
                 .env.NEXT_PUBLIC_ADSENSE_PUB_ID!}`}
             crossOrigin="anonymous"
             strategy="lazyOnload"
-
         ></Script>
     );
 }

@@ -13,12 +13,12 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { acceptCookies, declineCookies } from "@/actions/cookies";
+import { updateGoogleConsent } from "@/lib/consent";
 
 interface CookieConsentProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "small" | "mini";
   demo?: boolean;
-  onAcceptCallback?: () => void;
-  onDeclineCallback?: () => void;
   description?: string;
   learnMoreHref?: string;
 }
@@ -28,8 +28,6 @@ const CookieConsent = React.forwardRef<HTMLDivElement, CookieConsentProps>(
     {
       variant = "default",
       demo = false,
-      onAcceptCallback = () => { },
-      onDeclineCallback = () => { },
       className,
       description,
       learnMoreHref = "#",
@@ -41,19 +39,21 @@ const CookieConsent = React.forwardRef<HTMLDivElement, CookieConsentProps>(
     const [isOpen, setIsOpen] = React.useState(false);
     const [hide, setHide] = React.useState(false);
 
-    const handleAccept = React.useCallback(() => {
+    const handleAccept = async () => {
       setIsOpen(false);
       document.cookie =
         "cookieConsent=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";
       setTimeout(() => setHide(true), 700);
-      onAcceptCallback();
-    }, [onAcceptCallback]);
+      await acceptCookies();
+      updateGoogleConsent(true)
+    }
 
-    const handleDecline = React.useCallback(() => {
+    const handleDecline = async () => {
       setIsOpen(false);
       setTimeout(() => setHide(true), 700);
-      onDeclineCallback();
-    }, [onDeclineCallback]);
+      await declineCookies()
+      updateGoogleConsent(false)
+    }
 
     React.useEffect(() => {
       try {
