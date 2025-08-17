@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
-import { Apple, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 import { signupSchema } from "@/schemas/signup";
 import { Link, useRouter } from "@/i18n/navigation";

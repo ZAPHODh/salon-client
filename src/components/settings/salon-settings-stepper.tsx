@@ -334,6 +334,7 @@ export default function SalonSettingsStepper() {
                                                             <Input
                                                                 placeholder="00000-000"
                                                                 {...field}
+                                                                disabled={isLoading}
                                                                 onChange={(e) => {
                                                                     const formatted = formatPostalCode(e.target.value, form.watch("countryCode"))
                                                                     field.onChange(formatted)
@@ -362,7 +363,7 @@ export default function SalonSettingsStepper() {
                                                 <FormItem>
                                                     <FormLabel>Endereço</FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Rua, número, bairro" {...field} />
+                                                        <Input disabled={!error} placeholder="Rua, número, bairro" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -376,7 +377,7 @@ export default function SalonSettingsStepper() {
                                                 <FormItem>
                                                     <FormLabel>Cidade</FormLabel>
                                                     <FormControl>
-                                                        <Input placeholder="Nome da cidade" {...field} />
+                                                        <Input disabled={!error} placeholder="Nome da cidade" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>

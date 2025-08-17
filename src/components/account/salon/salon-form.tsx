@@ -8,17 +8,13 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
-import { VisibleHoursInput } from "./visible-hours-input"
+
 import { useState } from "react"
 import { PostalCodeInput, type AddressData } from "@/components/ui/postal-code-input"
 import { useTranslations } from "next-intl"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { salonConfigSchema, SalonFormValues } from "@/schemas/salon"
-import { WorkingHoursInput } from "./working-houts-input"
-import { useOnborda } from "onborda"
 
-import { useEffect } from "react"
-import Cookies from "js-cookie"
 import { countries, defaultVisibleHours, defaultWorkingHours } from "@/lib/helper"
 import { updateSalon } from "@/requests/update-salon"
 import { useRouter } from "next/navigation"
@@ -55,7 +51,6 @@ export interface SalonConfigData {
 
 
 export function SalonConfigForm({ initialData }: SalonConfigProps) {
-    const { startOnborda } = useOnborda();
     const { refresh } = useRouter()
     const t = useTranslations("salon.config")
     const tPostal = useTranslations("postalCode")
@@ -150,14 +145,6 @@ export function SalonConfigForm({ initialData }: SalonConfigProps) {
             setIsSubmitting(false)
         }
     }
-
-    useEffect(() => {
-        const hasSeenTour = Cookies.get("salonConfigTourShown")
-        if (!hasSeenTour) {
-            startOnborda('salonConfig')
-            Cookies.set("salonConfigTourShown", "true", { expires: 365 })
-        }
-    }, [startOnborda])
 
     return (
         <div className="space-y-6" id="salonConfig">
