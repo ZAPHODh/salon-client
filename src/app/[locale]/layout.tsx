@@ -15,7 +15,6 @@ import Adsense from "@/components/adsense";
 
 import { verifySession } from '@/lib/auth/dal';
 import CookieConsent from '@/components/cookie-consent';
-import { acceptCookies, declineCookies } from '@/actions/cookies';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -36,7 +35,6 @@ export default async function LocaleLayout({
     params: Promise<{ locale: string }>;
 }) {
     const { session } = await verifySession()
-    const nonce = (await headers()).get('x-nonce')
     const cookieStore = await cookies()
     const font = cookieStore.get('font')?.value
     const { locale } = await params;
@@ -48,7 +46,7 @@ export default async function LocaleLayout({
     return (
         <html lang={locale} className={`${inter.variable} ${roboto_mono.variable}`} suppressHydrationWarning>
             <head>
-                <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID} nonce='' />
+                <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID} />
                 <Adsense />
             </head>
             <body>
@@ -58,7 +56,6 @@ export default async function LocaleLayout({
                         defaultTheme="system"
                         enableSystem
                         disableTransitionOnChange
-                        nonce={nonce as string | undefined}
                     >
                         <FontProvider defaultFont={font || inter.variable}>
                             <NextIntlClientProvider>
