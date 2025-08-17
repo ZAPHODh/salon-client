@@ -20,6 +20,7 @@ import { createSalon } from "@/requests/create-salon"
 import { redirect } from "@/i18n/navigation"
 import { useLocale } from "next-intl"
 import { formatTime } from "@/lib/utils"
+import { useCep } from "@/hooks/use-cep"
 
 const steps = [
     {
@@ -48,6 +49,7 @@ export const weekDays = [
 
 export default function SalonSettingsStepper() {
     const locale = useLocale()
+
     const [currentStep, setCurrentStep] = useState(0)
     const [isTransitioning, setIsTransitioning] = useState(false)
     const [animationDirection, setAnimationDirection] = useState<"forward" | "backward">("forward")
@@ -63,7 +65,7 @@ export default function SalonSettingsStepper() {
         5: true,
         6: false,
     })
-
+    const { fetchAddress, error, isLoading } = useCep()
     const form = useForm<SalonFormValues>({
         resolver: zodResolver(salonConfigSchema),
         defaultValues: {
@@ -335,6 +337,15 @@ export default function SalonSettingsStepper() {
                                                                 onChange={(e) => {
                                                                     const formatted = formatPostalCode(e.target.value, form.watch("countryCode"))
                                                                     field.onChange(formatted)
+                                                                }}
+                                                                onBlur={async () => {
+                                                                    const cepValue = form.getValues("cep")
+                                                                    const addressData = await fetchAddress(cepValue)
+
+                                                                    if (addressData) {
+                                                                        form.setValue("address", `${addressData.street} - ${addressData.neighborhood}`)
+                                                                        form.setValue("city", `${addressData.city}/${addressData.state}`)
+                                                                    }
                                                                 }}
                                                             />
                                                         </FormControl>

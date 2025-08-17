@@ -108,7 +108,7 @@ export function ProfessionalForm({ professional, onSuccess, onCancel }: Professi
                             <FormItem>
                                 <FormLabel>CPF</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="000.000.000-00" {...field} />
+                                    <Input placeholder="00000000000" {...field} maxLength={11} />
                                 </FormControl>
                                 <FormDescription>Documento de identificação (opcional)</FormDescription>
                                 <FormMessage />
@@ -138,7 +138,7 @@ export function ProfessionalForm({ professional, onSuccess, onCancel }: Professi
                             <FormItem>
                                 <FormLabel>Telefone</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="(11) 99999-9999" {...field} />
+                                    <Input placeholder="11999999999" {...field} />
                                 </FormControl>
                                 <FormDescription>Número de contato (opcional)</FormDescription>
                                 <FormMessage />
