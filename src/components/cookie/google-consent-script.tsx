@@ -3,22 +3,21 @@
 import Script from "next/script"
 
 interface GoogleConsentScriptProps {
-    googleAnalyticsId?: string
-    googleAdsId?: string
+  googleAnalyticsId?: string
+  googleAdsId?: string
 }
 
 export function GoogleConsentScript({ googleAnalyticsId, googleAdsId }: GoogleConsentScriptProps) {
-    return (
-        <>
-            <Script
-                id="google-consent-mode"
-                strategy="beforeInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `
+  return (
+    <>
+      <Script
+        id="google-consent-mode"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             
-            // Set default consent state
             gtag('consent', 'default', {
               'analytics_storage': 'denied',
               'ad_storage': 'denied',
@@ -29,7 +28,6 @@ export function GoogleConsentScript({ googleAnalyticsId, googleAdsId }: GoogleCo
               'security_storage': 'granted'
             });
             
-            // Configure regions for different privacy laws
             gtag('consent', 'default', {
               'analytics_storage': 'denied',
               'ad_storage': 'denied',
@@ -48,19 +46,20 @@ export function GoogleConsentScript({ googleAnalyticsId, googleAdsId }: GoogleCo
               'region': ['US-CA']
             });
           `,
-                }}
-            />
-            {googleAnalyticsId && (
-                <>
-                    <Script
-                        src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-                        strategy="afterInteractive"
-                    />
-                    <Script
-                        id="google-analytics"
-                        strategy="afterInteractive"
-                        dangerouslySetInnerHTML={{
-                            __html: `
+        }}
+      />
+      {googleAnalyticsId && (
+        <>
+          <Script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+            strategy="afterInteractive"
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
                 window.gtag = window.gtag || function(){dataLayer.push(arguments);};
                 gtag('js', new Date());
                 gtag('config', '${googleAnalyticsId}', {
@@ -68,23 +67,23 @@ export function GoogleConsentScript({ googleAnalyticsId, googleAdsId }: GoogleCo
                   page_location: window.location.href,
                 });
               `,
-                        }}
-                    />
-                </>
-            )}
+            }}
+          />
+        </>
+      )}
 
-            {/* Google Ads */}
-            {googleAdsId && (
-                <Script
-                    id="google-ads"
-                    strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                        __html: `
+      {/* Google Ads */}
+      {googleAdsId && (
+        <Script
+          id="google-ads"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
               gtag('config', '${googleAdsId}');
             `,
-                    }}
-                />
-            )}
-        </>
-    )
+          }}
+        />
+      )}
+    </>
+  )
 }

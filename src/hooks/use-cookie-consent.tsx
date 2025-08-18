@@ -210,7 +210,6 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     }, [])
 
     const resetConsent = useCallback(() => {
-        // Delete all consent-related cookies
         deleteCookie(CONSENT_COOKIE_NAME)
         deleteCookie("cookie-necessary")
         deleteCookie("cookie-analytics")
