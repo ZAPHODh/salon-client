@@ -50,11 +50,7 @@ export function GoogleConsentScript({ googleAnalyticsId, googleAdsId }: GoogleCo
       />
       {googleAnalyticsId && (
         <>
-          <Script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-            strategy="afterInteractive"
-          />
+          <Script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}></Script>
           <Script
             id="google-analytics"
             strategy="afterInteractive"
