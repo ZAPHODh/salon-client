@@ -14,7 +14,8 @@ import { ZodProvider } from '@/components/providers/zodI18n';
 import Adsense from "@/components/adsense";
 
 import { verifySession } from '@/lib/auth/dal';
-import CookieConsent from '@/components/cookie-consent';
+import { CookieConsentButton } from '@/components/cookie/cookie-consent-button';
+import { CookieConsentProvider } from '@/components/providers/consent-provider';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -51,24 +52,32 @@ export default async function LocaleLayout({
             </head>
             <body>
                 <SessionProvider initialSession={session}>
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="system"
-                        enableSystem
-                        disableTransitionOnChange
+                    <CookieConsentProvider
+                        googleAnalyticsId={process.env.NEXT_PUBLIC_GA_ID}
+                        googleAdsId={process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}
                     >
-                        <FontProvider defaultFont={font || inter.variable}>
-                            <NextIntlClientProvider>
-                                <ZodProvider>
-                                    <NavHeader />
-                                    {children}
-                                    <CookieConsent variant="default" />
-                                    <FooterSection />
-                                </ZodProvider>
-                            </NextIntlClientProvider>
-                            <Toaster />
-                        </FontProvider>
-                    </ThemeProvider>
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem
+                            disableTransitionOnChange
+                        >
+                            <FontProvider defaultFont={font || inter.variable}>
+                                <NextIntlClientProvider>
+                                    <ZodProvider>
+                                        <NavHeader />
+                                        {children}
+                                        <div className="mt-6">
+                                            <CookieConsentButton />
+                                        </div>
+                                        {/* <CookieDebugPanel /> */}
+                                        <FooterSection />
+                                    </ZodProvider>
+                                </NextIntlClientProvider>
+                                <Toaster />
+                            </FontProvider>
+                        </ThemeProvider>
+                    </CookieConsentProvider>
                 </SessionProvider>
             </body>
         </html >
